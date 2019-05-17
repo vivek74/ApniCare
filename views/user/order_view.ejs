@@ -1,0 +1,65 @@
+<% include ../partials/header %>
+<body>
+
+    <nav style="height: 80px">
+        <div class="nav-wrapper light-blue">
+                <a data-target="slide-out" class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="margin-top: 10px;font-size:25px;">menu</i></a>
+            <a onclick="history.back()"  class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="font-size:35px;margin-top: 10px">arrow_back</i></a>
+            <a class="brand-logo" style="margin-top: 10px">Order</a>
+        </div>
+    </nav>
+    <%include ../partials/header2%>
+
+    <!-- Section: Users Info !-->
+
+    <section class="section section-users">
+        <div class="row" style="margin: 0;padding: 0">
+
+            <% allorders.reverse().forEach(function(orders){ %>
+                <div onclick="window.location.href = '/users/user-view/order-history/view-order/<%=orders.id%>'"  style="cursor:pointer;margin: 0;padding: 0" class="col-s12 m12 card-1" >
+                    <div class="card-panel black-text text-darken-2 no-pad-bot" style="margin: 0;padding-top: 1%;padding-bottom: 0">
+                        <div class="row" >
+                            <div class="col s12 m12 l1 no-padding right-align" style="margin-left: -4%">
+                                <i class="material-icons medium" style="padding-right: 5px">account_circle</i>
+                            </div>
+                            <div class="col s12 m12 l3 left" style="padding-left: 0;">
+                                <span style="font-weight: 500;color: darkgrey;font-size: large"><%=orders.userName%></span><br>
+                            </div>
+                            <div class="col s12 m12 l3 left" style="padding-left: 0;">
+                                <span style="font-weight: 500;color: darkgrey;font-size: medium;">Order Type: <%=orders.orderType%></span><br>
+                                <span style="font-weight: 500;color: darkgrey;font-size: medium;">Order ID: <%=orders.orderId%></span><br>
+                                
+                            </div>
+                            <div class="col s12 m12 l2 left-align" style="padding-left: 0;">
+                                <span style="font-weight: 500;color: darkgrey;font-size: medium;">User Type: <%=orders.userType%></span><br>
+                                <span style="font-weight: 500;color: darkgrey;font-size: medium;">Date: <%= moment(orders.orderDate).format("DD-MMM-YYYY")%></span><br>
+                                <span style="font-weight: 500;color: darkgrey;font-size: medium;">Time: <%= moment(orders.orderDate).format("hh:mm A")%></span>
+                            </div>
+                            <div class="col s12 m12 l2 left-align" style="padding-left: 0;">
+                                <span style="font-weight: 500;color: darkgrey;font-size: medium;">Contact <%=orders.contactNumber%></span><br>
+                            </div>
+                            <div class="col s12 m12 l1 right-align">
+                                <i class="material-icons">chevron_right</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <%});%>
+        </div>
+    </section>
+
+
+    <!-- Sectio: Fixed Acion button !-->
+
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="./js/materialize.min.js"></script>
+    <script type="application/javascript">
+        $('.sidenav').sidenav();
+        $('.fixed-action-btn').floatingActionButton();
+        $('.modal').modal();
+
+    </script>
+</body>
+
+</html>

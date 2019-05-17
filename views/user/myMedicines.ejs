@@ -1,0 +1,114 @@
+<% include ../partials/header %>
+
+<body>
+
+    <nav style="height: 80px">
+        <div class="nav-wrapper light-blue">
+                <a data-target="slide-out" class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="margin-top: 10px;font-size:25px;">menu</i></a>
+            <a onclick="history.back()" class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="margin-top: 10px;font-size: 25px">arrow_back</i></a>
+            <a class="brand-logo" style="margin-top: 10px;font-size: 22px">My Medicines</a>
+        </div>
+    </nav>
+    <% include ../partials/header2 %>
+
+    <section class="section section-mymedicines">
+        <div class="row" style="padding-left: 15px">
+            <div class="col s12 m7 l7 center-align">
+                <h4>Added Medicine List</h4>
+            </div>
+            <div class="col m5 l5"></div>
+            <div class="col m5 l5"></div>
+            <div class="col s12 m10 l7 left-align">
+                <div class="card">
+                    <% foundCustomer.mymedicines.reverse().forEach(function(medicines){ %>
+                    <div class="hide-on-med-and-down card-panel" style="margin-top: 0;padding-top: 0;height: 100px">
+                        <div class="card-content" style="margin-top: 0;padding-top: 0;padding-left: 0;margin-left: 0">
+                        <div class="col s12 m6 l6" style="margin-top: 10px">
+                        <p class="deep-purple-text text-darken-2 left-align">Medicine name - <%=medicines.medicineName%></p>
+                            <p class="left-align">Quantity - <%=medicines.qty%> Tablets</p>
+                            <p class="left-align">Manufacturar name - <%=medicines.manufacturarName%></p>
+                        </div>
+                        <div class="col s12 m6 l6 right-align " style="margin-top: 10px">
+                            <p><span style="font-size: 20px">Price - Rs <%=medicines.mrp%></span>
+                            </p>
+                            <form class="delete-form" action="/users/user-view/health-record/my-medicine/delete-med/<%=foundCustomer.id%>/<%=medicines.id%>?_method=DELETE" method="POST">
+                                <button style="background-color: transparent; border: 0; padding: 0; margin: 0; color: red; text-decoration: underline; cursor: pointer;">
+                                  DELETE 
+                                </button>
+                            </form>
+                        </div>
+                        </div>
+                    </div>
+                    <%});%>
+                </div>
+            </div>
+            <div class="col s12 m7 l7 center-align">
+                <h4>Ordered Medicine List</h4>
+            </div>
+            <div class="col m5 l5"></div>
+            <div class="col m5 l5"></div>
+            <div class="col s12 m10 l7 left-align">
+                <div class="card">
+                    <% buyedMedicine.reverse().forEach(function(allmedicines){ %>
+                        <% allmedicines.medicines.reverse().forEach(function(medicines){ %>
+                            <div class="hide-on-med-and-down card-panel" style="margin-top: 0;padding-top: 0;height: 100px">
+                                <div class="card-content" style="margin-top: 0;padding-top: 0;padding-left: 0;margin-left: 0">
+                                <div class="col s12 m6 l6" style="margin-top: 10px">
+                                <p class="deep-purple-text text-darken-2 left-align">Medicine name - <%=medicines.Name%></p>
+                                    <p class="left-align">Quantity - <%=medicines.Qty%> Tablets</p>
+                                    <p class="left-align">Medicine type - <%=medicines.medicinetype%></p>
+                                </div>
+                                <div class="col s12 m6 l6 right-align " style="margin-top: 10px">
+                                    <p><span style="font-size: 20px">Price - Rs <%=medicines.Price%></span>
+                                    </p>
+                                </div>
+                                </div>
+                            </div>
+                        <%});%>
+                    <%});%>
+                </div>
+            </div>
+            <div class="col m2"></div>
+        </div>
+    </section>
+
+
+    <!-- Sectio: Fixed Acion button !-->
+    <div class="fixed-action-btn">
+            <a class="btn-floating btn-large light-blue modal-trigger" href="#modal1">
+                <i class="large material-icons">date_range</i>
+            </a>
+            <!-- Modal Structure -->
+            <div id="modal1" class="modal modal-fixed-footer">
+                <form action="/users/user-view/my-medicines/<%=customer%>" method="POST">
+                    <div class="modal-content">
+                        <h3>Add Medicines</h3>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                  <input name="medicineName" id="medicineName" type="text" class="validate" required>
+                                  <label for="medicineName">Medicine Name</label>
+                            </div>
+                            <div class="input-field col s6">
+                                  <input name="qty" id="qty" type="number" class="validate" required>
+                                  <label for="qty">Qty (In tablets)</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                                <div class="input-field col s6">
+                                      <input name="mrp" id="mrp" type="text" class="validate" required>
+                                      <label for="mrp">Price</label>
+                                </div>
+                                <div class="input-field col s6">
+                                      <input name="manufacturarName" id="manufacturarName" type="text" class="validate" required>
+                                      <label for="manufacturarName">Manufacture</label>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+<% include ../partials/footer %>

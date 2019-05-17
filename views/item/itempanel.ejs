@@ -1,0 +1,91 @@
+<head class="animated fadeIn">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="/stylesheets/css/materialize.min.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="/stylesheets/css/main.css" media="screen,projection" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/animate.css">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<nav class="light-blue " style="height: 100px">
+  <div class="light-blue row">
+      <div class="col l12 m12 s12">
+          <div class="col l5 m5 s12" style="margin-top: 15px">
+              <a data-target="slide-out" class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="font-size:23px;">menu</i></a>
+              <a style="font-size: 23px">Items</a>
+          </div>
+
+          <div class="col l5 m5 s9 input-field black-text" style="margin-top: 35px; height: 0">
+              <input onkeyup="showResultsItem(this.value)" placeholder="Search by medicine name" type="search" class="white black-text" style="height: 40px;border-radius: 5px;padding-left: 10px">
+          </div>
+          <div class="col l1 m1 s2 left-align" style="margin-top: 30px;">
+          <i class="material-icons white-text" style="font-size: 30px;font-weight: 800">search</i>
+          </div>    
+
+
+            <ul id="search-results" style="margin-left: 570px; width: 200px; line-height:2; position: absolute; margin-top: 80px;
+            z-index: 5;">
+                
+            </ul>
+
+      </div>
+  </div>
+</nav>
+
+<div style="margin-top: 5em; position: absolute; z-index: 99999; margin-left: 5em;" class="center-align">
+  <% if(error && error.length > 0) { %>
+    <div id="mydiv" class="card-panel" style="background-color: red; color: white; text-align: center; border-radius: 0.2px;"><%=error%></div>
+  <% } %>
+  <% if(success && success.length > 0) { %>
+    <div id="mydiv" class="card-panel green accent-4" style="color: white;"><%=success%></div>  
+  <% } %>
+</div> 
+<% include ../partials/header2 %>
+
+<body>
+
+    <div class="row" style="margin-top: 10px">
+        <div class="col l12 s12 m12">
+            <div class="col s12 l12 m12" style="font-weight: 500">
+                <div class="col s12 l3 m4" style="margin-top: 10px">
+                    <a href="/item/enter/enter-medicines" class="btn btn-large light-blue">Enter Medicine</a>
+                </div>
+                <div class="col s12 l3 m4" style="margin-top: 10px">
+                    <a href="/item/enter/enter-item" class="btn btn-large red">Enter Item</a>
+                </div>
+                <div class="col s12 l3 m4" style="margin-top: 10px">
+                    <a href="/item/enter/enter-salt" class="btn btn-large pink ">Enter Salt</a>
+                </div>
+                <div class="col s12 l3 m4" style="margin-top: 10px">
+                    <a href="/item/view/manufacturer" class="btn btn-large green">Manufacturer</a>
+                </div>
+            </div>
+        </div>
+    </div>
+<hr>
+    <!-- Section: Users Info -->
+    <section class="section section-users">
+        <div class="row" style="margin: 0;padding: 0">
+            <% medicineItem.forEach(function(medicines){ %>
+              <div style="width:70%; margin: 0 auto; margin-top:30px; cursor: pointer;" class="col-s12 m12 card-1" onclick="location.href='/item/<%=medicines.id%>'">
+                  <div class="card-panel black-text text-darken-2 no-pad-bot" style="margin: 0;padding-top: 1%;padding-bottom: 0">
+                  <div class="row" style="height: 50px;">
+                      <div class="col s12 m3 l7 left-align" style="padding-left: 0;">
+                          <span style="font-weight: 500;font-size: medium; text-transform: uppercase;"><%=medicines.medicineName%></span><br>
+                          <span style="font-weight: 500;color: darkgrey;font-size: small;"><%=medicines.medicineId%></span>
+                      </div>
+                      <div class="col s12 m3 l5 left-align" style="padding-left: 0;">
+                        <span style="font-weight: 500;color: darkgrey;font-size: small;">Manufacturer -  <%=medicines.manufacturerName%></span><br>
+                      </div>
+                      <div style="float:right;" class="col s12 m1 l1 right-align">
+                        <i class="material-icons">chevron_right</i>
+                      </div>
+                      </div>
+                  </div>
+              </div>
+            <%});%>
+        </div>
+    </section>
+<% include ../partials/footer %>

@@ -1,0 +1,164 @@
+<head class="animated fadeIn">
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="/stylesheets/css/materialize.min.css" media="screen,projection" />
+  <link type="text/css" rel="stylesheet" href="/stylesheets/css/main.css" media="screen,projection" />
+  <link rel="stylesheet" type="text/css" href="/stylesheets/animate.css">
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<nav class="light-blue " style="height: 100px">
+<div class="light-blue row">
+    <div class="col l12 m12 s12">
+        <div class="col l5 m5 s12" style="margin-top: 15px">
+            <a data-target="slide-out" class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="font-size:23px;">menu</i></a>
+            <a style="font-size: 23px">Coupon</a>
+        </div>
+
+        <div class="col l5 m5 s9 input-field black-text" style="margin-top: 35px; height: 0">
+            <input onkeyup="showResultsCoupon(this.value)" placeholder="Search by coupon name" type="search" class="white black-text" style="height: 40px;border-radius: 5px;padding-left: 10px">
+        </div>
+        <div class="col l1 m1 s2 left-align" style="margin-top: 30px;">
+        <i class="material-icons white-text" style="font-size: 30px;font-weight: 800">search</i>
+        </div>    
+
+
+          <ul id="search-results" style="margin-left: 570px; width: 200px; line-height:2; position: absolute; margin-top: 80px;
+          z-index: 5;">
+              
+          </ul>
+
+    </div>
+</div>
+</nav>
+
+<div style="margin-top: 5em; position: absolute; z-index: 99999; margin-left: 5em;" class="center-align">
+<% if(error && error.length > 0) { %>
+  <div id="mydiv" class="card-panel" style="background-color: red; color: white; text-align: center; border-radius: 0.2px;"><%=error%></div>
+<% } %>
+<% if(success && success.length > 0) { %>
+  <div id="mydiv" class="card-panel green accent-4" style="color: white;"><%=success%></div>  
+<% } %>
+</div> 
+<% include ../partials/header2 %>
+<body>
+
+    <!-- Section Coupon Code !-->
+
+    <section class="section section-couponcode">
+        <div class="row" style="margin-left: 2%">
+            <div class="col l12 m12 s12 xs12" style="font-size: 120%">
+              <% allCoupon.reverse().forEach(function(coupons){ %>
+                <div onclick="window.location.href = '/coupon-code/<%=coupons.id%>'" class="card card-1" style="padding-bottom: 20px; cursor: pointer;">
+                    <div class="card-content">
+                        <div class="col l4 m4 s4">
+                            <p style="text-transform:uppercase;" class="left-align"><%=coupons.couponCodeName%></p>
+                        </div>
+                        <div class="col l3 m3 s3">
+                            <p class="center-align blue-text"><%=coupons.status%></p>
+                        </div>
+                        <div class="col l4 m4 s4">
+                            <form action="/coupon-code/status/<%=coupons.status%>">
+                                <div class="switch right-align">
+                                    <label>
+                                        <input name="respond" id="cpd" type="checkbox" <%if(coupons.status == true){%>checked<%}%> >
+                                        <span class="lever"></span>
+                                    </label>
+                                </div>  
+                            </form>
+                            
+                        </div>
+                        <div class="col l1 m1 s1 right-align" style="margin-top: 5px">
+                            <i class="material-icons">chevron_right</i>
+                        </div>
+                    </div>
+                </div>
+              <%});%>
+            </div>
+        </div>
+  
+    </section>
+
+
+    <!-- Sectio: Fixed Acion button !-->
+
+    <div class="fixed-action-btn">
+        <a class="btn-floating btn-large light-blue modal-trigger" href="#modal1">
+            <i class="large material-icons">create</i>
+        </a>
+        <!-- Modal Structure -->
+        <!-- Modal Structure -->
+        <form action="/coupon-code" method="post">
+          <div id="modal1" class="modal modal-fixed-footer">
+            <div class="modal-content">
+              <h4>Add user</h4>
+              <div class="card-content">
+                <div class="row">
+                      <div class="input-field col s12">
+                        <input name="couponCodeName" id="couponCodeName" type="text" class="validate" required>
+                        <label for="couponCodeName">Coupon code name</label>
+                      </div>
+
+                      <div class="row">
+                        <div class="input-field col s6">
+                            <select name="status" class="browser-default" required>
+                              <option value="" disabled selected>Status</option>
+                              <option value="CONTINUE">Continue</option>
+                              <option value="DISCONTINUE">Discontinue</option>
+                            </select>
+                        </div>
+                        <div class="input-field col s6">
+                            <select name="type" class="browser-default" required>
+                              <option value="" disabled selected>Type</option>
+                              <option value="CASHBACK">Cashback</option>
+                              <option value="DISCOUNT">Discount</option>
+                            </select>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="input-field col s12">
+                          <select name="factor" class="browser-default" required>
+                            <option value="" disabled selected>Factor</option>
+                            <option value="DISCRETE">Discrete</option>
+                            <option value="GLOBAL">Global</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="input-field col s6">
+                          <input type="number" name="minValue" id="minValue" type="Number" required>
+                          <label for="minValue">Minimum amount</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input type="number" name="valueAmount" id="valueAmount" type="text" class="validate" required>
+                            <label for="valueAmount">Value amount (In percentage)</label>
+                          </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="input-field col s6">
+                          <input name="validForm" type="text" class="datepicker">
+                          <label for="validForm">Valid from</label>
+                        </div>
+                        <div class="input-field col s6">
+                          <input name="validThrough" type="text" class="datepicker">
+                          <label for="validThrough">Valid through</label>
+                        </div>
+                      </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn waves-effect waves-light" type="submit">Submit
+                <i class="material-icons right">send</i>
+              </button>
+            </div>
+          </div>
+        </form>
+    </div>
+
+<% include ../partials/footer %>

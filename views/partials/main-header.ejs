@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head class="animated fadeIn">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="/stylesheets/css/materialize.min.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="/stylesheets/css/main.css" media="screen,projection" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/animate.css">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<nav class="light-blue " style="height: 100px">
+  <div class="light-blue row">
+      <div class="col l12 m12 s12">
+          <div class="col l5 m5 s12" style="margin-top: 15px">
+              <a data-target="slide-out" class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="font-size:23px;">menu</i></a>
+              <a id="lable" style="font-size: 23px"></a>
+          </div>
+
+          <div class="col l5 m5 s9 input-field black-text" style="margin-top: 35px;">
+              <input placeholder="Search by phone number" type="search" class="white black-text" style="height: 40px;border-radius: 100px;padding-left: 10px">
+          </div>
+          <div class="col l1 m1 s2 left-align" style="margin-top: 30px;">
+          <i class="material-icons white-text" style="font-size: 30px;font-weight: 800">search</i>
+          </div>
+
+      </div>
+  </div>
+</nav>
+
+<div style="margin-top: 3em; position: absolute; z-index: 99999; margin-left: 5em;" class="center-align">
+  <% if(error && error.length > 0) { %>
+    <div id="mydiv" class="card-panel" style="background-color: red; color: white; text-align: center; border-radius: 0.2px;"><%=error%></div>
+  <% } %>
+  <% if(success && success.length > 0) { %>
+    <div id="mydiv" class="card-panel green accent-4" style="color: white;"><%=success%></div>  
+  <% } %>
+</div> 
+
+
+
+
+
+

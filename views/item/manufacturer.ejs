@@ -1,0 +1,40 @@
+<% include ../partials/header %>
+    <nav style="height: 80px">
+        <div class="nav-wrapper light-blue">
+            <div class="row">
+                <div class="col l12 s12 m12">
+                    <a data-target="slide-out" class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="margin-top: 10px;font-size:25px;">menu</i></a>
+                    <a onclick="history.back()" class="sidenav-trigger pointer show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="font-size:35px;margin-top: 10px">arrow_back</i></a>
+                    <a class="brand-logo" style="margin-top: 10px;font-size: 150%;font-weight: 400">Manufacturer</a>
+                </div>
+            </div>
+        </div>
+    </nav> 
+    <%include ../partials/header2%>
+
+    <section class="section section-mymedicines">
+        <div class="row" style="padding-left: 15px">
+            <div class="col s12 m7 l7 center-align">
+                
+            </div>
+            <div class="col m5 l5"></div>
+
+            <div class="col s12 m10 l7 left-align">
+                <div class="card">
+                    <% data.reverse().forEach(function(show){ %>
+                        <div class="hide-on-med-and-down card-panel" style="margin-top: 0;padding-top: 0;height: 100px">
+                            <div class="card-content" style="margin-top: 0;padding-top: 0;padding-left: 0;margin-left: 0">
+                            <div class="col s12 m6 l6" style="margin-top: 10px">
+                            <p style="text-transform:uppercase;" class="deep-purple-text text-darken-2 left-align"><span><a href="/item/view/manufacturer/show-list/<%=show.manufacturerName%>"><%=show.manufacturerName%></a></span></p>
+                                <p class="left-align"><%=show.unitQty%></p>
+                                <p class="left-align">Medicine / Item name - <span><a href="/item/view/manufacturer/show-med-list/<%=show.medicineName%>"><%=show.medicineName%></a></span></p>
+                            </div>
+                            </div>
+                        </div>
+                    <%})%>
+                </div>
+            </div>
+            <div class="col m2"></div>
+        </div>
+    </section>
+<% include ../partials/footer %>

@@ -1,0 +1,131 @@
+<head class="animated fadeIn">
+        <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="/stylesheets/css/materialize.min.css" media="screen,projection" />
+        <link type="text/css" rel="stylesheet" href="/stylesheets/css/main.css" media="screen,projection" />
+        <link rel="stylesheet" type="text/css" href="/stylesheets/animate.css">
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
+    
+    <nav class="light-blue " style="height: 100px">
+      <div class="light-blue row">
+          <div class="col l12 m12 s12">
+              <div class="col l5 m5 s12" style="margin-top: 15px">
+                  <a data-target="slide-out" class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="font-size:23px;">menu</i></a>
+                  <a style="font-size: 23px">Inventory</a>
+              </div>
+    
+              <div class="col l5 m5 s9 input-field black-text" style="margin-top: 35px; height: 0">
+                  <input onkeyup="showResultsItem(this.value)" placeholder="Search by medicine / item name" type="search" class="white black-text" style="height: 40px;border-radius: 5px;padding-left: 10px">
+              </div>
+              <div class="col l1 m1 s2 left-align" style="margin-top: 30px;">
+              <i class="material-icons white-text" style="font-size: 30px;font-weight: 800">search</i>
+              </div>    
+                <ul id="search-results" style="margin-left: 570px; width: 200px; line-height:2; position: absolute; margin-top: 80px;
+                z-index: 5;">
+                    
+                </ul>
+          </div>
+      </div>
+    </nav>
+    
+    <div style="margin-top: 5em; position: absolute; z-index: 99999; margin-left: 5em;" class="center-align">
+      <% if(error && error.length > 0) { %>
+        <div id="mydiv" class="card-panel" style="background-color: red; color: white; text-align: center; border-radius: 0.2px;"><%=error%></div>
+      <% } %>
+      <% if(success && success.length > 0) { %>
+        <div id="mydiv" class="card-panel green accent-4" style="color: white;"><%=success%></div>  
+      <% } %>
+    </div> 
+    <% include ../partials/header2 %>
+<body>
+    <!-- Section Inventory !-->
+    <section class="section section-inventory">
+        <div class="row">
+            <div class="col l12 s12 m12 hide-on-small-and-down">
+                <% allMedicine.reverse().forEach(function(medicines){ %>
+                    <div class="card" style="height: 130px;">
+                        <div class="card-content">
+                            <div class="col l4 m4 s12">
+                                <p class="purple-text left-align"><%=medicines.medicineName%></p>
+                                <p class="left-align"><%=medicines.totalTablet%> Tablets</p>
+                                <p class="left-align"><%=medicines.manufacturerName%></p>
+                            </div>
+                            <div class="col l3 m3 s12">
+                                <%if(medicines.inventoryStatus){%>
+                                    <input style="color: red;" disabled value="<%=medicines.inventoryStatus%>" type="text">
+                                    <label>Status</label>
+                                <%} else {%>
+                                    <input disabled value="Not entered" type="text">
+                                    <label>Status</label>
+                                <%}%>
+                            </div>
+                            <div class="col l4 s4 m4 s12">
+
+                                <%if(medicines.totalTablet == 0){%>
+                                    <p class="left-align" style="font-size: large"><span class="grey-text" style="font-size: small">MRP </span><i class="fa fa-rupee"></i><%=medicines.mrp%></p>
+                                    <a href="" class="red-text text-darken-1" style="margin-top: 10px;font-weight: 600;font-size: 20px"><u>Out of stock</u>
+                                    </a>
+                                <%}else{%>
+                                    <p class="left-align" style="font-size: large"><span class="grey-text" style="font-size: small">MRP </span><i class="fa fa-rupee"></i><%=medicines.mrp%>
+                                    </p>
+                                    <p class="left-align" style="font-size: 120%"><span class="grey-text">QUANTITY </span> <%=medicines.totalTablet%> Tablets | <%=medicines.unitQty%> Strips
+                                    </p>
+                                <%}%>
+                            </div>
+                            
+                            <div class="col l1 s1 m1 s12">
+                                <a class="btn-floating btn-large light-blue modal-trigger" href="#modal1">
+                                    <i class="large material-icons">create</i>
+                                </a>
+                                <i style="cursor:pointer;" onclick="location.href='/item/<%=medicines.id%>'" class="material-icons">chevron_right</i>
+                            </div>
+                        </div>
+                    </div>
+
+                      <!-- Modal Structure -->
+                        <form action="/inventory/<%=medicines.id%>" method="post">
+                          <div id="modal1" class="modal modal-fixed-footer">
+                            <div class="modal-content">
+                                <h4>Add medicines</h4>
+                                <div class="row">
+                                    <div class="input-field col s6">
+                                      <input name="unitQty" id="unitQty" type="Number" required>
+                                      <label for="unitQty">Strips/Qty</label>
+                                    </div>
+                                    <div class="input-field col s6">
+                                      <input name="mrp" id="mrp" type="text" required>
+                                      <label for="mrp">MRP</label>
+                                    </div>
+                                  </div>
+
+                                  <div class="row">
+                                    <div class="input-field col s6">
+                                      <input name="packagingUnit2" id="packagingUnit2" type="Number" required>
+                                      <label for="packagingUnit2">No of tablets</label>
+                                    </div>
+                                    <div class="input-field col s6">
+                                        <select name="inventoryStatus" class="browser-default grey lighten-3" required>
+                                            <option value="" disabled selected>Status</option>
+                                            <option value="Discountinued">Discountinued</option>
+                                            <option value="Unavailable">Unavailable</option>
+                                            <option value="Available">Available</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button class="btn waves-effect waves-light" type="submit">Submit
+                                <i class="material-icons right">send</i>
+                              </button>
+                            </div>
+                          </div>
+                        </form>
+
+
+                <%});%>
+            </div>
+    </section>
+<% include ../partials/footer %>

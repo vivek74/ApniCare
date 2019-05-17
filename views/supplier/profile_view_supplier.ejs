@@ -1,0 +1,122 @@
+<% include ../partials/header %>
+<body>
+
+    <nav style="height: 80px">
+        <div class="nav-wrapper light-blue">
+                <a data-target="slide-out" class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="margin-top: 10px;font-size:25px;">menu</i></a>
+            <a onclick="history.back()"  class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="font-size:35px;margin-top: 10px">arrow_back</i></a>
+            <a class="brand-logo" style="margin-top: 10px">Supplier Profile</a>
+        </div>
+    </nav>
+    <%include ../partials/header2%>
+    <!-- Section Coupon Code !-->
+    <section class="section section-supplier_view">
+        <form action="/supplier/profile/submit" method="POST">
+            <div class="row" style="padding-left: 3%">
+                <div class="col l12 m12 s12">
+                    <div class="col l3 m3 s12">
+                        <div class="input-field">
+                            <input type="text" id="supplier_name" name="supplier_name" required>
+                            <label for="supplier_name">Supplier Name</label>
+                        </div>
+                        <div class="input-field">
+                            <input type="text" id="city" name="city" required>
+                            <label for="city">City</label>
+                        </div>
+                        <div class="input-field">
+                            <input type="text" id="mraddress" name="mraddress" required>
+                            <label for="mraddress">MRAddress</label>
+                        </div>
+                        <div class="input-field">
+                            <input type="number" id="pincode" name="pincode" required>
+                            <label for="pincode">Pincode</label>
+                        </div>
+                    </div>
+                    <div class="col l1 m1 hide-on-small-and-down"></div>
+                        <div class="col l3 m3 s12">
+                            <div class="input-field">
+                                <input type="text" id="website" name="website" required>
+                                <label for="website">Website</label>
+                            </div>
+                            <div class="input-field">
+                                <input type="text" id="dlnumber" name="dlnumber" required>
+                                <label for="dlnumber">DL Number</label>
+                            </div>
+                            <div class="input-field">
+                                <input type="text" id="gstNumber" name="gstNumber" required>
+                                <label for="gstNumber">GST Number</label>
+                            </div>
+                            <div class="input-field">
+                                <input type="text" id="expiration" class="datepicker" name="expiration" required>
+                                <label for="expiration">Expiration</label>
+                            </div>
+                        </div>
+                        <div class="col l1 hide-on-small-and-down"></div>
+                        <div class="col l3 m3 s12">
+                            <div class="input-field">
+                                <input type="email" id="email" name="email" required>
+                                <label for="email">Email</label>
+                            </div>
+                            <div class="input-field">
+                                <input type="number" id="contactperson" name="contactperson" required>
+                                <label for="contactperson">Contact Person</label>
+                            </div>
+                            <div class="input-field">
+                                <input type="number" id="mobilenumber" name="mobilenumber" required>
+                                <label for="mobilenumber">Contact Person Number</label>
+                            </div>
+                            <div class="input-field">
+                                <input type="number" id="supplierNumber" name="supplierNumber" required>
+                                <label for="supplierNumber">Supplier Number</label>
+                            </div>
+                        </div>
+                        <div class="col l1 m1 hide-on-small-and-down"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col l2 m2 s12"></div>
+                    <div class="col l3 m3 s6">
+                        <button type="button" class="btn btn-large red" id="clear">Clear</button>
+                    </div>
+                    <div class="col l1 m1 hide-on-small-and-down"></div>
+                    <div class="col l3 m3 s6">
+                        <button type="submit" class="btn btn-large green">Submit</button>
+                    </div>
+                    <div class="col l1 m1 hide-on-small-and-down"></div>
+                </div>
+        </form>
+    </section>
+
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- <script type="text/javascript" src="/js/materialize.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- adding custon script -->
+    <script type="text/javascript" src="/js/script.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('select').formSelect();
+            $('.sidenav').sidenav();
+            $('.fixed-action-btn').floatingActionButton();
+            $('.modal').modal();
+            $('.tabs').tabs();
+            $('.slider').slider();
+            $('.datepicker').datepicker();
+            $('.datepicker').datepicker({
+                container: 'body',
+                selectMonths: true, // Creates a dropdown to control month
+                selectYears: 100, // Creates a dropdown of 15 years to control year
+                format: 'dd/mm/yyyy'
+            });
+
+            $('#clear').on('click', () => {
+                $('input[type=text]').val("");
+            })
+
+        });
+
+    </script>
+
+</body>
+
+</html>

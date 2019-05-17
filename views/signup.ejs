@@ -1,0 +1,60 @@
+<% include ./partials/header %>
+    <body>
+        <div class="navbar-fixed">
+            <nav class="white">
+                <div class="container">
+                <div class="nav-wrapper">
+                    <h5 class="brand-logo center black-text text-darken-1 large">Apni Care</h5>
+                </div>
+            </div>
+            </nav>
+        </div>
+    
+        
+        <section class="section section-login">
+            <div class="container">
+                <div class="row" style="margin-top: 5%">
+                        <div class="col m2"></div>
+                        <div class="col s12 m8 card-panel" style="padding-left: 0">
+                            <div class="col s6 m6" style="padding-left: 0;background: url('https://cdn.shopify.com/s/files/1/1775/8583/t/1/assets/geometric-cave.jpg?7999575290568706578');background-size: cover;min-height: 330px;background-position: center">
+                                <div class="caption white-text center-align text-darken-3 hide-on-med-and-down" style="margin-top: 30%">
+                                    <h3>Account</h3>
+                                    <a class="btn" href="/login">login</a>
+                                    <a class="btn" href="/register">Register</a>
+                                </div>
+                                
+                                <div class="caption white-text center-align text-darken-3 show-on-medium-and-down hide-on-large-only" style="margin-top: 25%">
+                                    <h3>Account</h3>
+                                    <div class="input-field" style="margin-bottom: 20%">
+                                        <a class="btn btn-large" href="#!">Sign In</a>
+                                    </div>
+                                    <div class="input-field">
+                                        <a class="btn btn-large" href="#!">Register</a>
+                                    </div>
+                                </div>
+                            
+                            </div>
+                            <div class="col s6 m6">
+                                <h5 class="black-text darken-2 left-align">Register</h5>
+                                <form action="/register" method="post">
+                                    <div class="input-field" style="width: 100%">
+                                        <input id="mobile" name="username" type="text" class="validate" pattern="^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[6789]\d{9}$" required>
+                                        <label for="mobile">Phone</label>
+                                    </div>
+
+                                    <div class="input-field">
+                                        <input id="password" name="password" type="password" class="validate" required>
+                                        <label for="password">Password</label>
+                                    </div>
+                                    <div class="input-field" style="margin-top: 30px">
+                                        <input class="btn right" type="submit" value="Sign Up">
+                                    </div>  
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col m2"></div>
+                </div>
+            </div>
+        </section>
+        <% include ./partials/footer %>   
+        

@@ -1,0 +1,87 @@
+<%include ../partials/header%>
+<body>
+
+    <nav style="height: 80px">
+        <div class="nav-wrapper light-blue">
+                <a data-target="slide-out" class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="margin-top: 10px;font-size:25px;">menu</i></a>
+            <a onclick="history.back()" class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="margin-top: 10px;font-size: 25px">arrow_back</i></a>
+            <a class="brand-logo" style="margin-top: 10px;font-size: 22px">My Records</a>
+        </div>
+    </nav>
+    <%include ../partials/header2%>
+
+    <!-- Section: Records !-->
+
+    <section class="section section-records">
+        <div class="row">
+            <% allrecords.records.reverse().forEach(function(record){ %>
+                <div class="col m6 l4 s12">
+                    <div class="card">
+                        <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="<%=record.image%>">
+                        </div>
+                        <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">Patient name: <span style="text-transform:uppercase;"><%=record.patientName%></span><i class="material-icons right">more_vert</i></span>
+                        <p style="font-size: medium"><b>Prescription date: <%= moment(record.created).format("DD-MMM-YYYY")%></b></p>
+                        <p style="font-size: medium"><b>Prescription id: <%=record.recordId%></b></p>
+                        </div>
+                        <div class="card-reveal">
+                            <span class="card-title grey-text text-darken-4"><%= moment(record.recordDate).format("DD-MMM-YYYY") %><i class="material-icons right">close</i></span>
+                            <p style="font-size: small; text-transform:uppercase;"><b>name - <%=record.patientName%></b></p>
+                            <p style="font-size: small; text-transform:uppercase;"><b>Phone number - <%=record.phoneNumber%></b></p>
+                            <p style="font-size: small; text-transform:uppercase;"><b>Relation - <%=record.relation%></b></p>
+                            <form class="delete-form" action="/users/user-view/health-record/my-record/delete-record/<%=allrecords.id%>/<%=record._id%>?_method=DELETE" method="POST">
+                                <button style="background-color: transparent; border: 0; padding: 0; margin: 0; color: red; text-decoration: underline; cursor: pointer;">
+                                  DELETE 
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            <%});%>
+        </div>
+    </section>
+
+    <!-- Sectio: Fixed Acion button !-->
+    <div class="fixed-action-btn">
+        <a class="btn-floating btn-large light-blue modal-trigger" href="#modal1">
+            <i class="large material-icons">date_range</i>
+        </a>
+        <!-- Modal Structure -->
+        <div id="modal1" class="modal modal-fixed-footer">
+            <form action="/users/user-view/health-record/my-record/add-record/<%=customer%>" method="POST" enctype="multipart/form-data">
+                <div class="modal-content">
+                    <h3>Add Prescriptions</h3>
+                    <div class="row">
+                        <div class="input-field col s6">
+                              <input name="patientName" id="patientName" type="text" class="validate" >
+                              <label for="patientName">Patient name</label>
+                        </div>
+                        <div class="input-field col s6">
+                              <input name="phoneNumber" id="phoneNumber" type="number" class="validate">
+                              <label for="phoneNumber">Phone number</label>
+                        </div>
+                    </div>
+                    <div class="input-field col s12">
+                        <input name="relation" id="relation" type="text" class="validate">
+                        <label for="relation">Relation</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <div class="file-field input-field">
+                            <div class="btn grey">
+                                <span>File</span>
+                                <input name="myImage" type="file">
+                            </div>
+                                <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+<%include ../partials/footer%>

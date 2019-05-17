@@ -1,0 +1,114 @@
+<head class="animated fadeIn">
+        <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="/stylesheets/css/materialize.min.css" media="screen,projection" />
+        <link type="text/css" rel="stylesheet" href="/stylesheets/css/main.css" media="screen,projection" />
+        <link rel="stylesheet" type="text/css" href="/stylesheets/animate.css">
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
+    
+    <nav class="light-blue " style="height: 100px">
+      <div class="light-blue row">
+          <div class="col l12 m12 s12">
+              <div class="col l5 m5 s12" style="margin-top: 15px">
+                  <a data-target="slide-out" class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="font-size:23px;">menu</i></a>
+                  <a style="font-size: 23px">Supplier</a>
+              </div>
+    
+              <div class="col l5 m5 s9 input-field black-text" style="margin-top: 35px; height: 0">
+                  <input onkeyup="showResultsVendor(this.value)" placeholder="Search by vendor name" type="search" class="white black-text" style="height: 40px;border-radius: 5px;padding-left: 10px">
+              </div>
+              <div class="col l1 m1 s2 left-align" style="margin-top: 30px;">
+              <i class="material-icons white-text" style="font-size: 30px;font-weight: 800">search</i>
+              </div>    
+    
+    
+                <ul id="search-results" style="margin-left: 570px; width: 200px; line-height:2; position: absolute; margin-top: 80px;
+                z-index: 5;">
+                    
+                </ul>
+    
+          </div>
+      </div>
+    </nav>
+    
+    <div style="margin-top: 5em; position: absolute; z-index: 99999; margin-left: 5em;" class="center-align">
+      <% if(error && error.length > 0) { %>
+        <div id="mydiv" class="card-panel" style="background-color: red; color: white; text-align: center; border-radius: 0.2px;"><%=error%></div>
+      <% } %>
+      <% if(success && success.length > 0) { %>
+        <div id="mydiv" class="card-panel green accent-4" style="color: white;"><%=success%></div>  
+      <% } %>
+    </div> 
+    <% include ../partials/header2 %>
+<body>
+    <!-- Section Coupon Code !-->
+
+    <section class="section section-couponcode">
+        <div class="row" style="margin-left: 2%">
+            <div class="col l12 m12 s12 xs12" style="font-size: 120%">
+                <% supplier.forEach(function(data){%>
+                <div onclick="location.href='/supplier/<%= data.supplierId %>/add_medicine'" class="card card-1" style="padding-bottom: 20px; cursor: pointer;">
+                    <div class="card-content">
+                        <div class="col l4 m4 s4">
+                            <p class="left-align">
+                                <%= data.supplierName %>
+                            </p>
+                        </div>
+                        <div class="col l4 m4 s4">
+                            <p class="center-align blue-text">
+                                <%= data.city %>
+                            </p>
+                        </div>
+                        <div class="col l4 m4 s4 right-align" style="margin-top: 5px">
+                            <i class="material-icons" style="cursor:pointer">chevron_right</i>
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Sectio: Fixed Acion button !-->
+
+    <div class="fixed-action-btn">
+        <a class="btn-floating btn-large light-blue" href="http://localhost:8000/supplier/profile">
+            <i class="large material-icons">add</i>
+        </a>
+    </div>
+
+    <!-- Sectio: Fixed Acion button !-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- <script type="text/javascript" src="/js/materialize.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- adding custon script -->
+    <script type="text/javascript" src="/js/script.js"></script>
+    <script>
+        function viewprofile(supplierId) {
+            window.location.href = "http://localhost:8000/supplier/view_profile/" + supplierId;
+        };
+            
+        $(document).ready(function() {
+            $('select').formSelect();
+            $('.sidenav').sidenav();
+            $('.fixed-action-btn').floatingActionButton();
+            $('.modal').modal();
+            $('.tabs').tabs();
+            $('.slider').slider();
+            $('.datepicker').datepicker();
+            $('.datepicker').datepicker({
+                container: 'body',
+                selectMonths: true, // Creates a dropdown to control month
+                selectYears: 100, // Creates a dropdown of 15 years to control year
+                format: 'dd/mm/yyyy'
+            });
+        })
+    </script>
+
+</body>
+
+</html>

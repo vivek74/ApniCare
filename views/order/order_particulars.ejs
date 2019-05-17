@@ -1,0 +1,101 @@
+<% include ../partials/header %>
+
+<body>
+
+    <nav style="height: 100px">
+        <div class="nav-wrapper light-blue">
+                <a data-target="slide-out" class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="margin-top: 10px;font-size:25px;">menu</i></a>
+            <a onclick="history.back()" data-target="slide-out" class="sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="font-size:23px;margin-top: 20px; cursor: pointer;">keyboard_backspace
+
+                </i></a>
+            <a class="brand-logo" style="margin-top: 20px;font-size: 23px">Particulars View</a>
+        </div>
+    </nav>
+    <%include ../partials/header2%>
+
+    <section class="section section_order_view3">
+        <div class="row" style="padding-left: 2%">
+            <div class="col l3 m3 s6">
+                <h5>MEDICINE</h5>
+                <% order.medicines.forEach(medicine=>{%>
+                <div class="inp<%= medicine %>ut-field">
+                    <input type="text" value="<%= medicine.Name %>" style="border-bottom: 0">
+                </div>
+                <% }) %>
+            </div>
+            <div class="col l3 m3 s6">
+                <h5>Quantity</h5>
+                <% order.medicines.forEach(medicine=>{%>
+                <div class="input-field">
+                    <input type="text" value="<%= medicine.Qty %>  <%= medicine.medicinetype %> " style="border-bottom: 0">
+                </div>
+                <% }) %>
+            </div>
+            <div class="col l3 m3 s6">
+                <h5>MRP</h5>
+                <% order.medicines.forEach(medicine=>{%>
+                <div class="input-field">
+                    <input type="text" value="<%= medicine.Price %>" style="border-bottom: 0">
+                </div>
+                <% }) %>
+            </div>
+            <div class="col l3 m3 s6">
+                <h5>Discounted Amt</h5>
+                <% order.medicines.forEach(medicine=>{%>
+                <div class="input-field">
+                    <input type="text" value="<%= medicine.Discount %>" style="border-bottom: 0">
+                </div>
+                <% }) %>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col l6 hide-on-small-and-down"></div>
+            <div class="col l3 s6">
+                <h5>Net Payable Amount:</h5>
+                <h5>Discount Amount:</h5>
+                <h5>Cashback Amount:</h5>
+            </div>
+            <div class="col l3 s6">
+                <h5>INR <%= order.netTotal %></h5>
+                <h5>INR <%= order.discountedAmt %></h5>
+                <h5>INR <%= order.cashbackAmt %></h5>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sectio: Fixed Acion button !-->
+
+    <div class="fixed-action-btn">
+        <a class="btn-floating btn-large light-blue" href="/orders/edit_orders/<%= order._id %>">
+            <i class="large material-icons">create</i>
+        </a>
+    </div>
+
+
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- <script type="text/javascript" src="/js/materialize.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- adding custon script -->
+    <script type="text/javascript" src="/js/script.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('select').formSelect();
+            $('.sidenav').sidenav();
+            $('.fixed-action-btn').floatingActionButton();
+            $('.modal').modal();
+            $('.tabs').tabs();
+            $('.slider').slider();
+            $('.datepicker').datepicker();
+            $('.datepicker').datepicker({
+                container: 'body',
+                selectMonths: true, // Creates a dropdown to control month
+                selectYears: 100, // Creates a dropdown of 15 years to control year
+                format: 'dd/mm/yyyy'
+            });
+        });
+
+    </script>
+</body>
+
+</html>

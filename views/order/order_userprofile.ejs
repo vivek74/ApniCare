@@ -1,0 +1,231 @@
+<% include ../partials/header %>
+
+<body>
+
+    <nav style="height: 160px">
+        <div class="nav-wrapper light-blue">
+            <div class="row">
+                <div class="col l12 s12 m12">
+                        <a data-target="slide-out" class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="margin-top: 10px;font-size:25px;">menu</i></a>
+                    <a onclick="history.back()" data-target="slide-out" class="sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="font-size:35px;margin-top: 20px; cursor: pointer;">arrow_back</i></a>
+                    <a href="#" class="brand-logo" style="margin-top: 20px;font-size: 150%;font-weight: 400">Order info</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <%include ../partials/header2%>
+
+    <div class="row light-blue white-text" style="margin-top: 10px;padding: 15px">
+        <div class="col l6 m6 s6" style="font-weight: 500;font-size: large">
+            <%= profile.userName %>
+        </div>
+        <div class="col l6 m6 s6" style="font-weight: 00;font-size: large">Atulya Card#
+            <% if(profile.atulyaCardNumber){%>APAT
+            <%= profile.atulyaCardNumber %>
+            <% }else{ %>NOT AVAILABLE
+            <%}%>
+        </div>
+    </div>
+
+    <section class="section section-profile">
+        <div class="row" style="padding: 15px;padding-top: 0;margin-top: -30px">
+            <div class="col s12 l12 m12">
+                <h1 class="left-align">
+                    <%= profile.userName %>
+                </h1>
+            </div>
+            <div class="col s12 l6 m6">
+                <div class="row">
+                    <div class="col l6 s12">
+                        <h6>
+                            <%= profile.contactNumber %>
+                        </h6>
+                    </div>
+                    <div class="col l6 s12">
+                        <h6>Order ID: <span style="padding-left: 5%">
+                                <%= profile.orderId %></span></h6>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col l6 s12">
+                        <h6>User Type: <span style="margin-left: 5%;font-size: 250%;font-weight: 800" class="red-text"><i>
+                                    <%= profile.userType %></i></span></h6>
+                    </div>
+                    <div class="col l6 s12">
+                        <h6>Order Type: <span style="padding-left: 5%">
+                                <%= profile.orderType %></span></h6>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col l6 s12">
+                        <h6>Address:
+                            <%= profile.address %>
+                        </h6>
+                    </div>
+                    <div class="col l6 s12" style="margin-left:0;padding-left:0">
+                        <div class="col l6">
+                            <h6>Order Status:</h6>
+                        </div>
+                        <div class="col l6">
+                            <select class="browser-default grey lighten-5" name="orderStatus" onclick="orderStatus(this.value)">
+                                <% let options = ['Processing', 'Confirmed', 'In transit', 'Out for delievery', 'Delievered', 'Cancelled', 'Returned'] %>
+                                <% options.forEach(state=>{%>
+                                <% if(state === profile.orderStatus) {%>
+                                <option value="<%= state %>" selected>
+                                    <%= state %>
+                                </option>
+                                <% } else {%>
+                                <option value="<%= state %>">
+                                    <%= state %>
+                                </option>
+                                <% } %>
+                                <%}) %>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 10%">
+                    <div class="col l6 s12">
+                        <h6>Coupon Code Appllied:
+                            <% if(profile.promocode){%>
+                            <%= profile.promocode %>
+                            <% }else{ %>NOT APPLIED
+                            <%}%>
+                        </h6>
+                    </div>
+                    <div class="col l6 s12">
+                        <a href="/orders/get_particulars/<%= profile._id %>"><button type="button" class="btn btn-large light-blue">View Particulars</button></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m5 l5">
+                <h5 class="center-align">PRESCRIPTION</h5>
+                <div class="col m12 l12 s12 card-panel yellow center-align" style="padding-bottom: 10px">
+                    <i class="material-icons large" style="margin-top: 5%">face</i>
+                    <p class="grey-text text-darken-3" style="font-weight: 600;">
+                        <%= profile.userName %>
+                    </p>
+                    <% if(profile.prescriptionImage){%><button type="button" class="btn black white-text">OPEN</button>
+                    <% }else{ %>NOT AVAILABLE
+                    <%}%>
+                </div>
+
+                <div class="col m12 l12 s12 card-panel yellow center-align">
+                    <p class="grey-text text-darken-3" style="font-weight: 600;">Billing Info</p>
+                    <p class="grey-text text-darken-3" style="font-weight: 600;">Net Total <span style="font-size: x-large;padding-left: 5%">Rs.
+                            <%= profile.netTotal %></span></p>
+                    <p class="grey-text text-darken-3" style="font-weight: 600;">Cashback <span style="font-size: x-large;padding-left: 5%">Rs.
+                            <%= profile.cashbackAmt %></span></p>
+                    <p class="grey-text text-darken-3" style="font-weight: 600;">Discount <span style="font-size: x-large;padding-left: 5%">Rs.
+                            <%= profile.discountedAmt %></span></p>
+                </div>
+            </div>
+            <div class="col l1 m1 hide-on-med-and-down"></div>
+        </div>
+    </section>
+
+    <!-- Sectio: Fixed Acion button !-->
+
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h4>Cancel Order</h4>
+            <div class="row">
+                <div class="col l6 s12" style="padding-top: 5%">
+                    <button type="button" class="btn materialize-red white-text" style="font-weight:500" onclick="payWithWallet()">Pay with wallet?</button>
+                </div>
+                <div class="col l6 s12" style="padding-top: 5%">
+                    <button type="button" class="btn orange white-text" style="font-weight:500" onclick="orderStatus('Paywithcash')">Pay with cash?</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <h4>Add to wallet</h4>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input placeholder="Amount" id="first_name" type="number" class="validate">
+                    <label for="first_name">Wallet Amount</label>
+                </div>
+                <div class="col l6 s6 left-align">
+                    <button type="button" class="btn green white-text" style="font-weight:600" onclick="submitWallet()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- <script type="text/javascript" src="/js/materialize.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- adding custon script -->
+    <script type="text/javascript" src="/js/script.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('select').formSelect();
+            $('.sidenav').sidenav();
+            $('.fixed-action-btn').floatingActionButton();
+            $('.modal').modal();
+            $('.tabs').tabs();
+            $('.slider').slider();
+            $('.datepicker').datepicker();
+            $('.datepicker').datepicker({
+                container: 'body',
+                selectMonths: true, // Creates a dropdown to control month
+                selectYears: 100, // Creates a dropdown of 15 years to control year
+                format: 'dd/mm/yyyy'
+            });
+        });
+
+    </script>
+
+    <script type="application/javascript">
+        function orderStatus(value) {
+            if (value === "Paywithcash") {
+                let orderId = "<%= profile._id %>";
+                $.post(
+                    "/orders/change_orderStatus", {
+                        id: orderId,
+                        orderStatus: 'Cancelled'
+                    }
+                )
+                $('#modal').modal('close');
+            } else if (value === "Cancelled") {
+                $('#modal').modal();
+                $('#modal').modal('open');
+            } else {
+                let orderId = "<%= profile._id %>";
+                $.post(
+                    "/orders/change_orderStatus", {
+                        id: orderId,
+                        orderStatus: value
+                    }
+                )
+            }
+        }
+
+        function payWithWallet() {
+            $('#modal').modal('close');
+            $('#modal1').modal();
+            $('#modal1').modal('open');
+        }
+
+        function submitWallet() {
+            let amt = $('#first_name').val();
+            let phone = '<%= profile.contactNumber %>'
+            $.post(
+                "/orders/update_wallet", {
+                    amt: amt,
+                    phone: phone
+                }
+            ).done(data => {
+                $('#modal1').modal('close');
+            })
+        }
+
+    </script>
+</body>
+
+</html>

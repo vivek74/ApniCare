@@ -1,0 +1,187 @@
+<head class="animated fadeIn">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="/stylesheets/css/materialize.min.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="/stylesheets/css/main.css" media="screen,projection" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/animate.css">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<nav class="light-blue " style="height: 100px">
+  <div class="light-blue row">
+      <div class="col l12 m12 s12">
+          <div class="col l5 m5 s12" style="margin-top: 15px">
+              <a data-target="slide-out" class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="font-size:23px;">menu</i></a>
+              <a style="font-size: 23px">Users</a>
+          </div>
+
+          <div class="col l5 m5 s9 input-field black-text" style="margin-top: 35px; height: 0">
+              <input onkeyup="showResults(this.value)" placeholder="Search by phone number" type="search" class="white black-text" style="height: 40px;border-radius: 5px;padding-left: 10px">
+          </div>
+          <div class="col l1 m1 s2 left-align" style="margin-top: 30px;">
+          <i class="material-icons white-text" style="font-size: 30px;font-weight: 800">search</i>
+          </div>    
+
+
+            <ul id="search-results-item" style="margin-left: 570px; width: 200px; line-height:2; position: absolute; margin-top: 80px;
+            z-index: 5;">
+                
+            </ul>
+
+      </div>
+  </div>
+</nav>
+
+<div style="margin-top: 5em; position: absolute; z-index: 99999; margin-left: 5em;" class="center-align">
+  <% if(error && error.length > 0) { %>
+    <div id="mydiv" class="card-panel" style="background-color: red; color: white; text-align: center; border-radius: 0.2px;"><%=error%></div>
+  <% } %>
+  <% if(success && success.length > 0) { %>
+    <div id="mydiv" class="card-panel green accent-4" style="color: white;"><%=success%></div>  
+  <% } %>
+</div> 
+<% include ../partials/header2 %>
+
+<body>
+    <!-- <nav>
+        <div class="nav-wrapper light-blue">
+            <a href="#" data-target="slide-out" class="sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="font-size:35px">menu</i></a>
+            <a href="#" class="brand-logo">Users</a>
+        </div>
+    </nav>
+     -->
+
+    <!--  SectionLFC NFC -->
+    <div class="row" style="margin-top: 50px;">
+            <div class="col s12 m2">
+                <div onclick="location.href='/users'" class="card-1 pointer card light-blue darken-1">
+                    <div class="card-content white-text">
+                        <p>ALL</p>
+                        <span class="card-title right-align" style="font-size: 40px;font-weight: 600"><%=all%></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m2 l2">
+                <div onclick="location.href='/users/nfc'" class="card light-blue darken-1">
+                    <div class="card-1 pointer card-content white-text">
+                        <p>NFC</p>
+                        <span class="card-title right-align" style="font-size: 40px;font-weight: 600"><%=nfc%></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m2 l2">
+                <div onclick="location.href='/users/suspended-user'" class="card light-blue darken-1">
+                    <div class="card-1 pointer card-content white-text">
+                        <p>SUSPENDED</p>
+                        <span class="card-title right-align" style="font-size: 40px;font-weight: 600"><%=suspended%></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m2 l2">
+                <div onclick="location.href='/users/hfc'" class="card light-blue darken-1">
+                    <div class="card-1 pointer card-content white-text">
+                        <p>HFC</p>
+                        <span class="card-title right-align" style="font-size: 40px;font-weight: 600"><%=hfc%></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m2 l2">
+                <div onclick="location.href='/users/lfc'" class="card light-blue darken-1">
+                    <div class="card-1 pointer card-content white-text">
+                        <p>LFC</p>
+                        <span class="card-title right-align" style="font-size: 40px;font-weight: 600"><%=lfc%></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m2 l2">
+                <div onclick="location.href='/users/pending-user'" class="card light-blue darken-1" style="width: 100%">
+                    <div class="card-1 pointer card-content white-text">
+                        <p>PENDING</p>
+                        <span class="card-title right-align" style="font-size: 40px;font-weight: 600"><%=userstate%></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    <!-- Section: Users Info -->
+    
+    <section class="section section-users">
+        <div class="row" style="margin: 0;padding: 0">
+
+            <% lfcCustomer.forEach(function(customers){ %>
+              <div class="col-s12 m12 card-1" onclick="location.href='/users/user-view/<%=customers.id%>'" style="margin: 0;padding: 0;cursor: pointer;">
+                  <div class="card-panel black-text text-darken-2 no-pad-bot" style="margin: 0;padding-top: 1%;padding-bottom: 0">
+                  <div class="row" style="">
+                      <div class="col s12 m1 l1 no-padding right-align" style="margin-left: -4%">
+                          <i class="material-icons medium" style="padding-right: 5px">account_circle</i>
+                      </div>
+                      <div class="col s12 m4 l5 left" style="padding-left: 0;">
+                       <span style="font-weight: 500;color: darkgrey;font-size: large"><%=customers.name%></span><br>
+                        <i class="material-icons grey-text text-darken-2 no-padding" style="margin-top: 15px">add_locations</i><span style="font-weight: 400;color: darkgrey;font-size: medium;margin-left: -20px;"><%if(customers.state){%> <%=customers.state%> <%}else{%> NIL <%}%></span>     
+                      </div>
+                      <div class="col s12 m3 l3 left-align" style="padding-left: 0;">
+                          <span style="font-weight: 500;color: darkgrey;font-size: medium; text-transform: uppercase;"><%=customers.userType%></span><br>
+                          <span style="font-weight: 500;color: darkgrey;font-size: medium;"><%=customers.userId%></span>
+                      </div>
+                      <div class="col s12 m3 l2 left-align" style="padding-left: 0;">
+                          <span style="font-weight: 500;color: darkgrey;font-size: medium;">Contact <%=customers.phone%></span><br>
+                      </div>
+                      <div class="col s12 m1 l1 right-align">
+                      <i class="material-icons">chevron_right</i>
+                      </div>
+                      </div>
+                  </div>
+              </div>
+            <%});%>
+
+        </div>
+    </section>
+    
+    
+    <!-- Sectio: Fixed Acion button -->
+    
+    <div class="fixed-action-btn">
+  <a class="btn-floating btn-large light-blue modal-trigger" href="#modal1">
+    <i class="large material-icons">person_add</i>
+  </a>
+  <!-- Modal Structure -->
+  <form action="/users/add-user" method="post">
+  <div id="modal1" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h4>Add user</h4>
+      <div class="card-content">
+        <div class="row">
+          <div class="row">
+            <div class="input-field col s6">
+              <input name="name" id="name" type="text" class="validate" required>
+              <label for="name">Name (*Required)</label>
+            </div>
+            <div class="input-field col s6">
+              <input name="username" id="phone" type="text" class="validate" required>
+              <label for="username">Phone (*Required)</label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+                <div class="input-field col s6">
+                    <select name="requestedUserType" class="browser-default">
+                        <option value="" disabled selected>User type</option>
+                            <option value="HFC">HFC</option>
+                            <option value="LFC">LFC</option>
+                        <option value="NFC">NFC</option>
+                    </select>
+                </div>
+            </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn waves-effect waves-light" type="submit">Submit
+        <i class="material-icons right">send</i>
+      </button>
+    </div>
+  </div>
+</form>
+</div>
+<% include ../partials/footer%>

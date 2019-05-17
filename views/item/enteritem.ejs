@@ -1,0 +1,127 @@
+<% include ../partials/header %>
+
+    <nav style="height: 100px">
+        <div  class="nav-wrapper light-blue">
+                <a data-target="slide-out" class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="margin-top: 10px;font-size:25px;">menu</i></a>
+            <a onclick="history.back()" class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="font-size:23px;margin-top: 10px;">keyboard_backspace
+                </i></a>
+            <a class="brand-logo" style="margin-top: 10px;font-size: 23px">Enter Item</a>
+        </div>
+    </nav>
+    <%include ../partials/header2%>
+
+<form action="/item/enter-item" method="post" enctype="multipart/form-data">
+    <section class="section section-items">
+        <div class="row" style="padding-left: 2%">
+            <div class="col l7 s12" style="margin-top: 1%">
+
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input required name="itemName" class="itemName" type="text">
+                        <label for="itemName">Items Name</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input required id="manufacturerName" name="manufacturerName" type="text">
+                        <label for="manufacturerName">Manufacturer Name</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s4">
+                        <input onkeyup="item()" required id="unitQty0" class="unitQty" name="quantity[0][unitQty]" type="Number" >
+                        <label for="unitQty0">Unit Quantity</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input required id="firstPackaging" class="unitQty" name="quantity[0][packagingUnit1]" type="text" >
+                        <label for="firstPackaging">Packaging unit 1</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input required id="secondPackaging" name="quantity[0][packagingUnit2]" type="text" >
+                        <label for="secondPackaging">Packaging unit 2</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s3">
+                        <input onkeyup="item()" required id="mrp0"name="quantity[0][mrp]" type="Number" class="mrp">
+                        <label for="mrp0">MRP</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <input required id="discount" class="discount" name="quantity[0][discount]" type="Number">
+                        <label for="discount">Discount</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <input required id="rate0" class="price" name="quantity[0][rate]" type="Number">
+                        
+                    </div>
+                    <div class="s3">
+                        <button class="btn btn-large light-blue add_button">Add more size</button>
+                    </div>
+                </div>
+
+                <div class="item_add">
+                    
+                </div>
+
+            </div>
+            <div class="col l5 s12">
+                <div class="file-field input-field">
+                    <div class="btn grey btn-small">
+                        <span>Upload item image 1</span>
+                        <input name="myImage" type="file">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input id="catch" class="file-path validate" type="text">
+                    </div>
+                </div>
+                <div class="file-field input-field">
+                    <div class="btn grey btn-small">
+                        <span>Upload item image 2</span>
+                        <input name="myImage" type="file">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input id="catch" class="file-path validate" type="text">
+                    </div>
+                </div>
+                <div class="file-field input-field">
+                    <div class="btn grey btn-small">
+                        <span>Upload item image 3</span>
+                        <input name="myImage" type="file">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input id="catch" class="file-path validate" type="text">
+                    </div>
+                </div>
+                <div class="file-field input-field">
+                    <div class="btn grey btn-small">
+                        <span>Upload item image 4</span>
+                        <input name="myImage" type="file">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input id="catch" class="file-path validate" type="text">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col l12 s12">
+                <h3 class="left-align">Detailed Information</h3>
+                <div class="input-field col s6">
+                    <textarea id="textarea1" required name="detailedInfo" class="materialize-textarea"></textarea>
+                    <label for="textarea1">Textarea</label>
+                </div>
+                <div class="col l6 s12">
+
+                </div>
+            </div>
+            <div class="col l10 s10 right-align">
+                <button class="btn btn-large red">Clear</button>
+                <button type="submit" class="btn btn-large green">Submit</button>
+            </div>
+            <div class="col l2 s2"></div>
+        </div>
+    </section>
+</form>
+<% include ../partials/footer %>

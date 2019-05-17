@@ -1,0 +1,55 @@
+<% include ../partials/header %>
+<body>
+
+    <nav style="height: 80px">
+        <div class="nav-wrapper light-blue">
+            <a data-target="slide-out" class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="margin-top: 10px;font-size:25px;">menu</i></a>
+            <a onclick="history.back()" class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="margin-top: 10px;font-size: 25px">arrow_back</i></a>
+            <a class="brand-logo" style="margin-top: 10px;font-size: 22px">Health Records</a>
+        </div>
+    </nav>
+    <% include ../partials/header2%>
+    <div class="row" style="margin-top: 40px">
+    <div class="col l12 s12 m12">
+        <div class="col s12 l8 m12" style="font-weight: 500; margin-left:12em;" >
+
+            <div class="col s12 l4 m4" style="margin-top: 10px;">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="/images/prescription_icon.png">   
+                    </div>    
+                    <div class="card-action">
+                        <a style="margin-left: 30px;" href="/users/user-view/health-record/my-prescription/<%=customer.id%>" class="card-1 btn card-1 btn-small light-blue">My Prescriptions</a>
+                    </div>
+                </div>   
+            </div>
+
+            <div class="col s12 l4 m4" style="margin-top: 10px">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="/images/records_icon.png">   
+                    </div>    
+                    <div class="card-action">
+                        <a href="/users/user-view/health-record/my-record/<%=customer.id%>" class="card-1 btn btn-small deep-orange">My Records</a>
+                    </div>
+                </div>  
+            </div>
+
+            <div class="col s12 l4 m4" style="margin-top: 10px">
+                    <div class="card">
+                            <div class="card-image">
+                                <img src="/images/invoice.png">   
+                            </div>    
+                            <div class="card-action">
+                                    <a href="/users/user-view/health-record/invoice/<%=customer.id%>" class="card-1 btn btn-small pink darken-3">Invoices</a>
+                            </div>
+                    </div>
+                
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<% include ../partials/footer %>
+

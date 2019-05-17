@@ -1,0 +1,112 @@
+<% include ../partials/header %>
+<body>
+
+    <nav style="height: 80px">
+        <div class="nav-wrapper light-blue">
+                <a data-target="slide-out" class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="margin-top: 10px;font-size:25px;">menu</i></a>
+            <a onclick="history.back()"  class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="font-size:35px;margin-top: 10px">arrow_back</i></a>
+            <a class="brand-logo" style="margin-top: 10px">Supplier Profile</a>
+        </div>
+    </nav>
+    <% include ../partials/header2%>
+
+
+    <section class="section">
+        <div class="row" style="padding-left: 2%">
+            <input id="supplierid" type="hidden" value="<%= supplier[0].supplierId %>">
+            <div class="col l10 m10 s12">
+                <input type="text" value="<%= supplier[0].supplierName %>" id="supplier_name" style="border-bottom: 0;font-weight: 400;font-size: 220%" readonly>
+                <input type="text" value="<%= supplier[0].contactPersonNumber %>" id="mobilenumber" style="border-bottom: 0;font-weight: 400;font-size: 160%" readonly>
+                <input type="text" value="<%= supplier[0].website %>" id="website" style="border-bottom: 0;font-weight: 400;font-size: 160%" readonly>
+                <div class="input-field">
+                    <input type="text" id="email" value="<%= supplier[0].email %>" id="email" style="border-bottom: 0;font-weight: 400;font-size: 160%" readonly>
+                    <label for="email" style="font-size:150%">email: </label>
+                </div>
+                <div class="col l6 m6 s12 input-field" style="margin-left: -10px">
+                    <input type="text" id="dl" value="<%= supplier[0].diNumber %>" style="border-bottom: 0;font-weight: 400;font-size: 160%" readonly>
+                    <label for="dl" style="font-size:150%">DL #: </label>
+                </div>
+                <div class="col l6 m6 s12 input-field" style="margin-left: -10px;padding-bottom: 1%">
+                    <input type="text" id="expiry" value="<%= moment(supplier[0].expiration).format('DD/MM/YYYY') %>" class="datepicker" style="border-bottom: 0;font-weight: 400;font-size: 160%" readonly>
+                    <label for="expiry" style="font-size:150%">Expiry: </label>
+                </div>
+                <div class="col l12 s12 m12 input-field" style="margin-left: -10px;">
+                    <input type="text" id="gst" value="<%= supplier[0].gstNumber %>" style="border-bottom: 0;font-weight: 400;font-size: 160%" readonly>
+                    <label for="gst" style="font-size:150%">GST IN#: </label>
+                </div>
+                <div class="col l12 s12 m12 input-field" style="margin-left: -10px;">
+                    <input class="grey-text lighten-3" type="text" value="<%= supplier[0].address %>" id="address" style="border-bottom: 0;font-weight: 400;font-size: 160%" readonly>
+                    <input class="grey-text lighten-3" type="text" value="<%= supplier[0].city %>" id="city" style="border-bottom: 0;font-weight: 400;font-size: 160%" readonly>
+                    <input class="grey-text lighten-3" type="text" value="<%= supplier[0].pincode %>" id="pincode" style="border-bottom: 0;font-weight: 400;font-size: 160%" readonly>
+                </div>
+            </div>
+            <div class="col l2 m2 s12 right-align" style="margin-top: 2%">
+                <a class="btn-floating btn-large light-blue" id="create">
+                    <i class="large material-icons">create</i>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col l12 s12 m12 right-align" id="edit_option">
+                <button id="submit_btn" class="btn btn-large white-text green" style="font-weight: 600">Edit</button>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Sectio: Fixed Acion button !-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- <script type="text/javascript" src="/js/materialize.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- adding custon script -->
+    <script type="text/javascript" src="/js/script.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('select').formSelect();
+            $('.sidenav').sidenav();
+            $('.fixed-action-btn').floatingActionButton();
+            $('.modal').modal();
+            $('.tabs').tabs();
+            $('.slider').slider();
+            $('.datepicker').datepicker();
+            $('.datepicker').datepicker({
+                container: 'body',
+                selectMonths: true, // Creates a dropdown to control month
+                selectYears: 100, // Creates a dropdown of 15 years to control year
+                format: 'dd/mm/yyyy'
+            });
+            $('#create').on('click', () => {
+                $('input[type=text]').attr('readonly', false).css("border-bottom", "1px solid black");
+                $('#edit_option').fadeIn();
+            });
+            $('#edit_option').fadeOut();
+
+            $('#submit_btn').on('click', () => {
+                $.post(
+                    "http://localhost:8000/supplier/profile/edit/" + $('#supplierid').val(), {
+                        supplier_name: $('#supplier_name').val(),
+                        city: $('#city').val(),
+                        mr_address: $('#address').val(),
+                        pincode: $('#pincode').val(),
+                        dl_number: $('#dl').val(),
+                        expiration: $('#expiry').val(),
+                        email: $('#email').val(),
+                        mobile_person: $('#mobilenumber').val(),
+                        website: $('#website').val(),
+                        gstNumber: $('#gst').val(),
+                    }
+                ).done(
+                    (data) => {
+                        window.location = "http://localhost:8000/supplier/allprofile";
+                    }
+                )
+            })
+
+        });
+
+    </script>
+
+</body>
+
+</html>

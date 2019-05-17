@@ -1,0 +1,163 @@
+<head class="animated fadeIn">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="/stylesheets/css/materialize.min.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="/stylesheets/css/main.css" media="screen,projection" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/animate.css">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<nav class="light-blue " style="height: 100px">
+  <div class="light-blue row">
+      <div class="col l12 m12 s12">
+          <div class="col l5 m5 s12" style="margin-top: 15px">
+              <a data-target="slide-out" class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="font-size:23px;">menu</i></a>
+              <a style="font-size: 23px">Order</a>
+          </div>
+
+          <!-- <div class="col l5 m5 s9 input-field black-text" style="margin-top: 35px; height: 0">
+              <input onkeyup="showResultsItem(this.value)" placeholder="Search by medicine name" type="search" class="white black-text" style="height: 40px;border-radius: 5px;padding-left: 10px">
+          </div> -->
+          <!-- <div class="col l1 m1 s2 left-align" style="margin-top: 30px;">
+          <i class="material-icons white-text" style="font-size: 30px;font-weight: 800">search</i>
+          </div>     -->
+
+
+            <!-- <ul id="search-results" style="margin-left: 570px; width: 200px; line-height:2; position: absolute; margin-top: 80px;
+            z-index: 5;">
+                
+            </ul> -->
+
+      </div>
+  </div>
+</nav>
+<% include ../partials/header2 %>
+<body>
+
+
+    <! -- Section : Search -- !>
+    <!-- <section class="search section light-blue" style="padding-bottom: 0;margin-bottom: 0;border-bottom-width: thick;border-bottom: solid 5px red">
+        <div class="container" style="padding-bottom: 0;margin-bottom: 0">
+            <div class="row" style="padding-bottom: 0;margin-bottom: 0">
+                <div class="col s10 m10 l10 push-l4" style="padding-bottom: 0;margin-bottom: 0">
+                    <input type="text" class="input-field" style="padding-bottom: 0;margin-bottom: 0;margin-top: 5px;border-bottom: 0">
+                </div>
+                <div class="col m2 l2 push-l4" style="margin-left: -15px;padding-bottom: 0;margin-bottom: 0">
+                    <i class="material-icons black-text" style="font-size: 30px;padding-bottom: 0;margin-bottom: 0;margin-top: 15px;">search</i>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <! -- Section : LFC NFC... -- !>
+    <div class="row" style="margin-top: 50px;">
+        <div class="col s12 m2 l2">
+            <div class="card light-blue darken-1">
+                <div class="card-content white-text">
+                    <p>ALL</p>
+                    <span class="card-title right-align" style="font-size: 40px;font-weight: 600" id="all">0</span>
+                </div>
+            </div>
+        </div>
+        <div class="col l1 m1"></div>
+        <div class="col s12 m2 l2">
+            <div class="card light-blue darken-1">
+                <div class="card light-blue darken-1">
+                    <div class="card-content white-text">
+                        <p>CART</p>
+                        <span class="card-title right-align" style="font-size: 40px;font-weight: 600" id="cart">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col l1 m1"></div>
+        <div class="col s12 m2 l2">
+            <div class="card light-blue darken-1">
+                <div class="card-content white-text">
+                    <p>PRESCRIPTION</p>
+                    <span class="card-title right-align" style="font-size: 40px;font-weight: 600" id="prescription">0</span>
+                </div>
+            </div>
+        </div>
+        <div class="col l1 m1"></div>
+        <div class="col s12 m2 l2">
+            <div class="card light-blue darken-1">
+                <div class="card-content white-text">
+                    <p>CREATED</p>
+                    <span class="card-title right-align" style="font-size: 40px;font-weight: 600" id="created">0</span>
+                </div>
+            </div>
+        </div>
+        <div class="col l1 m1"></div>
+    </div>
+
+    <!-- Section: Users Info !-->
+
+    <section class="section section-users">
+        <div class="row" style="margin: 0;padding: 0" id="allOrders">
+        </div>
+    </section>
+
+
+    <!-- Sectio: Fixed Acion button !-->
+
+    <div class="fixed-action-btn">
+        <a class="btn-floating btn-large light-blue modal-trigger" href="/orders/place_orders">
+            <i class="large material-icons">person_add</i>
+        </a>
+        
+    </div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- <script type="text/javascript" src="/js/materialize.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- adding custon script -->
+    <script type="text/javascript" src="/js/script.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('select').formSelect();
+            $('.sidenav').sidenav();
+            $('.fixed-action-btn').floatingActionButton();
+            $('.modal').modal();
+            $('.tabs').tabs();
+            $('.slider').slider();
+            $('.datepicker').datepicker();
+            $('.datepicker').datepicker({
+                container: 'body',
+                selectMonths: true, // Creates a dropdown to control month
+                selectYears: 100, // Creates a dropdown of 15 years to control year
+                format: 'dd/mm/yyyy'
+            });
+        });
+
+        $.get(
+            "/orders/get_allOrders"
+        ).done(data => {
+            let html = '';
+            let options = ['Processing', 'Confirmed', 'In transit', 'Out for delievery', 'Delievered', 'Cancelled', 'Returned']
+            data['order'].forEach(order=>{
+                html += '<div class="col-s12 m12" style="margin: 0;padding: 0"><div class="card-panel black-text text-darken-2 no-pad-bot" style="margin: 0;padding-top: 1%;padding-bottom: 0"><div class="row" style=""><div class="col s12 m12 l1 no-padding right-align" style="margin-left: -4%"><i class="material-icons medium" style="padding-right: 5px">account_circle</i></div><div class="col s12 m12 l3 left" style="padding-left: 0;"><span style="font-weight: 500;color: darkgrey;font-size: large">'+ order['userName'] +'</span><br><i class="material-icons grey-text text-darken-2 no-padding" style="margin-top: 15px">add_locations</i><span style="font-weight: 400;color: darkgrey;font-size: medium;margin-left: -20px">'+ order['address'] +'</span></div><div class="col s12 m12 l2 left" style="padding-left: 0;"><span style="font-weight: 500;color: darkgrey;font-size: medium;">Order Type: '+ order['orderType'] +'</span><br><span style="font-weight: 500;color: darkgrey;font-size: medium;">Order ID: '+ order['orderId'] +'</span><br><span style="font-weight: 500;color: darkgrey;font-size: medium;">Apnicare #: '+ order['atulyaCardNumber'] +'</span></div><div class="col s12 m12 l3 left-align" style="padding-left: 0;"><span style="font-weight: 500;color: darkgrey;font-size: medium;">User Type: '+ order['userType'] +'</span><br><span style="font-weight: 500;color: darkgrey;font-size: medium;">Date: '+ new Date(order['orderDate']).toLocaleDateString("hi-IN") +'</span><br><span style="font-weight: 500;color: darkgrey;font-size: medium;">Time: '+ new Date(order['orderDate']).toLocaleTimeString() +'</span></div><div class="col s12 m12 l2 left-align" style="padding-left: 0;"><span style="font-weight: 500;color: darkgrey;font-size: medium;">Contact '+ order['contactNumber'] +'</span><br><span style="font-weight: 500;color: darkgrey;font-size: medium;"><select class="browser-default grey lighten-4">';
+                
+                options.forEach(option=>{
+                    if(option == order['orderStatus']){
+                        html += '<option value="'+ option +'" selected>'+ option +'</option>';
+                    }else{
+                        html += '<option value="'+ option +'">'+ option +'</option>';
+                    }
+                })
+                
+                html += '</select></span></div><div class="col s12 m12 l1 right-align"><a href="/orders/view_profile/'+ order['_id'] +'"><i class="material-icons" style="cursor:pointer">chevron_right</i></a></div></div></div></div>';
+                
+            })
+            
+            $('#allOrders').html(html);
+            $('#all').text(data['order'].length);
+            $('#created').text(data['order'].length);
+        })
+
+    </script>
+</body>
+
+</html>

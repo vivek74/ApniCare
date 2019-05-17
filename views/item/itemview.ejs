@@ -1,0 +1,178 @@
+<% include ../partials/header %>
+
+<body>
+    <nav style="height: 80px">
+                <div class="nav-wrapper light-blue">
+                    <div class="row">
+                        <div class="col l12 s12 m12">
+                                <a data-target="slide-out" class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="margin-top: 10px;font-size:25px;">menu</i></a>
+                            <a onclick="history.back()" class="sidenav-trigger pointer show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="font-size:35px;margin-top: 10px">arrow_back</i></a>
+                            <a class="brand-logo" style="margin-top: 10px;font-size: 150%;font-weight: 400">Medicine/Item View</a>
+                        </div>
+                    </div>
+                </div>
+    </nav> 
+    <%include ../partials/header2%>
+    <%if(medicine.isItem == true){%>
+    <section class="section section-itemview">
+        <div class="row" style="padding-left: 1%">
+            <div class="col l7 m7 s12">
+                <h2 style="text-transform: uppercase;" class="left-align"><%=medicine.manufacturerName%></h2>
+                <p class="left-align purple-text" style="font-size: 120%; text-transform: uppercase;"><u><%=medicine.medicineName%></u></p>
+                <div class="row">
+                    <div class="col l6 m6 s12" style="font-size: 120%">
+                        <p class="left-align grey-text">
+                            Item ID: <%=medicine.medicineId%>
+                        </p>
+                    </div>
+                    <div class="col l6 s12" style="font-size: 120%">
+                        Item Type <span class="blue-text right-align"> GENERAL TYPE</span>
+                        <div class="input-field">
+                            <select class="browser-default grey lighten-3">
+                                <option value="" disabled selected>Choose Size</option>
+                                <% medicine.quantity.forEach(function(medicinesQty){ %>
+                                    <option value="3"><%=medicinesQty.unitQty%>ml (Price - Rs <%=medicinesQty.mrp%>)</option>
+                                <%})%>
+                            </select>
+                            
+                        </div>
+                    </div>
+                    <div class="col l12 m12 s12">
+                        <h2 class="left-align">Detailed Information</h2>
+                        <p class="left-align" style="font-size: 110%">
+                                <%=medicine.detailedInfo%>
+                            <span class="blue-text" style="border-bottom: solid 2px red;border-bottom-color: red">Know more</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col l5">
+                <div class="row">
+                    <div class="col l2"></div>
+                    <div class="col l10" style="width: 400px">
+                        <div class="slider">
+                            <ul class="slides">
+                                <li>
+                                    <img src="<%=medicine.MedicineImage1%>"> <!-- random image -->
+                                    <div class="caption center-align">
+                                        
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="<%=medicine.MedicineImage2%>"> <!-- random image -->
+                                    <div class="caption left-align">
+                                        
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="<%=medicine.MedicineImage3%>"> <!-- random image -->
+                                    <div class="caption right-align">
+                                        
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="<%=medicine.MedicineImage4%>"> <!-- random image -->
+                                    <div class="caption center-align">
+                                        
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <%} else {%>
+        <section class="section section-itemview">
+                <div class="row" style="padding-left: 1%">
+                    <div class="col l7 m7 s12">
+                        <h2 class="left-align"><%=medicine.medicineName%></h2>
+                        <div class="row">
+                            <div class="col l6 m6 s12" style="font-size: 120%">
+                                <p class="left-align blue-text">
+                                    <u><%=medicine.manufacturerName%></u>
+                                </p>
+                            </div>
+
+                            <div class="col l6 m6 s12" style="font-size: 120%">  
+                                <p>Prescription required <a class="btn-floating btn waves-effect waves-light "><%if(medicine.prescriptionNeeded == true){%><i class="material-icons green">check</i> <%} else {%><i class="material-icons red">highlight_off</i> <%}%></a></p>
+                            </div>
+
+                            <div class="col l6 m6 s12" style="font-size: 120%">  
+                                <p>Decimal <a class="btn-floating btn waves-effect waves-light "><%if(medicine.decimalNeeded == true){%><i class="material-icons green">check</i> <%} else {%><i class="material-icons red">highlight_off</i> <%}%></a></p>
+                            </div>
+                            
+                            <div class="col l6 m6 s12" style="font-size: 120%">
+                                <p class="left-align">
+                                    Composition for <%=medicine.medicineName%>
+                                </p>
+                                <% medicine.drugs.forEach(function(drugs){ %>
+                                    <span class="blue-text"><u><i><%=drugs.salt%> <%=drugs.strength%>mg</i></u></span><br>
+                                <%})%>
+                            </div>
+                            <div class="col l6 m6 s12" style="font-size: 120%">
+                                <p>Medicine Type <span class="blue-text"><%if(medicine.medType == true){%>Branded<%}else{%>Generic<%}%></span></p>
+                                <p class="white-text">xcvcxvcxvcx</p>
+                            </div>
+                            <div class="col l6 m6 s12" style="font-size: 120%">
+                                <p class="left-align">
+                                    Medicine ID: <%=medicine.medicineId%>
+                                </p>
+                            </div>
+                            <div class="col l6 s12" style="font-size: 120%">
+                                <p>Mainly prescribed for <%=medicine.mainlyPrescribedFor%></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col l5 m5 s12">
+                        <div class="row">
+                            <div class="col l2 hide-on-med-and-down"></div>
+                            <div class="col l10 m12 s12" style="width: 400px">
+                                <div class="slider">
+                                    <ul class="slides">
+                                        <li>
+                                            <img src="<%=medicine.MedicineImage1%>"> <!-- random image -->
+                                            <div class="caption center-align">
+                                                
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <img src="<%=medicine.MedicineImage2%>"> <!-- random image -->
+                                            <div class="caption left-align">
+                                                
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <img src="<%=medicine.MedicineImage3%>"> <!-- random image -->
+                                            <div class="caption right-align">
+                                                
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <img src="<%=medicine.MedicineImage4%>"> <!-- random image -->
+                                            <div class="caption center-align">
+                                                
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col l12 m12 s12">
+                        <h2 class="left-align">Detailed Information</h2>
+                        <div class="col l6 m6 s12">
+                            <p class="left-align" style="font-size: 110%">
+                                <%=medicine.detailedInfo%>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    <%}%>
+
+
+
+<% include ../partials/footer %>

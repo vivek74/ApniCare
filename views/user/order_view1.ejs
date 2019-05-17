@@ -1,0 +1,86 @@
+<% include ../partials/header %>
+<body>
+
+    <nav style="height: 80px">
+        <div class="nav-wrapper light-blue">
+            <a data-target="slide-out" class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="margin-top: 10px;font-size:25px;">menu</i></a>
+            <a onclick="history.back()"  class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="font-size:35px;margin-top: 10px">arrow_back</i></a>
+            <a class="brand-logo" style="margin-top: 10px">Order</a>
+        </div>
+    </nav>
+    <%include ../partials/header2%>
+
+    <div class="row light-blue white-text" style="margin-top: 10px;padding: 15px">
+        <div class="col l6 m6 s6" style="font-weight: 500;font-size: large"><%=orders.userName%></div>
+    </div>
+
+    <section class="section section-profile">
+        <div class="row" style="padding: 15px;padding-top: 0;margin-top: -30px">
+            <div class="col s12 l12 m12">
+                <h1 class="left-align"><%=orders.userName%></h1>
+            </div>
+            <div class="col s12 l6 m6">
+                <div class="row">
+                    <div class="col l6 s12">
+                        <h6><%=orders.contactNumber%></h6>
+                    </div>
+                    <div class="col l6 s12">
+                        <h6>Order ID: <span style="padding-left: 5%"><%=orders.orderId%></span></h6>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col l6 s12">
+                        <h6>User Type: <span style="margin-left: 5%;font-size: 250%;font-weight: 800" class="red-text"><i><%=orders.userType%></i></span></h6>
+                    </div>
+                    <div class="col l6 s12">
+                        <h6>Order Type: <span style="padding-left: 5%"><%=orders.orderType%></span></h6>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col l6 s12">
+                        <h6>Address: <%=orders.address%></h6>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 10%">
+                    <div class="col l6 s12">
+                        <h6>Coupon Code Appllied: <%if(orders.promocode){%><%=orders.promocode%><%} else {%>NOT APPLIED<%}%></h6>
+                    </div>
+                    <div class="col l6 s12">
+                        <a href="/users/user-view/order-history/view-order/view-perticulars/<%=orders.id%>" class="btn btn-large light-blue">View Particulars</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m5 l5">
+                <h5 class="center-align">PRESCRIPTION</h5>
+                <div class="col m12 l12 s12 card-panel yellow center-align">
+                    <i class="material-icons large" style="margin-top: 5%">face</i>
+                    <p class="grey-text text-darken-3" style="font-weight: 600;"><%=orders.userName%></p>
+                    <p class="grey-text text-darken-3" style="font-weight: 400;margin-top: -2%"><%=orders.address%></p>
+                    <% if(orders.prescriptionImage){%><button type="button" class="btn black white-text">OPEN</button>
+                    <% }else{ %>NOT AVAILABLE
+                    <%}%>
+                </div>
+
+                <div class="col m12 l12 s12 card-panel yellow center-align">
+                    <p class="grey-text text-darken-3" style="font-weight: 600;">Billing Info</p>
+                    <p class="grey-text text-darken-3" style="font-weight: 600;">Total <span style="font-size: x-large;padding-left: 5%">Rs. <%= orders.netTotal %></span></p>
+                    <p class="grey-text text-darken-3" style="font-weight: 600;">Cashback <span style="font-size: x-large;padding-left: 5%">Rs. <%= orders.cashbackAmt %></span></p>
+                    <p class="grey-text text-darken-3" style="font-weight: 600;">Net Total <span style="font-size: x-large;padding-left: 5%">Rs. <%= orders.discountedAmt %></span></p>
+                </div>
+            </div>
+            <div class="col l1 m1 hide-on-med-and-down"></div>
+        </div>
+    </section>
+    
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="./js/materialize.min.js"></script>
+    <script type="application/javascript">
+        $('.sidenav').sidenav();
+        $('.fixed-action-btn').floatingActionButton();
+        $('.modal').modal();
+        $('.tabs').tabs();
+
+    </script>
+</body>
+
+</html>

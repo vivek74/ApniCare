@@ -1,0 +1,83 @@
+<% include ../partials/header %>
+
+<body>
+
+    <nav style="height: 100px">
+        <div class="nav-wrapper light-blue">
+                <a data-target="slide-out" class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="margin-top: 10px;font-size:25px;">menu</i></a>
+            <a onclick="history.back()" class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="font-size:23px;margin-top: 10px;">keyboard_backspace
+
+                </i></a>
+            <a class="brand-logo" style="margin-top: 10px;font-size: 23px">Enter Salt/Drug</a>
+        </div>
+    </nav>
+    <%include ../partials/header2%>
+
+<form action="/item/enter-salt" method="post">
+    <section class="section section-entersalt">
+        <div class="row" style="padding-left: 2%">
+            <div class="col l4 m4 s12">
+                <div class="input-field">
+                    <input name="name" type="text" id="name">
+                    <label for="name">Salt/Drug name</label>
+                </div>
+                <div class="input-field">
+                    <input name="usedFor" type="text" id="usedFor">
+                    <label for="usedFor">Uses</label>
+                </div>
+                <div class="input-field">
+                    <input name="working" type="text" id="working">
+                    <label for="working">Working</label>
+                </div>
+            </div>
+            <div class="col l1 m1"></div>
+
+            <div class="col l7 m7 s12">
+                <h4 style="margin-left: -10px">Medicines Availbale</h4>
+                <div class="row">
+                    <div class="input-field">
+                        <input name="medicineAvailable[0][company]" type="text" id="company" required>
+                        <label for="company">Company name</label>
+                    </div>
+                    <div class="input-field">
+                        <input name="medicineAvailable[0][medicine]" type="text" id="medicine" required>
+                        <label for="medicine">Medicine name</label>
+                    </div>
+                </div>
+                <div class="item_medicine_text"></div>
+                <div class="row">
+                    <button class="btn btn-large light-blue white-text add_medicine_button">Add another medicine</button>
+                </div>
+            </div>
+
+        </div>
+        <div class="row" style="padding-left: 2%">
+            <div class="col l6 m6 s12">
+                <h3 style="margin-left: -10px">FAQs</h3>
+                <div class="row" style="font-size: 140%">
+                    <div class="question">
+                        <input name="faq[0][question]" type="text" class="question" required>
+                        <label for="question">Question</label>
+                    </div>
+                    <div class="answer">
+                        <input name="faq[0][answer]" type="text" class="answer" required>
+                        <label for="answer">Answer</label>
+                    </div>
+                    <div class="item_faq_text">
+                        
+                    </div>
+                    <div class="row" style="margin-left: 60%">
+                        <br>
+                        <button class="btn light-blue white-text add_faq_button">Add more Ques</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col l6 m6 s12 center-align">
+                <button class="btn  green white-text">Submit</button>
+            </div>
+        </div>
+    </section>
+</form>
+<% include ../partials/footer %>

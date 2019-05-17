@@ -1,0 +1,136 @@
+<% include ../partials/header %>
+
+<body>
+    <div class="nav-wrapper light-blue white-text" style="padding-top: 2%;padding-bottom: 2%">
+        <div class="row">
+            <input type="hidden" id="supplierid" value="<%= supplier[0].supplierId %>">
+            <div class="col l9 hide-on-med-and-down">
+                <span onclick="history.back()" style="font-size: 250%;font-weight: 500; cursor: pointer;"><i class="material-icons small" style="padding-right: 2%">arrow_back</i>
+                    <%= supplier[0].supplierName %></span>
+            </div>
+            <div class="col l3 hide-on-med-and-down right-align">
+                <a href="/supplier/view_profile/<%= supplier[0].supplierId %>" class="btn btn-large white light-blue-text" style="font-weight: 600">View Profile</a>
+            </div>
+            <div class="col m12 s12 show-on-medium-and-down hide-on-large-only hide-on-extra-large-only">
+                <span onclick="history.back()" style="font-size: 200%;font-weight: 500;cursor: pointer;"><i class="material-icons small" style="padding-right: 2%">arrow_back</i>
+                    <%= supplier[0].supplierName %></span>
+            </div>
+            <div class="col m12 s12 center-align show-on-medium-and-down hide-on-large-only hide-on-extra-large-only">
+                <button type="button" class="btn btn-large white light-blue-text" style="font-weight: 600;margin-top: 3%" id="view_profile1">View Profile</button>
+            </div>
+        </div>
+    </div>
+    <div class="row light-blue white-text" style="margin-top: 10px">
+        <div class="col l3 m6 s12">
+            <p style="font-weight: 500;font-size: 130%">Contact&nbsp;&nbsp;
+                <%= supplier[0].contactPersonNumber %>
+            </p>
+        </div>
+        <div class="col l3 m6 s12">
+            <p style="font-weight: 500;font-size: 130%">Address&nbsp;&nbsp;
+                <%= supplier[0].address %>
+            </p>
+        </div>
+        <div class="col l3 m6 s12">
+            <p style="font-weight: 500;font-size: 130%">City&nbsp;&nbsp;
+                <%= supplier[0].city %>
+            </p>
+        </div>
+        <div class="col l3 m6 s12" style="margin-top: -20px">
+            <p style="font-weight: 500;font-size: 200%">Total Medicines:&nbsp;&nbsp;
+                <%= supplier[0].medicineList.length %>
+            </p>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 3%">
+        <div class="col l2 m2 hide-on-small-and-down"></div>
+        <div class="col l6 m6 s8">
+            <input type="text" placeholder="Search" id="search" class="grey lighten-4" style="border-bottom: 0;padding-left: 20px;">
+        </div>
+        <div class="col l2 m2 s4 center-align">
+            <button type="button" class="btn green" style="font-weight: 500">Search Medicine</button>
+        </div>
+        <div class="col l2 m2 s4 center-align">
+            <a href="/supplier/add_medicine/<%= supplier[0].supplierId %>" class="btn red darken-1" style="font-weight: 500">Add Medicine</a>
+            
+        </div>
+        <div class="col l2 m2 hide-on-small-and-down"></div>
+    </div>
+
+    <div class="row" style="margin-top: 5%">
+        <div class="col l2 m2 hide-on-small-and-down"></div>
+        <div class="col l8 m8 s12" id="searchresult">
+            <% supplier[0].medicineList.forEach(function(medicine){ %>
+            <div class="card">
+                <div class="card-content">
+                    <div class="row">
+                        <div class="col l10 m10 s10">
+                            <h6>
+                                <%= medicine %>
+                            </h6>
+                        </div>
+                        <div class="col l2 m2 s2 right-align">
+                            <i class="material-icons" style="cursor: pointer">chevron_right</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <% }) %>
+        </div>
+        <div class="col l2 m2 hide-on-small-and-down"></div>
+    </div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- <script type="text/javascript" src="/js/materialize.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- adding custon script -->
+    <script type="text/javascript" src="/js/script.js"></script>
+
+
+
+    <script>
+        $(document).ready(function() {
+            $('select').formSelect();
+            $('.sidenav').sidenav();
+            $('.fixed-action-btn').floatingActionButton();
+            $('.modal').modal();
+            $('.tabs').tabs();
+            $('.slider').slider();
+            $('.datepicker').datepicker();
+            $('.datepicker').datepicker({
+                container: 'body',
+                selectMonths: true, // Creates a dropdown to control month
+                selectYears: 100, // Creates a dropdown of 15 years to control year
+                format: 'dd/mm/yyyy'
+            });
+            $('#search').keyup(function() {
+                let keyword = this.value;
+                let searchList = new Array();
+                let list = new Array();
+                let html = '';
+                <% let data = supplier[0].medicineList; %>
+                <% data.forEach(function(medicine){ %>
+                list.push("<%= medicine %>");
+                <% }) %>
+                list.forEach(function(match) {
+                    if (match.toLowerCase().indexOf(keyword.toLowerCase()) >= 0) {
+                        searchList.push(match);
+                    }
+                });
+
+                searchList.forEach(function(found) {
+                    html += '<div class="card"><div class="card-content"><div class="row"><div class="col l10 m10 s10"><h6>' + found + '</h6></div><div class="col l2 m2 s2 right-align"><i class="material-icons" style="cursor: pointer">chevron_right</i></div></div></div></div>';
+                });
+
+                $('#searchresult').html(html);
+
+            })
+        });
+
+    </script>
+
+</body>
+
+</html>

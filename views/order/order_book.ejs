@@ -1,0 +1,762 @@
+<% include ../partials/header %>
+
+<body>
+
+    <nav style="height: 100px">
+        <div class="nav-wrapper light-blue">
+                <a data-target="slide-out" class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="margin-top: 10px;font-size:25px;">menu</i></a>
+            <a onclick="history.back()" data-target="slide-out" class="sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="font-size:23px;margin-top: 20px; cursor: pointer;">keyboard_backspace
+
+                </i></a>
+        </div>
+    </nav>
+    <%include ../partials/header2%>
+
+    <div class="row" id="errors">
+        <div class="col l12 s12 m12">
+            <div class="card red white-text">
+                <div class="card-content center-align">
+                    <h5 id="error-text"></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="section section_ordere_view">
+        <div class="row">
+            <div class="col l3" style="padding-left: 3%;margin-top: 2%">
+                <div class="input-field">
+                    <input type="text" id="contactnumber">
+                    <label for="contactnumber">Contact Number</label>
+                </div>
+                <div class="input-field">
+                    <ul>
+                        <li id="contactfound">
+                            <div class="input-field">
+                                <input type="text" id="patientName">
+                                <input type="hidden" id="atulyaCard">
+                                <label for="patientName">Patient Name</label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="input-field">
+                    <select name="userType">
+                        <option value="LFC">LFC</option>
+                        <option value="HFC">HFC</option>
+                        <option value="NFC">NFC</option>
+                    </select>
+                    <label>User Type</label>
+                </div>
+                <div class="input-field" id="alternateNumber">
+                    <input type="text" id="alternatenumber">
+                    <label for="alternatenumber">Alternate Number</label>
+                </div>
+            </div>
+            <div class="col l9" id="address">
+                <h4 class="center-align">ADDRESSES</h4>
+            </div>
+        </div>
+        <div class="row" style="padding-left: 2%;margin-top: 2%">
+            <div class="right-align col l9 s12 m9">
+                <i class="btn-floating material-icons green center-align" id="add" style="font-size: 30px">add</i>
+            </div>
+        </div>
+        <div class="row" style="padding-left: 2%;margin-top: 2%">
+            <div class="col l3 m3 s6" id="medicine">
+                <h5>Medicines:</h5>
+                <div class="input-field">
+                    <input type="text" value="" name="medicineName1" list="medicinelist1" onkeyup="checkMedicine(this.value, this.name)" onchange="changePrice(this.value, this.name)">
+                    <datalist id="medicinelist1" name="medicinelist1">
+
+                    </datalist>
+                </div>
+            </div>
+            <div class="col l1 m1 s3" id="medicinePrice">
+                <h5>Price</h5>
+                <div class="input-field">
+                    <input type="text" value="" name="medicinePrice1">
+                    <input type="hidden" name="walletApplied" value="" walletValue="">
+                </div>
+            </div>
+            <div class="col l1 m1 s3" id="medicineQty">
+                <h5>QTY</h5>
+                <div class="input-field center-align">
+                    <input type="number" value="" name="medicineQty1" onkeyup="changeQty(this.value, this.name)">
+                    <input type="hidden" value="" name="medicinePrescription1">
+                </div>
+            </div>
+            <div class="col l2 m2 s12" id="medicineUnit" style="margin-top: -7px">
+                <h5 class="center-align">Unit</h5>
+                <div class="input-field col l12 s12 m12">
+                    <select class="browser-default grey lighten-3" name="medicineUnit1" onchange="changeUnit(this.value, this.name)">
+
+                    </select>
+                </div>
+            </div>
+
+            <div class="col l2 m2 s12" id="medicineDiscount">
+                <h5 class="center-align">Discount amt</h5>
+                <div class="input-field center-align">
+                    <input class="center-align" type="text" value="" name="medicineDiscount1">
+                </div>
+            </div>
+            <div class="col l3 m3 s12">
+                <div class="card grey lighten-2">
+                    <form>
+                        <div class="card-content center-align file-field input-field">
+                            <div class="btn black white-text">
+                                <span>File</span>
+                                <input type="file" name="userfiles[]" value="" id="userfiles">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <h6 class="center-align">Upload Prescription <sub>if any(max limit 1)</sub></h6>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col l3 s6 right-align">
+                <p>
+                    <label>
+                        <input type="checkbox" id="wallet" class="filled-in" onchange="walletPayment()" checked="" />
+                        <span style="font-weight: 400;font-size: 150%;color: black" id="balance">Wallet Balance: 0 INR</span>
+                    </label>
+                </p>
+            </div>
+            <div class="col l1"></div>
+            <div class="col l4 s6">
+                <h6 style="margin-top: 16px;" id="promocode"><span class="light-blue-text">PROMOCODE</span><input type="text" name="
+                    promoCode" value="" onchange="couponCheck(this.name, this.value)"><button type="button" class="btn red white-text">APPLY</button></h6>
+                <input type="hidden" name="promocodeApplied" value="">
+                <input type="hidden" name="promocodeValue" value="">
+            </div>
+            <div class="col l4"></div>
+        </div>
+        <div class="row">
+            <div class="col l3"></div>
+            <div class="col s12 l5">
+                <h5 class="right-align">Total Amt: <span style="font-size: 70%;margin-left: 20%" id="totalAmt">INR 0</span></h5>
+                <h5 class="right-align">Cashback Amt: <span style="font-size: 70%;margin-left: 20%" id="cashbackAmt">INR 0</span></h5>
+                <h5 class="right-align">Discount Amt: <span style="font-size: 70%;margin-left: 20%" id="discountAmt">INR 0</span></h5>
+            </div>
+            <div class="col l4 center-align">
+                <div class="row">
+                    <button type="button" class="green btn btn-large" id="submit">Submit</button>
+                </div>
+                <div class="row">
+                    <a href="/orders/place_orders"><button type="button" class="red btn btn-large">Clear</button></a>
+                </div>
+            </div>
+        </div>
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+                <div class="row">
+                    <div class="col l5">
+                        <div class="row">
+                            <div class="col s12 l12 m12">
+                                <div class="card">
+                                    <div class="card-content">
+                                        <span class="card-title">User Info</span>
+                                        <div class="input-field">
+                                            <input type="text" id="contactnumber2">
+                                            <label for="contactnumber2">Contact Number</label>
+                                        </div>
+                                        <div class="input-field">
+                                            <ul>
+                                                <li id="contactfound2">
+                                                    <div class="input-field">
+                                                        <input type="text" id="patientName2">
+                                                        <label for="patientName2">Patient Name</label>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="input-field">
+                                            <select name="userType2">
+                                                <option value="HFC" selected>HFC</option>
+                                            </select>
+                                            <label>User Type</label>
+                                        </div>
+                                        <div class="input-field" id="alternateNumber2">
+                                            <input type="text" id="alternatenumber2">
+                                            <label for="alternatenumber2">Alternate Number</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col l7" id="address2">
+                        <div class="row">
+                            <div class="col s12 l12 m12">
+                                <div class="card">
+                                    <div class="card-content">
+                                        <span class="card-title">ADDRESSES</span>
+                                        <div class="input-field">
+                                            <input type="text" id="addressline1">
+                                            <label for="addressline1">Address</label>
+                                        </div>
+                                        <div class="input-field">
+                                            <input type="text" id="addressline2">
+                                            <label for="addressline2">Address</label>
+                                        </div>
+                                        <div class="input-field">
+                                            <input type="text" id="landmark">
+                                            <label for="landmark">Landmark</label>
+                                        </div>
+                                        <div class="input-field">
+                                            <input type="text" id="city">
+                                            <label for="city">City</label>
+                                        </div>
+                                        <div class="input-field">
+                                            <input type="text" id="state">
+                                            <label for="state">State</label>
+                                        </div>
+                                        <div class="input-field">
+                                            <input type="text" id="country">
+                                            <label for="country">Country</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-green btn-flat" onclick="newUser()">Submit</a>
+            </div>
+        </div>
+
+    </section>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- <script type="text/javascript" src="/js/materialize.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- adding custon script -->
+    <script type="text/javascript" src="/js/script.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('select').formSelect();
+            $('.sidenav').sidenav();
+            $('.fixed-action-btn').floatingActionButton();
+            $('.modal').modal();
+            $('.tabs').tabs();
+            $('.slider').slider();
+            $('.datepicker').datepicker();
+            $('.datepicker').datepicker({
+                container: 'body',
+                selectMonths: true, // Creates a dropdown to control month
+                selectYears: 100, // Creates a dropdown of 15 years to control year
+                format: 'dd/mm/yyyy'
+            });
+        });
+
+    </script>
+
+
+
+
+    <script type="application/javascript">
+        $('#wallet').prop('checked', false);
+        $('#errors').hide();
+        $('#contactnumber').keyup(function() {
+            $.post(
+                "/orders/check_phone", {
+                    phone: this.value
+                }
+            ).done(
+                (data) => {
+                    if (data['user'] === null) {
+                        let html = '<div class="row red white-text"><div class="col l10 m10 s10"><p>No user found</p></div><div class="col l2 m2 s2" style="margin-top: 5px"><a class="btn-floating waves-effect waves-ripple green modal-trigger" href="#modal1"><i class="material-icons">add</i></a></div></div>';
+                        $('#contactfound').html(html);
+                    } else {
+                        $('#balance').text('Wallet Balance: ' + data['user']['walletAccount'] + ' INR');
+                        let username = data["user"]["username"];
+                        let html = '<div class="input-field"><input type="text" id="patientName" value=' + username + '></div>';
+                        let userType = data["user"]["userType"];
+                        let alternateNumber = data["user"]["alternateNumber"];
+                        let addresses = data["user"]["addresses"]
+                        $('#contactfound').html(html);
+                        $('#atulyaCard').val(data["user"]["atulyaCard"]);
+                        $('select[name="userType"]').val(userType).prop('selected', true);
+                        $('select[name="userType"]').formSelect();
+                        $('#alternateNumber').html('<div class="input-field"><input type="text" id="alternatenumber" value=' + alternateNumber + ' readonly></div>')
+                        let listaddresshtml = '<h4 class="center-align">ADDRESSES</h4>';
+                        addresses.forEach(alladdress => {
+                            listaddresshtml += '<div class="col l6"><label><input class="with-gap" name="group1" type="radio" /><span class="blue-text text-darken-2" style="font-size: 180%;font-weight: 600">' + alladdress['addressLine1'] + '  ' + alladdress['addressLine2'] + '<br>' + alladdress['city'] + '<br>' + alladdress['landmark'] + '<br>' + alladdress['state'] + '<br>' + alladdress['country'] + '</span></label></div>';
+                        })
+                        $('#address').html(listaddresshtml);
+                    }
+                }
+            )
+
+        });
+
+        $('#add').on('click', () => {
+            let medicineNameDivCount = 0;
+            $('#medicine').each(function(pos, div) {
+                medicineNameDivCount = $(div).children('div.input-field').length + 1;
+            });
+            $('#medicine').append('<div class="input-field"><input type="text" value="" name="medicineName' + medicineNameDivCount + '" list="medicinelist' + medicineNameDivCount + '" onkeyup="checkMedicine(this.value, this.name)" onchange="changePrice(this.value, this.name)"><datalist id="medicinelist' + medicineNameDivCount + '" name="medicinelist' + medicineNameDivCount + '"></datalist></div>');
+            $('#medicinePrice').append('<div class="input-field"><input type="text" value=""  name="medicinePrice' + medicineNameDivCount + '"></div>');
+            $('#medicineQty').append('<div class="input-field center-align"><input type="number" value="" name="medicineQty' + medicineNameDivCount + '" onkeyup="changeQty(this.value, this.name)"><input type="hidden" value="" name="medicinePrescription' + medicineNameDivCount + '"></div>');
+            $('#medicineUnit').append('<div class="input-field col l12 s12 m12"><select class="browser-default grey lighten-3" name="medicineUnit' + medicineNameDivCount + '" onchange="changeUnit(this.value, this.name)"><option selected>Tablets</option><option>Strip</option></select></div>');
+            $('#medicineDiscount').append('<div class="input-field center-align"><input class="center-align" type="text" value=""  name="medicineDiscount' + medicineNameDivCount + '"></div>');
+        })
+
+
+        function checkMedicine(value, name) {
+            let listname = name;
+            if (listname.match(/\d/g) == null) {
+                listname = null
+            } else {
+                listname = listname.match(/\d/g).join("")
+            }
+            $.post(
+                "/orders/check_medicine", {
+                    medicine: value
+                }
+            ).done(data => {
+                let medicinehtml = '';
+                data['medicine'].forEach(medicine => {
+                    medicinehtml += '<option value="' + medicine['medicineName'] + '">' + medicine['medicineName'] + '</option>'
+                })
+                $('[name=medicinelist' + listname + ']').html(medicinehtml);
+            })
+        }
+
+        function walletPayment() {
+            if ($('[name=promocodeApplied]').val() !== "APPLIED") {
+                if ($('#wallet').prop('checked') === true) {
+                    let price = parseFloat($('#totalAmt').html().replace("INR ", ""));
+                    let balance = parseFloat($('#balance').html().replace("Wallet Balance: ", "").replace(" INR", ""));
+                    if ((balance <= .50 * price) && (balance <= parseFloat(200))) {
+                        let netTotal = price - balance;
+                        $('#totalAmt').html("INR " + netTotal.toFixed(2));
+                        $('[name=walletApplied]').attr('walletValue', balance.toFixed(2));
+                        $('#balance').html("Wallet Balance: " + balance.toFixed(2) + " INR");
+                    } else if ((balance <= .50 * price) && (balance >= parseFloat(200))) {
+                        let netTotal = price - parseFloat(200);
+                        $('#totalAmt').html("INR " + netTotal.toFixed(2));
+                        $('[name=walletApplied]').attr('walletValue', parseFloat(200));
+                        $('#balance').html("Wallet Balance: " + (balance - parseFloat(200)).toFixed(2) + " INR");
+                    } else if ((balance >= .50 * price) && (balance >= parseFloat(200))) {
+                        if (parseFloat(200) >= .50 * price) {
+                            let netTotal = price - (.50 * price).toFixed(2);
+                            $('#totalAmt').html("INR " + netTotal.toFixed(2));
+                            $('[name=walletApplied]').attr('walletValue', (.50 * price).toFixed(2));
+                            $('#balance').html("Wallet Balance: " + (balance - (.50 * price)).toFixed(2) + " INR");
+                        } else {
+                            let netTotal = price - parseFloat(200);
+                            $('#totalAmt').html("INR " + netTotal.toFixed(2));
+                            $('[name=walletApplied]').attr('walletValue', parseFloat(200));
+                            $('#balance').html("Wallet Balance: " + (balance - parseFloat(200)).toFixed(2) + " INR");
+                        }
+                    } else if ((balance >= .50 * price) && (balance <= parseFloat(200))) {
+                        let netTotal = price - (.50 * price).toFixed(2);
+                        $('#totalAmt').html("INR " + netTotal.toFixed(2));
+                        $('[name=walletApplied]').attr('walletValue', (.50 * price).toFixed(2));
+                        $('#balance').html("Wallet Balance: " + (balance - (.50 * price)).toFixed(2) + " INR");
+                    } else {
+                        $('[name=promoCode]').val('');
+                        $('#error-text').text('Cannot use wallet');
+                        $('#errors').show().delay(5000).fadeOut(800);
+                        $('#wallet').prop('checked', false);
+                    }
+                } else {
+                    let balance_orignal = parseFloat($('#balance').html().replace("Wallet Balance: ", "").replace(" INR", ""));
+                    let price = parseFloat($('#totalAmt').html().replace("INR ", ""));
+                    let balance = parseFloat($('[name=walletApplied]').attr('walletValue'));
+                    let netTotal = price + balance;
+                    $('[name=walletApplied]').val('');
+                    $('#totalAmt').html("INR " + netTotal.toFixed(2));
+                    $('[name=walletApplied]').val('');
+                    $('#balance').html("Wallet Balance: " + (balance_orignal + balance).toFixed(2) + " INR");
+                }
+            } else {
+                $('#error-text').text('PROMOCODE ALREADY APPLIED');
+                $('#errors').show().delay(5000).fadeOut(800);
+                $('#wallet').prop('checked', false);
+                $('[name=promoCode]').val('');
+            }
+        }
+
+
+
+        function changePrice(value, name) {
+            let listname = name;
+            if (listname.match(/\d/g) == null) {
+                listname = null
+            } else {
+                listname = listname.match(/\d/g).join("")
+            }
+            $.post(
+                "/orders/get_medicine", {
+                    medicine: $('[name=medicineName' + listname + ']').val()
+                }
+            ).done(data => {
+                let medicineNameDivCount = 0;
+                $('#medicine').each(function(pos, div) {
+                    medicineNameDivCount = $(div).children('div.input-field').length;
+                });
+                if (data['medicine']['prescriptionNeeded'] === true) {
+                    $('[name=medicinePrescription' + medicineNameDivCount + ']').val("NEEDED");
+                } else {
+                    $('[name=medicinePrescription' + medicineNameDivCount + ']').val("");
+                }
+                if (data['medicine']['isItem'] === true) {
+                    var option = '';
+                    data['medicine']['quantity'].forEach(product => {
+                        option += '<option value="' + product.packagingUnit1 + '(' + product.packagingUnit2 + ')" maxlength="' + product.unitQty + '" selected>' + product.packagingUnit1 + '(' + product.packagingUnit2 + 'ml)</option>';
+                    })
+                    var total_price = parseFloat(data['medicine']['quantity'][data['medicine']['quantity'].length - 1]['mrp']);
+                    var discounted_price = parseFloat(data['medicine']['quantity'][data['medicine']['quantity'].length - 1]['mrp']) - ((parseFloat(data['medicine']['quantity'][data['medicine']['quantity'].length - 1]['mrp']) * parseFloat(data['medicine']['quantity'][data['medicine']['quantity'].length - 1]['discount'])) / 100);
+                    $('[name=medicineUnit' + medicineNameDivCount + ']').html(option);
+                    $('[name=medicinePrice' + listname + ']').val(total_price);
+                    $('[name=medicineDiscount' + listname + ']').val(discounted_price);
+                    $('[name=medicineUnit' + medicineNameDivCount + ']').formSelect();
+
+                } else {
+                    if (data['medicine']['decimalNeeded'] === false) {
+                        if (data['medicine']['packagingUnit1'] === "Tablets") {
+                            var option = '<option value="Strip" maxlength="' + data['medicine']['unitQty'] + '" selected>Strip</option>';
+                            var mrp = parseFloat(data['medicine']['mrp']);
+                            var discount = parseFloat(data['medicine']['mrp']) - ((parseFloat(data['medicine']['mrp']) * data['medicine']['medDiscount']) / 100);
+                            $('[name=medicineUnit' + medicineNameDivCount + ']').html(option);
+                            $('[name=medicinePrice' + listname + ']').val(mrp);
+                            $('[name=medicineDiscount' + listname + ']').val(discount);
+                            $('[name=medicineUnit' + medicineNameDivCount + ']').formSelect();
+                        } else {
+                            var option = '<option value="Bottle" maxlength="' + data['medicine']['packagingUnit2'] + '" selected>Bottle</option>';
+                            var mrp = parseFloat(data['medicine']['mrp']);
+                            var discount = parseFloat(data['medicine']['mrp']) - ((parseFloat(data['medicine']['mrp']) * data['medicine']['medDiscount']) / 100);
+                            $('[name=medicineUnit' + medicineNameDivCount + ']').html(option);
+                            $('[name=medicinePrice' + listname + ']').val(mrp);
+                            $('[name=medicineDiscount' + listname + ']').val(discount);
+                            $('[name=medicineUnit' + medicineNameDivCount + ']').formSelect();
+                        }
+                    } else {
+                        if (data['medicine']['packagingUnit1'] === "Tablets") {
+                            var option = '<option value="Tablets" maxlength="' + data['medicine']['totalTablet'] + '" selected>Tablets</option><option maxlength="' + data['medicine']['unitQty'] + '" value="Strip">Strip</option>';
+                            var mrp = parseFloat(data['medicine']['rate']);
+                            var discount = parseFloat(data['medicine']['rate']) - ((parseFloat(data['medicine']['mrp']) * data['medicine']['medDiscount']) / 100);
+                            $('[name=medicineUnit' + medicineNameDivCount + ']').html(option);
+                            $('[name=medicinePrice' + listname + ']').val(mrp);
+                            $('[name=medicineDiscount' + listname + ']').val(discount);
+                            $('[name=medicineUnit' + medicineNameDivCount + ']').formSelect();
+                        } else {
+                            var option = '<option value="Bottle" maxlength="' + data['medicine']['packagingUnit2'] + '" selected>Bottle</option>';
+                            var mrp = parseFloat(data['medicine']['mrp']);
+                            var discount = parseFloat(data['medicine']['mrp']) - ((parseFloat(data['medicine']['mrp']) * data['medicine']['medDiscount']) / 100);
+                            $('[name=medicineUnit' + medicineNameDivCount + ']').html(option);
+                            $('[name=medicinePrice' + listname + ']').val(mrp);
+                            $('[name=medicineDiscount' + listname + ']').val(discount);
+                            $('[name=medicineUnit' + medicineNameDivCount + ']').formSelect();
+                        }
+                    }
+                }
+            })
+        }
+
+
+        function changeUnit(value, name) {
+            let selectedValue = value;
+            let listname = name;
+            if (listname.match(/\d/g) == null) {
+                listname = null
+            } else {
+                listname = listname.match(/\d/g).join("")
+            }
+            $.post(
+                "/orders/get_medicine", {
+                    medicine: $('[name=medicineName' + listname + ']').val()
+                }
+            ).done(data => {
+                if (selectedValue.includes('Bottle')) {
+                    data['medicine']['quantity'].forEach((product, key) => {
+                        if ((product.packagingUnit1 + '(' + product.packagingUnit2 + ')') === value) {
+                            var total_price = parseFloat(data['medicine']['quantity'][key]['mrp']) - ((parseFloat(data['medicine']['quantity'][key]['mrp']) * parseFloat(data['medicine']['quantity'][key]['discount'])) / 100);
+                            $('[name=medicinePrice' + listname + ']').val(total_price);
+                        }
+                    })
+
+
+                } else if (selectedValue === "Strip") {
+                    $('[name=medicinePrice' + listname + ']').val(data['medicine']['mrp'])
+                } else {
+                    $('[name=medicinePrice' + listname + ']').val(data['medicine']['rate'])
+                }
+                changeQty($('[name=medicineQty' + listname + ']').val(), 'medicineQty' + listname);
+            })
+        }
+
+        function couponCheck(name, value) {
+            $.post(
+                "/orders/get_coupon", {
+                    coupon: value,
+                    phone: $('#contactnumber').val(),
+                }
+            ).done(data => {
+                if (data['coupon'] === "NULL") {
+                    $('#error-text').text('Coupon not found');
+                    $('#errors').show().delay(5000).fadeOut(800);
+
+                } else {
+                    $.post(
+                        "/orders/check_coupon", {
+                            coupon: data["coupon"]["couponCodeName"],
+                            phone: $('#contactnumber').val(),
+                        }
+                    ).done(user => {
+
+                        let couponAlredayUsed = "NOT USED";
+
+                        user['user']['couponsUsed'].forEach(coupons => {
+                            if (coupons === data['coupon']['couponCodeName']) {
+                                couponAlredayUsed = "USED";
+                            }
+                        })
+                        if (couponAlredayUsed === "USED") {
+                            $('#error-text').text('Coupon already used');
+                            $('#errors').show().delay(5000).fadeOut(800);
+                        } else {
+                            if (data["coupon"] !== null) {
+                                if ($('[name=walletApplied]').val() !== "APPLIED") {
+                                    if (data["coupon"]["type"] === "cashback") {
+                                        let medicineNameDivCount = 0;
+                                        let totalprice = 0;
+                                        let totalAmthtml = 0;
+                                        $('#medicine').each(function(pos, div) {
+                                            medicineNameDivCount = $(div).children('div.input-field').length + 1;
+                                        });
+                                        let i;
+                                        //                                        for (i = 1; i < parseInt(medicineNameDivCount); i++) {
+                                        //                                            let medicinePrice = $('[name=medicinePrice' + i + ']').val();
+                                        //                                            totalprice = parseFloat($('[name=medicineQty' + i + ']').val()) * parseFloat(medicinePrice);
+                                        //                                            totalAmthtml = parseFloat(totalAmthtml) + totalprice;
+                                        //                                        }
+                                        totalAmthtml = parseFloat($('#totalAmt').html().replace('INR ', ''));
+                                        $('#totalAmt').html('INR ' + totalAmthtml.toFixed(2) + '');
+                                        if (parseFloat(data["coupon"]["minValue"]) <= parseFloat($('#totalAmt').html().replace("INR ", ""))) {
+                                            let cashback_amt = parseFloat($('#totalAmt').html().replace("INR ", "")) * (parseFloat(data["coupon"]["valueAmount"]) / 100);
+                                            $('#cashbackAmt').text("INR " + cashback_amt.toFixed(2));
+                                            $('[name=promocodeValue]').val(data["coupon"]["couponCodeName"])
+                                            $('#discountAmt').text("INR 0");
+                                        } else {
+                                            $('#error-text').text('Should have minimum balance of INR ' + parseFloat(data["coupon"]["minValue"]));
+                                            $('#errors').show().delay(5000).fadeOut(800);
+                                        }
+                                    } else {
+                                        if (parseFloat(data["coupon"]["minValue"]) <= parseFloat($('#totalAmt').html().replace("INR ", ""))) {
+                                            let medicineNameDivCount = 0;
+                                            let totalprice = 0;
+                                            let totalAmthtml = 0;
+                                            $('#medicine').each(function(pos, div) {
+                                                medicineNameDivCount = $(div).children('div.input-field').length + 1;
+                                            });
+                                            let i;
+                                            for (i = 1; i < parseInt(medicineNameDivCount); i++) {
+                                                let medicinePrice = $('[name=medicineDiscount' + i + ']').val();
+                                                totalprice = parseFloat($('[name=medicineQty' + i + ']').val()) * parseFloat(medicinePrice);
+                                                totalAmthtml = parseFloat(totalAmthtml) + totalprice;
+                                            }
+
+                                            $('#totalAmt').html('INR ' + totalAmthtml.toFixed(2) + '');
+                                            let discounted_amt = parseFloat($('#totalAmt').html().replace("INR ", "")) * (parseFloat(data["coupon"]["valueAmount"]) / 100);
+                                            $('#cashbackAmt').text("INR 0");
+                                            $('#totalAmt').html("INR " + (parseFloat(totalAmthtml) - parseFloat(discounted_amt)).toFixed(2));
+                                            $('#discountAmt').text("INR " + parseFloat(discounted_amt).toFixed(2));
+                                            $('[name=promocodeValue]').val(data["coupon"]["couponCodeName"])
+                                        } else {
+                                            $('#error-text').text('Should have minimum balance of INR ' + parseFloat(data["coupon"]["minValue"]));
+                                            $('#errors').show().delay(5000).fadeOut(800);
+                                            $('[name=promocodeValue]').val("")
+                                        }
+                                    }
+                                } else {
+                                    $('#error-text').text('Wallet already in use');
+                                    $('#errors').show().delay(5000).fadeOut(800);
+                                    $('[name=promocodeValue]').val("")
+                                }
+                            } else {
+                                let medicineNameDivCount = 0;
+                                let totalprice = 0;
+                                let totalAmthtml = 0;
+                                $('#medicine').each(function(pos, div) {
+                                    medicineNameDivCount = $(div).children('div.input-field').length + 1;
+                                });
+                                let i;
+                                for (i = 1; i < parseInt(medicineNameDivCount); i++) {
+                                    let medicinePrice = $('[name=medicineDiscount' + i + ']').val();
+                                    totalprice = parseFloat($('[name=medicineQty' + i + ']').val()) * parseFloat(medicinePrice);
+                                    totalAmthtml = parseFloat(totalAmthtml) + totalprice;
+                                }
+
+                                $('#totalAmt').html('INR ' + totalAmthtml.toFixed(2) + '');
+                                $('[name=promoCode]').val("");
+                                $('#cashbackAmt').text("INR 0");
+                                $('#discountAmt').text("INR 0");
+                                $('#error-text').text('Coupon not found');
+                                $('#errors').show().delay(5000).fadeOut(800);
+                            }
+
+                        }
+
+                    });
+                }
+            })
+        }
+
+        function changeQty(value, name) {
+            let selectedValue = value;
+            let listname = name;
+            if (listname.match(/\d/g) == null) {
+                listname = null
+            } else {
+                listname = listname.match(/\d/g).join("")
+            }
+            if (parseFloat($('[name=medicineUnit' + listname + '] :selected').attr("maxlength")) >= parseFloat(value)) {
+                let medicineNameDivCount = 0;
+                let totalprice = 0;
+                let totalAmthtml = 0;
+                $('#medicine').each(function(pos, div) {
+                    medicineNameDivCount = $(div).children('div.input-field').length + 1;
+                });
+                let i;
+                for (i = 1; i < parseInt(medicineNameDivCount); i++) {
+                    let medicinePrice = $('[name=medicineDiscount' + i + ']').val();
+                    totalprice = parseFloat($('[name=medicineQty' + i + ']').val()) * parseFloat(medicinePrice);
+                    totalAmthtml = parseFloat(totalAmthtml) + totalprice;
+                }
+
+                $('#totalAmt').html('INR ' + totalAmthtml.toFixed(2) + '');
+            } else {
+                $('[name=' + name + ']').val(parseFloat($('[name=medicineUnit' + listname + '] :selected').attr("maxlength")));
+                $('#error-text').text('We have maximum of ' + parseFloat($('[name=medicineUnit' + listname + '] :selected').attr("maxlength")) + '.');
+                $('#errors').show().delay(5000).fadeOut(800);
+                let medicineNameDivCount = 0;
+                let totalprice = 0;
+                let totalAmthtml = 0;
+                $('#medicine').each(function(pos, div) {
+                    medicineNameDivCount = $(div).children('div.input-field').length + 1;
+                });
+                let i;
+                for (i = 1; i < parseInt(medicineNameDivCount); i++) {
+                    let medicinePrice = $('[name=medicineDiscount' + i + ']').val();
+                    totalprice = parseFloat($('[name=medicineQty' + i + ']').val()) * parseFloat(medicinePrice);
+                    totalAmthtml = parseFloat(totalAmthtml) + totalprice;
+                }
+
+                $('#totalAmt').html('INR ' + totalAmthtml.toFixed(2) + '');
+            }
+        }
+
+        function newUser() {
+            $.post(
+                "/orders/create_user", {
+                    addressline1: $('#addressline1').val(),
+                    addressline2: $('#addressline2').val(),
+                    landmark: $('#landmark').val(),
+                    city: $('#city').val(),
+                    state: $('#state').val(),
+                    country: $('#country').val(),
+                    alternatenumber: $('#alternatenumber2').val(),
+                    userType: $('[name=userType2]').val(),
+                    userName: $('#patientName2').val(),
+                    phone: $('#contactnumber2').val()
+                }
+            ).done(data => {
+                window.location.href = '/orders/place_orders';
+            })
+        }
+
+
+
+
+
+        $('#submit').one('click', (event) => {
+            let patientName = $('#patientName').val();
+            let userType = $('[name=userType]').val();
+            let alternateNumber = $('[name=alternatenumber]').val();
+            let address = $('[name=group1]:checked').next().text();
+            let medicineNameDivCount = 0;
+            let medicineName = new Array();
+            let medicineQty = new Array();
+            let medicineUnit = new Array();
+            let medicinePrice = new Array();
+            let medicineDiscount = new Array();
+            $('#medicine').each(function(pos, div) {
+                medicineNameDivCount = $(div).children('div.input-field').length + 1;
+            });
+            let i;
+            for (i = 1; i < parseInt(medicineNameDivCount); i++) {
+                medicineName.push($('[name=medicineName' + i + ']').val());
+                medicineQty.push($('[name=medicineQty' + i + ']').val());
+                medicineUnit.push($('[name=medicineUnit' + i + ']').val());
+                medicinePrice.push($('[name=medicinePrice' + i + ']').val());
+                medicineDiscount.push($('[name=medicineDiscount' + i + ']').val());
+            }
+            let atulyaCard = $('#atulyaCard').val();
+            let walletAmt = $('[name=walletApplied]').attr('walletValue');
+            let promoCode = $('[name=promocodeValue]').val();
+            let totalAmt = $('#totalAmt').html().replace("INR ", "");
+
+
+            $.post(
+                "/orders/upload_orderdata", {
+                    'patientNumber': $('#contactnumber').val(),
+                    'patientName': patientName,
+                    'userType': userType,
+                    'alternateNumber': alternateNumber,
+                    'address': address,
+                    'medicineName': medicineName,
+                    'medicineQty': medicineQty,
+                    'medicinePrice': medicinePrice,
+                    'medicineDiscount': medicineDiscount,
+                    'medicineUnit': medicineUnit,
+                    'atulyaCard': atulyaCard,
+                    'walletAmt': walletAmt,
+                    'promoCode': promoCode,
+                    'totalAmt': totalAmt,
+                    'cashbackAmt': $('#cashbackAmt').html().replace("INR ", ""),
+                    'discountAmt': $('#discountAmt').html().replace("INR ", "")
+                }
+            ).done(data => {
+                if (parseFloat($('#userfiles').get(0).files.length) > parseFloat(0)) {
+                    var form = new FormData();
+                    for (var i = 0; i < $('#userfiles').get(0).files.length; ++i) {
+                        form.append('userfiles[]', $('#userfiles').get(0).files[i]);
+                    }
+
+                    form.append('orderId', data['order']['_id']);
+
+                    $.ajax({
+                        url: '/orders/upload_prescriptions',
+                        data: form,
+                        cache: false,
+                        processData: false,
+                        contentType: false,
+                        type: 'POST',
+                        success: function(order) {
+                            window.location.href = '/orders/all_orders'
+                        }
+                    });
+                } else {
+                    window.location.href = '/orders/all_orders'
+                }
+
+            })
+        })
+
+    </script>
+
+
+</body>
+
+</html>

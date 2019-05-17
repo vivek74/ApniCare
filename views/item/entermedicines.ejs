@@ -1,0 +1,168 @@
+<% include ../partials/header %>
+
+<body>
+    <nav style="height: 100px">
+        <div class="nav-wrapper light-blue">
+                <a data-target="slide-out" class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="margin-top: 10px;font-size:25px;">menu</i></a>
+            <a onclick="history.back()" class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="font-size:23px;margin-top: 10px;">keyboard_backspace
+
+                </i></a>
+            <a class="brand-logo" style="margin-top: 10px;font-size: 23px">Enter Medicine</a>
+        </div>
+    </nav>
+    <%include ../partials/header2%>
+
+<form action="/item" method="post" enctype="multipart/form-data">
+    <section class="section section-items">
+        <div class="row" style="padding-left: 2%">
+            <div class="col l7 s12" style="margin-top: 1%">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="medicine_name" name="medicineName" type="text" class="validate">
+                        <label for="medicine_name">Medicine Name</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input name="manufacturerName" id="manufacturerName" type="text" class="validate">
+                        <label for="manufacturerName">Manufacturer Name</label>
+                    </div>
+                </div>
+
+                <div class="row input_fields_wrap">
+                    <div class="input-field col s4">
+                        <input class="salt" id="salt" name="drugs[0][salt]" type="text" >
+                        <label for="salt">Salt/Drugs</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input class="strength" id="strength" name="drugs[0][strength]" type="number" >
+                        <label for="strength">Strength</label>
+                    </div>
+                    <div class="s4">
+                        <button class="btn btn-large light-blue add_field_button">Add more salt/drugs</button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s4">
+                        <input onkeyup="med()" id="unitQty" name="unitQty" type="number" class="validate">
+                        <label for="unitQty">Qty</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input class="packagingUnit1" id="packagingUnit1" name="packagingUnit1" type="text" >
+                        <label for="packagingUnit1">Packaging unit 1</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input class="packagingUnit2" id="packagingUnit2" name="packagingUnit1" type="text">
+                        <label for="packagingUnit2">Packaging unit 2</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s3">
+                        <input id="Prescribed" name="mainlyPrescribedFor" type="text" class="validate">
+                        <label for="Prescribed">Mainly Prescribed for</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <input onkeyup="med()" id="mrp" name="mrp" type="Number" class="validate">
+                        <label for="mrp">MRP</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <input id="medDiscount" name="medDiscount" type="Number" class="validate">
+                        <label for="medDiscount">Discount</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <input id="rate" name="rate" type="Number">
+                    </div>
+                </div>
+            </div>
+            <div class="col l5 s12">
+                <div class="file-field input-field">
+                    <div class="btn btn-small grey">
+                        <span>Upload medicine image 1</span>
+                        <input name="myImage" type="file">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text">
+                    </div>
+                </div>
+                <div class="file-field input-field">
+                    <div class="btn btn-small grey">
+                        <span>Upload medicine image 2</span>
+                        <input name="myImage" type="file">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text">
+                    </div>
+                </div>
+                <div class="file-field input-field">
+                    <div class="btn btn-small grey">
+                        <span>Upload medicine image 3</span>
+                        <input name="myImage" type="file">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text">
+                    </div>
+                </div>
+                <div class="file-field input-field">
+                    <div class="btn btn-small grey">
+                        <span>Upload medicine image 4</span>
+                        <input name="myImage" type="file">
+                    </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text">
+                    </div>
+                </div>
+                
+                <div class="row right-align" style="margin-top: 20px">
+                    <div class="col l12 s12">
+                        <div class="switch">
+                            <label>
+                                <span class="black-text" style="font-size: 200%;">Prescription needed:</span>
+                                <input type="checkbox" checked name="prescriptionNeeded" >
+                                <span class="lever" style="margin-top: -10px"></span>
+                            </label>
+                        </div>
+                        <div class="switch">
+                            <label>
+                                <span class="black-text" style="font-size: 200%">Decimal:</span>
+                                <input type="checkbox" name="decimalNeeded">
+                                <span class="lever" style="margin-top: -10px"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col l6 s12">
+                <h4 class="left-align">Detailed Information</h4>
+            </div>
+            <div class="col l2 s12" style="margin-top: 20px">
+                <select name="medType" class="browser-default grey lighten-3">
+                    <option value="" disabled selected>Medicine Type</option>
+                    <option value="Generic">Generic</option>
+                    <option value="Branded">Branded</option>
+                </select>
+            </div>
+            <div class="col l4"></div>
+            <div class="col l12 s12">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <textarea id="textarea1" name="detailedInfo" class="materialize-textarea"></textarea>
+                        <label for="textarea1">Textarea</label>
+                    </div>
+                </div>
+                <div class="col l6 s12">
+
+                </div>
+            </div>
+            <div class="col l10 s10 right-align">
+                <button class="btn btn-large red">Clear</button>
+                <button type="submit" class="btn btn-large green">Submit</button>
+            </div>
+            <div class="col l2 s2"></div>
+        </div>
+    </section>
+</form>
+
+<% include ../partials/footer %>

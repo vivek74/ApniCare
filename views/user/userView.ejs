@@ -1,0 +1,149 @@
+<% include ../partials/header %>
+<body>
+    <nav style="height: 80px">
+        <div class="nav-wrapper light-blue">
+            <div class="row">
+                <div class="col l12 s12 m12">
+                        <a data-target="slide-out" class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="margin-top: 10px;font-size:25px;">menu</i></a>
+                    <a onclick="history.back()" class="sidenav-trigger pointer show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="font-size:35px;margin-top: 10px">arrow_back</i></a>
+                    <a class="brand-logo" style="margin-top: 10px;font-size: 150%;font-weight: 400">User View</a>
+                </div>
+            </div>
+        </div>
+    </nav>  
+    <%include ../partials/header2%>
+
+    <div class="row light-blue white-text" style="margin-top: 10px;padding: 15px">
+        <div class="col l6 m6 s6" style="font-weight: 500;font-size: large; text-transform: uppercase;"><%=customer.name%></div>
+        <div class="col l6 m6 s6" style="font-weight: 00;font-size: large">Atulya Card <%=customer.atulyaCard%></div>
+    </div>
+
+    <section class="section section-profile">
+        <div class="row" style="padding: 15px;padding-top: 0;margin-top: -30px">
+            <div class="col s12 l12 m12">
+                <h1 style="text-transform: uppercase;" class="left-align"><%=customer.name%></h1>
+            </div>
+            <div class="col s12 l6 m6">
+                <div class="col l8 m8">
+                    <p class="left-align">Contact: <%=customer.phone%></p>
+                    <p class="left-align">Alternate Number :<%if(customer.alternateNumber){%> <%=customer.alternateNumber%> <% } else { %> NIL <%}%></p>
+                </div>
+                <div class="col m4 l4" style="margin-top: 20px">
+                    <a href="" class="btn btn-large darken-2 red white-text">TICKETS</a>
+                </div>
+                <div class="col l12 m12 s12">
+                    <p style="font-size: 20px">User Type: <span class="red-text text-darken-2 left-align" style="font-size: 35px"><i></i><%=customer.userType%></span></p>
+                    <p style="font-size: 20px">City: <%=customer.city%></p>
+                </div>
+                <div class="col s12 m12 l12" style="margin-left: 0;margin-right: 0;padding-left: 0;padding-right: 0">
+                    <div class="col s12 m12 l4" style="margin-top: 10px">
+                        <a href="/users/user-view/profile/<%=customer.id%>" class="btn btn-large light-blue">View Profile</a>
+                    </div>
+                    <div class="col s12 m12 l4" style="margin-top: 10px">
+                        <a href="/users/user-view/health-record/<%=customer.id%>" class="btn btn-large light-blue">Health Records</a>
+                    </div>
+                    <div class="col s12 m12 l4" style="margin-top: 10px">
+                        <a href="/users/user-view/my-medicines/<%=customer.id%>" class="btn btn-large light-blue">My Medicines</a>
+                    </div>
+                </div>
+                <div class="col s12 m12 l12" style="margin-left: 0;margin-right: 0;padding-left: 0;padding-right: 0;margin-top: 10px">
+                    <div class="show-on-large show-on-extra-large hide-on-med-and-down">
+                        <div class="col l6 right-align" style="margin-top: 10px">
+                            <a href="/users/user-view/coupon-codes/<%=customer.id%>" class="btn btn-large light-blue">Coupon Codes</a>
+                        </div>
+                        <div class="col l6 left-align" style="margin-top: 10px">
+                            <a href="/users/user-view/my-members/<%=customer.id%>" class="btn btn-large light-blue">My Members</a>
+                        </div>
+                        <div class="col l12 center-align" style="margin-top: 10px">
+                            <a href="/users/user-view/order-history/<%=customer.id%>" class="btn btn-large light-blue">Order History</a>
+                        </div>
+                    </div>
+                    <div class="hide-on-large-only hide-on-extra-large-only show-on-medium-and-down">
+                        <div class="col m12 s11" style="margin-top: 10px">
+                            <a href="/users/user-view/coupon-codes/<%=customer.id%>" class="btn btn-large light-blue">Coupon Codes</a>
+                        </div>
+                        <div class="col m12 s12" style="margin-top: 10px">
+                            <a href="/users/user-view/my-members/<%=customer.id%>" class="btn btn-large light-blue">My Members</a>
+                        </div>
+                        <div class="col m12 s12" style="margin-top: 10px">
+                            <a href="/users/user-view/order-history/<%=customer.id%>" class="btn btn-large light-blue">Order History</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m5 l5">
+                <%if(customer.isSuspended === false){%>
+                    <div class="col m12 l12 s12 center-align">
+                        <button class="btn-large waves-effect waves-light red darken-2 btn modal-trigger" href="#suspend"  type="submit">Suspend</button>    
+                    </div>
+                <%}else{%>
+                    <div class="col m12 l12 s12 center-align">
+                        <button class="btn-large waves-effect waves-light btn modal-trigger" href="#continue" >Continue</button>
+                    </div>
+                <%}%>
+                <%if(customer.userState === true){%>
+                    <div style="margin-top:2em;" class="col m12 l12 s12 center-align">
+                        <form action="/users/approve/<%=customer.id%>" method="post">
+                            <button class="btn-large waves-effect waves-light btn" type="submit">Approve customer</button>
+                        </form>
+                    </div>
+                <%}%>
+                
+                <div style="margin-top:2em;" class="col m12 l12 s12 center-align">
+                    <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Add money to user's wallet</a>
+                </div>
+
+                <div style="margin-top:2em;" class="col m12 l12 s12 card-panel yellow center-align">
+                     <p class="grey-text text-darken-3" style="font-weight: 600;">Wallet Info</p>
+                      <p class="grey-text text-darken-3" style="font-weight: 600;">Amount <span style="font-size: x-large">Rs. <%=customer.walletAccount%></span></p>
+                     <p class="grey-text text-darken-3" style="font-weight: 600;font-size: large">Non Transferable</p>
+                     <p class="grey-text text-darken-3" style="font-weight: 600;font-size: large">Non Refundable</p>
+                </div>
+            </div>
+            <div class="col l1 m1 hide-on-med-and-down"></div>
+        </div>
+    </section>
+
+    <!-- money model -->
+    <div id="modal1" class="modal">
+            <form action="/users/add-money/<%=customer.id%>" method="post">
+                    <div class="modal-content">
+                        <h5>Add money</h5>
+                        <div class="card-content">
+                          <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="walletAccount" name="walletAccount" type="number" class="validate" required>
+                                    <label for="walletAccount">Amount</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <div class="modal-footer">
+                    <button class="btn waves-effect waves-light" type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- suspend -->
+    <div id="suspend" class="modal">
+        <div class="modal-content">
+          <p>Did you really want to suspend this customer!!</p>
+        </div>
+        <div class="modal-footer">     
+          <a href="/users/suspend/<%=customer.id%>" class="modal-close waves-effect waves-green btn-flat">SUSPEND</a>
+          <a class="modal-close waves-effect waves-green btn-flat">CANCLE</a>
+        </div>
+    </div>
+
+    <!-- countinue -->
+    <div id="continue" class="modal">
+            <div class="modal-content">
+              <p>Did you really want to continue this customer!!</p>
+            </div>
+            <div class="modal-footer">     
+              <a href="/users/continue/<%=customer.id%>" class="modal-close waves-effect waves-green btn-flat">CONTINUE</a>
+              <a class="modal-close waves-effect waves-green btn-flat">CANCLE</a>
+            </div>
+    </div>
+</body>
+<% include ../partials/footer %>

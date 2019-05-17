@@ -1,0 +1,39 @@
+<% include ../partials/header %>
+    <nav style="height: 80px">
+        <div class="nav-wrapper light-blue">
+            <div class="row">
+                <div class="col l12 s12 m12">
+                    <a data-target="slide-out" class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="margin-top: 10px;font-size:25px;">menu</i></a>
+                    <a onclick="history.back()" class="sidenav-trigger pointer show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="font-size:35px;margin-top: 10px">arrow_back</i></a>
+                    <a class="brand-logo" style="margin-top: 10px;font-size: 150%;font-weight: 400"><%=foundList[0].name%></a>
+                </div>
+            </div>
+        </div>
+    </nav> 
+    <%include ../partials/header2%>
+    
+    <section class="section section-itemview">
+        <div class="row" style="padding-left: 1%">
+            <div class="col l7 m7 s12">
+                <h2 style="text-transform: uppercase;" class="left-align"><%=foundList[0].name%></h2>
+                <p class="left-align purple-text" style="font-size: 120%; text-transform: uppercase;"><u></u></p>
+                <div class="row">
+                    <div class="col l12 m12 s12">
+                        <h4 class="left-align" style="text-decoration:underline">Detailed Information - </h4>
+                        <% foundList[0].list.forEach(function(allList){ %>
+                        <p class="left-align" style="font-size: 110%"> - <span><a href="/item/view/manufacturer/show-med-list/<%=allList.items%>"><%=allList.items%></a></span></p>
+                        <%});%>
+                    </div>
+                </div>
+            </div>
+            <div class="col l5">
+                <div class="row">
+                    <div class="col l2"></div>
+                    <div class="col l10" style="width: 400px">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<% include ../partials/footer %>

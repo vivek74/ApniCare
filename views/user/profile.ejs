@@ -1,0 +1,605 @@
+<% include ../partials/header %>
+<body>
+
+    <nav style="height: 80px">
+        <div class="nav-wrapper light-blue">
+            <a data-target="slide-out" class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="margin-top: 10px;font-size:25px;">menu</i></a>
+            <a onclick="history.back()"  class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="font-size:35px;margin-top: 10px">arrow_back</i></a>
+            <a class="brand-logo" style="margin-top: 10px">Profile</a>
+        </div>
+    </nav>
+    <% include ../partials/header2 %>
+
+
+    <!-- Section: General Information !-->
+
+    <section class="section section-general">
+        <div class="row">
+            <div class="col m6 s12">
+                <h2 class="black-text text-darken-3 left-align">General Information</h1>
+                    <h5 class="black-text text-darken-2 left-align">View and manage the general information of the user</h5>
+                    <div class="col s12 m12" style="margin-top: 100px">
+                        <div class="row">
+
+                        </div>
+                    </div>
+                    <div class="col s12 m12">
+                        <div class="row" style="margin-bottom: 0;padding-bottom: 0">
+                            <div class="card light-blue white-text" style="margin-bottom: 0;padding-bottom: 0">
+                                <div class="card-content white-text" style="padding-bottom: 50px">
+                                    <div class="col s8 m8">
+                                        <h6 class="left-align">Name</h6>
+                                    </div>
+                                    <div class="col s4 m4">
+                                        <h6 class="left-align"><%=customer.name%></h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m12">
+                        <div class="row" style="margin-bottom: 0;padding-bottom: 0">
+                            <div class="card light-blue white-text" style="margin-bottom: 0;padding-bottom: 0">
+                                <div class="card-content white-text" style="padding-bottom: 50px">
+                                    <div class="col s8 m8">
+                                        <h6 class="left-align">UserType</h6>
+                                    </div>
+                                    <div class="col s4 m4">
+                                        <h6 class="left-align"><%=customer.userType%></h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m12">
+                        <div class="row" style="margin-bottom: 0;padding-bottom: 0">
+                            <div class="card light-blue white-text" style="margin-bottom: 0;padding-bottom: 0">
+                                <div class="card-content white-text" style="padding-bottom: 50px">
+                                    <div class="col s8 m8">
+                                        <h6 class="left-align">Gender</h6>
+                                    </div>
+                                    <div class="col s4 m4">
+                                        <h6 class="left-align"><%=customer.gender%></h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m12">
+                        <div class="row" style="margin-bottom: 0;padding-bottom: 0">
+                            <div class="card light-blue white-text" style="margin-bottom: 0;padding-bottom: 0">
+                                <div class="card-content white-text" style="padding-bottom: 50px">
+                                    <div class="col s8 m8">
+                                        <h6 class="left-align">Contact</h6>
+                                    </div>
+                                    <div class="col s4 m4">
+                                        <h6 class="left-align"><%=customer.phone%></h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m12">
+                        <div class="row" style="margin-bottom: 0;padding-bottom: 0">
+                            <div class="card light-blue white-text" style="margin-bottom: 0;padding-bottom: 0">
+                                <div class="card-content white-text" style="padding-bottom: 50px">
+                                    <div class="col s8 m8">
+                                        <h6 class="left-align">Email</h6>
+                                    </div>
+                                    <div class="col s4 m4">
+                                        <h6 class="left-align"><%=customer.email%></h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="col m6 s12" style="margin-top: 40px">
+                
+                <div class="row">
+                    <div class="col m4 s5">
+                        <p class="left-align">Aadhar Card Number: </p>
+                    </div>
+                    <div class="col m8 s7">
+                        <p class="left-align"><%=customer.adharCard%></p>
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col m4 s5">
+                        <p class="left-align">Aadhar Card Pic (front side): </p>
+                    </div>
+                    <div class="col m5 s7">
+                        <%if(customer.adharCardPicFront){%> 
+                            <img src="<%=customer.adharCardPicFront%>" class="responsive-img">
+                        <%} else {%>
+                            <form action="/users/upload/aadhar/<%=customer.id%>" method="POST" enctype="multipart/form-data">
+                                <div class="file-field input-field">
+                                <div class="btn grey">
+                                    <span>File</span>
+                                    <input name="myImage" type="file">
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input id="catch" name="loc" class="file-path validate" type="text" value="">
+                                </div>
+                                </div>
+                                <button type="submit" class="btn">Submit</button>
+                            </form>
+                        <%}%>
+                    </div>
+                    <!-- aadhar card back side -->
+                    <div class="col m4 s5" style="margin-top:2em;">
+                            <p class="left-align">Aadhar Card Pic (back side): </p>
+                        </div>
+                        <div class="col m5 s7" style="margin-top:2em;">
+                            <%if(customer.adharCardPicBack){%> 
+                                <img src="<%=customer.adharCardPicBack%>" class="responsive-img">
+                            <%} else {%>
+                                <form action="/users/upload/aadhar-back/<%=customer.id%>" method="POST" enctype="multipart/form-data">
+                                    <div class="file-field input-field">
+                                    <div class="btn grey">
+                                        <span>File</span>
+                                        <input name="myImage" type="file">
+                                    </div>
+                                    <div class="file-path-wrapper">
+                                        <input id="catch" name="loc" class="file-path validate" type="text" value="">
+                                    </div>
+                                    </div>
+                                    <button type="submit" class="btn">Submit</button>
+                                </form>
+                            <%}%>
+                        </div>
+                    <div class="col m3">
+                    </div>
+                </div>
+
+                <!-- ration card front side -->
+                <div class="row">
+                    <div class="col m4 s5">
+                        <p class="left-align">Ration Card Number: </p>
+                    </div>
+                    <div class="col m8 s7">
+                        <p class="left-align"><%=customer.rationCard%></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col m4 s5">
+                        <p class="left-align">Ration Card Pic: </p>
+                    </div>
+                    <div class="col m5 s7">
+                        <%if(customer.rationCardPicFront){%> 
+                            <img src="<%=customer.rationCardPicFront%>" class="responsive-img">
+                        <%} else {%>
+                            <form action="/users/upload/ration/<%=customer.id%>" method="POST" enctype="multipart/form-data">
+                                <div class="file-field input-field">
+                                <div class="btn grey">
+                                    <span>File</span>
+                                    <input name="myImage" type="file">
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input id="catch" class="file-path validate" type="text" value="">
+                                </div>
+                                </div>
+                                <button type="submit" class="btn">Submit</button>
+                            </form>
+                        <%}%>
+                    </div>
+
+                    <!-- ration back side -->
+                    <div class="col m4 s5" style="margin-top:2em;">
+                            <p class="left-align">Ration Card Pic (back side): </p>
+                        </div>
+                        <div class="col m5 s7" style="margin-top:2em;">
+                            <%if(customer.rationCardPicBack){%> 
+                                <img src="<%=customer.rationCardPicBack%>" class="responsive-img">
+                            <%} else {%>
+                                <form action="/users/upload/ration-back/<%=customer.id%>" method="POST" enctype="multipart/form-data">
+                                    <div class="file-field input-field">
+                                    <div class="btn grey">
+                                        <span>File</span>
+                                        <input name="myImage" type="file">
+                                    </div>
+                                    <div class="file-path-wrapper">
+                                        <input id="catch" class="file-path validate" type="text" value="">
+                                    </div>
+                                    </div>
+                                    <button type="submit" class="btn">Submit</button>
+                                </form>
+                            <%}%>
+                        </div>
+                    <div class="col m3">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="divider"></div>
+        <!-- health -->
+        <section id="health" class="section health">
+                <div class="row">
+                    <div class="col m12 l12 s12 left-align">
+                        <h1 class="left-align black-text" style="font-size: 350%">Health Details</h1>
+                    </div>
+                    <div class="col m12 l12 s12 right-align">
+        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col m5 l5 s12">
+                        <p class="left-align black-text" style="font-size: 20px">This section indicates about the health records of the patient such as the allergies, medications, diseases, injuries, etc.</p>
+                    </div>
+                    <div class="col l6 m6 s12 left-align purple-text text-darken-3" style="margin-top: 20px">
+                        
+                        <div class="input-field">
+                            <input placeholder="Allergies" id="Allergies" type="text" value="<%=customer.allergies%>" class="validate" readonly>
+                            <label for="Allergies">Allergies</label>
+                        </div>
+                        <div class="input-field">
+                            <input placeholder="Current Medications" id="CurrentMedications" type="text" value="<%=customer.currentMedication%>" class="validate" readonly>
+                            <label for="CurrentMedications">Current Medications</label>
+                        </div>
+                        <div class="input-field">
+                            <input placeholder="Past Medications" id="PastMedications" type="text" value="<%=customer.pastMedication%>" class="validate" readonly>
+                            <label for="PastMedications">Past Medications</label>
+                        </div>
+                        <div class="input-field">
+                            <input placeholder="Chronic Diseases" id="ChronicDiseases" type="text" value="<%=customer.chronicDiseases%>" class="validate" readonly>
+                            <label for="ChronicDiseases">Chronic Diseases</label>
+                        </div>
+                        <div class="input-field">
+                            <input placeholder="Surgeries" id="Surgeries" type="text" value="<%=customer.surgeries%>" class="validate" readonly>
+                            <label for="Surgeries">Surgeries</label>
+                        </div>
+                        <div class="input-field">
+                            <input placeholder="injuries" id="injuries" type="text" value="<%=customer.injuries%>" class="validate" readonly>
+                            <label for="injuries">Injuries</label>
+                        </div>
+                    </div>
+                    <div class="col l1 m1 hide-on-small-and-down"></div>
+                </div>
+            </section>
+        <!-- end -->
+
+        <div class="divider"></div>
+        <!-- life style -->
+
+        <section id="lifestyle" class="section lifestyle">
+                <div class="row">
+                    <div class="col m12 l12 s12 left-align">
+                        <h1 class="left-align black-text" style="font-size: 350%">Lifestyle</h1>
+                    </div>
+                    <div class="col m12 l12 s12 right-align">
+        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col m5 l5 s12">
+                        <p class="left-align black-text" style="font-size: 20px">This section indicates about the lifestyle records of the patient such as the allergies, medications, diseases, injuries, etc.</p>
+                    </div>
+                    <div class="col l6 m6 s12 left-align purple-text text-darken-3" style="margin-top: 20px">
+                        <div class="input-field">
+                            <input placeholder="Smoking Habits" id="SmokingHabits" type="text" class="validate" value="<%=customer.smokingHabit%>" readonly>
+                            <label for="SmokingHabits">Smoking Habits</label>
+                        </div>
+                        <div class="input-field">
+                            <input placeholder="Alchol Consumption" id="AlcholConsumption" type="text" class="validate" value="<%=customer.alcoholConsumption%>" readonly>
+                            <label for="AlcholConsumption">Alchol Consumption</label>
+                        </div>
+                        <div class="input-field">
+                            <input placeholder="Activity Level" id="ActivityLevel" type="text" class="validate" value="<%=customer.activitylevel%>" readonly>
+                            <label for="ActivityLevel">Activity Level</label>
+                        </div>
+                        <div class="input-field">
+                            <input placeholder="Food Preferences" id="FoodPreferences" type="text" class="validate" value="<%=customer.foodPreference%>" readonly>
+                            <label for="FoodPreferences">Food Preferences</label>
+                        </div>
+                        <div class="input-field">
+                            <input placeholder="Occupation" id="Occupation" type="text" class="validate" value="<%=customer.occupation%>" readonly>
+                            <label for="Occupation">Occupation</label>
+                        </div>
+                        
+                    </div>
+                    <div class="col l1 m1 hide-on-small-and-down"></div>
+                </div>
+            </section>
+        <!-- end -->
+        <!-- address -->
+        <div class="divider"></div>
+
+
+        <section id="myaddress" class="section myaddress">
+            <div class="row">
+                <div class="col m12 l12 s12">
+                    <h1 class="left-align black-text" style="font-size: 350%">My Addresses</h1>
+                    
+                </div>
+                <div class="col m5 l5 s12">
+                    <p class="left-align black-text" style="font-size: 20px">This section indicates about the saved addresses of the patient or their known persons</p>
+                </div>
+                <div class="col m7 l7 s12">
+                        <a class="waves-effect waves-light btn modal-trigger" href="#address1">Add address</a>
+                </div>
+            </div>
+            <div class="row">
+                <!-- looping address -->
+                <% customer.addresses.reverse().forEach(function(address){ %>
+                    <div class="col l4 m4 s12 left-align purple-text text-darken-3">
+                        <div class="col l12 s12 m12">
+                            <p style="font-size: 20px"><%=address.addressLine1%> <br><%=address.addressLine2%> <br><%=address.landmark%> <br><%=address.city%> <br><%=address.state%> <br><%=address.country%> <br><%=address.pin%></p>
+                        </div>
+                        <form class="delete-form" action="/users/delete/<%=customer.id%>/add/<%=address._id%>?_method=DELETE" method="POST">
+                            <button class="btn waves-effect waves-light red lighten-1" type="submit">DELETE</button>
+                        </form>
+                    </div>
+                <%})%>
+                <!-- looping end -->
+            </div>
+        </section>
+        <!-- end -->
+    </section>
+
+    <!-- Sectio: Fixed Acion button -->
+    
+    <div class="fixed-action-btn">
+        <a class="btn-floating btn-large light-blue modal-trigger" href="#modal1">
+          <i class="large material-icons">subject</i>
+        </a>
+        <!-- Modal Structure -->
+        <form action="/users/update/<%=customer.id%>" method="post">
+        <div id="modal1" class="modal modal-fixed-footer">
+          <div class="modal-content">
+            <h4>Add user</h4>
+            <div class="card-content">
+              <div class="row">
+      
+                    <div class="row">
+                      <div class="input-field col s6">
+                        <input name="name" value="<%=customer.name%>" id="name" type="text" class="validate" readonly>
+                        <label for="name">Name</label>
+                      </div>
+                      <div class="input-field col s6">
+                        <input name="email" id="email" value="<%=customer.email%>" type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" class="validate">
+                        <label for="email">Email</label>
+                      </div>
+                    </div>
+      
+                    <div class="row">
+                      <div class="input-field col s6">
+                        <input name="username" value="<%=customer.username%>" maxlength="10" pattern="\d{10}" id="phone" type="text" class="validate" title="Phone no should be of 10 digits" readonly>
+                        <label for="username">Phone</label>
+                      </div>
+                      <div class="input-field col s6">
+                        <input name="alternatePhone" value="<%=customer.alternateNumber%>" maxlength="10" pattern="\d{10}" id="alternatePhone" type="text" class="validate" title="Phone no should be 10 digits">
+                        <label for="alternatePhone">Alternate phone</label>
+                      </div>
+                    </div>
+      
+                    <div class="row">
+                      <div class="input-field col s12">
+                        <input name="atulyaCard" value="<%=customer.atulyaCard%>" maxlength="10" pattern="\d{10}" id="atulyaCard" type="text" class="validate" title="Atulya card no should be 10 digits">
+                        <label for="atulyaCard">Atulya Card</label>
+                      </div>
+                    </div>
+      
+                    <div class="row">
+                      <div class="input-field col s6">
+                        <input name="adharCard" value="<%=customer.adharCard%>" maxlength="12" pattern="\d{12}" id="adharCard" type="text" class="validate" title="Aadhar card should be of 12 digits">
+                        <label for="adharCard">Aadhar card</label>
+                      </div>
+                      <div class="input-field col s6">
+                        <input name="rationCard" value="<%=customer.rationCard%>" maxlength="12" pattern="\d{12}" id="rationCard" type="text" class="validate" title="Ration card should be of 12 digits">
+                        <label for="rationCard">Ration card</label>
+                      </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="input-field col s12">
+                          <input name="city" value="<%=customer.city%>" id="city" type="text" class="validate">
+                          <label for="city">City</label>
+                        </div>
+                      </div>
+
+                    <div class="row">
+                      <div class="input-field col s6">
+      
+                          <select name="gender" class="browser-default">
+                            <option value="" disabled selected>Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                          </select>
+                      </div>
+                      <div class="input-field col s6">
+                          <select name="userType" class="browser-default">
+                            <option value="" disabled selected>User type (Requested for <%=customer.requestedUserType%>)</option>
+                            <option value="HFC">HFC</option>
+                            <option value="LFC">LFC</option>
+                            <option value="NFC">NFC</option>
+                          </select>
+                      </div>
+                    </div>
+                    <p style="text-align: center; font-weight: bold;">Health</p>
+      
+                    <div class="row">
+                      <div class="input-field col s6">
+                        <input name="allergies" value="<%=customer.allergies%>" id="allergies" type="text" class="validate">
+                        <label for="allergies">Allergies</label>
+                      </div>
+                      <div class="input-field col s6">
+                        <input name="currentMedication" value="<%=customer.currentMedication%>" id="currentMedication" type="text" class="validate">
+                        <label for="currentMedication">Current medication</label>
+                      </div>
+                    </div>
+      
+                    <div class="row">
+                      <div class="input-field col s6">
+                        <input name="pastMedication" value="<%=customer.pastMedication%>" id="pastMedication" type="text" class="validate">
+                        <label for="pastMedication">Past Medication</label>
+                      </div>
+                      <div class="input-field col s6">
+                        <input name="chronicDiseases" value="<%=customer.chronicDiseases%>" id="chronicDiseases" type="text" class="validate">
+                        <label for="chronicDiseases">Chronic diseases</label>
+                      </div>
+                    </div>
+      
+                    <div class="row">
+                      <div class="input-field col s6">
+                        <input name="injuries" value="<%=customer.injuries%>" id="injuries1" type="text" class="validate">
+                        <label for="injuries1">Injuries</label>
+                      </div>
+                      <div class="input-field col s6">
+                        <input name="surgeries" value="<%=customer.surgeries%>" id="surgeries" type="text" class="validate">
+                        <label for="surgeries">Surgeries</label>
+                      </div>
+                    </div>
+      
+                    <p style="text-align: center; font-weight: bold;">Lifestyle</p>
+      
+                    <div class="row">
+                      <div class="input-field col s6">
+      
+                          <select name="smokingHabit" class="browser-default">
+                            <option value="" disabled selected>Smoking Habit</option>
+                            <option value="smoker">Smoker</option>
+                            <option value="want to quit">Want to quit</option>
+                            <option value="dont smoke">Don’t smoke</option>
+                          </select>
+                      </div>
+                      <div class="input-field col s6">
+                          <select name="alcoholConsumption" class="browser-default">
+                            <option value="" disabled selected>Alcohol Consumption</option>
+                            <option value="alcoholic">Alcoholic</option>
+                            <option value="want to quit">Want to quit</option>
+                            <option value="non alcoholic">Non-alcoholic</option>
+                          </select>
+                      </div>
+                    </div>
+      
+                    <div class="row">
+                      <div class="input-field col s4">
+                          <select name="activitylevel" class="browser-default">
+                            <option value="" disabled selected>Activity level</option>
+                            <option value="active">Active</option>
+                            <option value="lazy">Lazy</option>
+                          </select>
+                      </div>
+                      <div class="input-field col s4">
+                          <select name="foodPreference" class="browser-default">
+                            <option value="" disabled selected>Food Preference</option>
+                            <option value="vegetarian">Vegetarian</option>
+                            <option value="non vegetarian">Non vegetarian</option>
+                          </select>
+                      </div>
+                      <div class="input-field col s4">
+                          <select name="occupation" class="browser-default">
+                            <option value="" disabled selected>Occupation</option>
+                            <option value="service">Service</option>
+                            <option value="business">Business</option>
+                            <option value="student">Student</option>
+                          </select>
+                      </div>
+                    </div>
+      
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn waves-effect waves-light" type="submit">Submit
+              <i class="material-icons right">send</i>
+            </button>
+          </div>
+        </div>
+      </form>
+      
+      </div>
+
+      <!-- add address -->
+
+      <form action="/users/add-address/<%=customer.id%>" method="post">
+        <div id="address1" class="modal modal-fixed-footer">
+          <div class="modal-content">
+            <h4>Add address</h4>
+            <div class="card-content">
+              <div class="row">
+                  <div class="input-field col s6">
+                    <input name="addressLine1" id="addressLine1" type="text" class="validate" required>
+                    <label for="addressLine1">Address Line 1 (Required)</label>
+                  </div>
+                  <div class="input-field col s6">
+                    <input name="addressLine2" id="addressLine2" type="text" class="validate">
+                    <label for="addressLine2">Address Line 2</label>
+                  </div>
+                </div>
+  
+                <div class="row">
+                  <div class="input-field col s6">
+                    <input name="landmark" id="landmark" type="text" class="validate">
+                    <label for="landmark">Landmark</label>
+                  </div>
+                  <div class="input-field col s6">
+                    <input name="city1" id="city1" type="text" class="validate" required>
+                    <label for="city1">City (Required)</label>
+                  </div>
+                </div>
+                
+                <div class="row">
+                    <div class="input-field col s6">
+                      <input name="pin" id="pin" maxlength="6" pattern="\d{6}" type="text" class="validate" title="Pin code should be of 6 digits" required>
+                      <label for="pin">Pin code (Required)</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                  <div class="input-field col s6">
+  
+                      <select name="states" class="browser-default" required>
+                        <option value="" disabled selected>States(Required)</option>
+                        <option value="Andhra Pradesh">Andhra Pradesh</option>
+                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                        <option value="Assam">Assam</option>
+                        <option value="Bihar">Bihar</option>
+                        <option value="Chhattisgarh">Chhattisgarh</option>
+                        <option value="Goa">Goa</option>
+                        <option value="Gujarat">Gujarat</option>
+                        <option value="Haryana">Haryana</option>
+                        <option value="Himachal Pradesh">Himachal Pradesh</option>
+                        <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                        <option value="Jharkhand">Jharkhand</option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Kerala">Kerala</option>
+                        <option value="Madhya Pradesh">Madhya Pradesh</option>
+                        <option value="Maharashtra">Maharashtra</option>
+                        <option value="Manipur">Manipur</option>
+                        <option value="Meghalaya">Meghalaya</option>
+                        <option value="Mizoram">Mizoram</option>
+                        <option value="Nagaland">Nagaland</option>
+                        <option value="Odisha">Odisha</option>
+                        <option value="Punjab">Punjab</option>
+                        <option value="Rajasthan">Rajasthan</option>
+                        <option value="Sikkim">Sikkim</option>
+                        <option value="Tamil Nadu">Tamil Nadu</option>
+                        <option value="Telangana">Telangana</option>
+                        <option value="Tripura">Tripura</option>
+                        <option value="Uttar Pradesh">Uttar Pradesh</option>
+                        <option value="Uttarakhand">Uttarakhand</option>
+                        <option value="West Bengal">West Bengal</option>
+                      </select>
+                  </div>
+                  <div class="input-field col s6">
+                      <select name="country" class="browser-default" required>
+                        <option value="" disabled selected>Country(Required)</option>
+                        <option value="India">India</option>
+                        <option value="Others">Others</option>
+                      </select>
+                  </div>
+                </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn waves-effect waves-light" type="submit">Submit
+              <i class="material-icons right">send</i>
+            </button>
+          </div>
+        </div>
+      </form>
+      <!-- end add address -->
+</body>
+<% include ../partials/footer %>

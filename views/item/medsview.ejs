@@ -1,0 +1,174 @@
+<% include ../partials/header %>
+
+<body>
+
+    <nav style="height: 100px">
+        <div class="nav-wrapper light-blue">
+                <a data-target="slide-out" class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="margin-top: 10px;font-size:25px;">menu</i></a>
+            <a onclick="history.back()" data-target="slide-out" class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="font-size:23px;margin-top: 20px;">keyboard_backspace
+
+                </i></a>
+            <a class="brand-logo" style="margin-top: 20px;font-size: 23px">My Medicines</a>
+
+        </div>
+    </nav>
+    <%include ../partials/header2%>
+
+    <ul id="slide-out" class="sidenav">
+        <li>
+            <div class="user-view">
+                <div class="background">
+                    <img src="images/user-img-background.jpg">
+                </div>
+                <a href="#user"><img class="circle" src="images/user.png"></a>
+                <a ><span class="white-text name">Welcome</span></a>
+                <a ><span class="white-text email">Admin</span></a>
+            </div>
+        </li>
+
+        <li><a class="subheader">MENU</a></li>
+        <li><a class="waves-effect" href="/users">User</a></li>
+        <li><a class="waves-effect" href="/item">Items</a></li>
+        <li><a class="waves-effect" href="/order">Orders</a></li>
+        <li><a class="waves-effect" href="/inventory">Inventory</a></li>
+        <li><a class="waves-effect" href="/supplier">Supplier</a></li>
+        <li><a class="waves-effect" href="/coupon-code">Coupon code</a></li>
+        <li><a class="waves-effect" href="user-role">User roles</a></li>
+        <li><a class="waves-effect" href="profile">Profile</a></li>
+    </ul>
+
+    <section class="section section-itemview">
+        <div class="row" style="padding-left: 1%">
+            <div class="col l7 m7 s12">
+                <h2 class="left-align">Shelcal 250-mg Tablet</h2>
+                <div class="row">
+                    <div class="col l6 m6 s12" style="font-size: 120%">
+                        <p class="left-align blue-text">
+                            <u>Torrent Pharamaceuticals Ltd</u>
+                        </p>
+                    </div>
+                    <div class="col l6 m6 s12" style="font-size: 120%">
+                        <p>prescription required <a class="btn-floating btn waves-effect waves-light green"><i class="material-icons">check</i></a></p>
+                    </div>
+                    <div class="col l6 m6 s12" style="font-size: 120%">
+                        <p class="left-align">
+                            Composition for shelcal 250-mg Tablet
+                        </p>
+                        <span class="blue-text"><u><i>Renitidene 250mg</i></u></span>
+
+                    </div>
+                    <div class="col l6 m6 s12" style="font-size: 120%">
+                        <p>Medicine Type <span class="blue-text">Branded</span></p>
+                        <p class="white-text">xcvcxvcxvcx</p>
+                    </div>
+                    <div class="col l6 m6 s12" style="font-size: 120%">
+                        <p class="left-align">
+                            Medicine ID: APST250
+                        </p>
+                    </div>
+                    <div class="col l6 s12" style="font-size: 120%">
+                        <p>Mainly prescribed for calcium deficiency</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col l5 m5 s12">
+                <div class="row">
+                    <div class="col l2 hide-on-med-and-down"></div>
+                    <div class="col l10 m12 s12" style="width: 400px">
+                        <div class="card">
+                            <div class="card-image">
+                                <img class="materialboxed" src="./images/records.png" style="width: 378px">
+                                <span class="card-title">Dublin Ireland</span>
+                            </div>
+                            <div class="card-content blue white-text">
+                                <div class="row">
+                                    <div class="col l6">
+                                        <p>MRP <i class="fa fa-rupee" style="font-weight: 400;font-size: 25px">22.61</i></p>
+                                    </div>
+                                    <div class="col l6">
+                                        <p style="font-size: 20px">Size 600ml</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col l4 white-text">
+                                        <div class="input-field white-text">
+                                            <input class="white-text" type="text" id="qunatity">
+                                            <label class="white-text" for="qunatity">Quantity</label>
+                                        </div>
+                                    </div>
+                                    <div class="col l5">
+                                        <div class="input-field white-text">
+                                            <select class="browser-default white lighten-3">
+                                                <option disabled selected>Bottle</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col l3 input-field">
+                                        <i class="material-icons black-text" style="font-size: 30px;margin-top: 5px">add_shopping_cart
+                                        </i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col l12 m12 s12">
+                <h2 class="left-align">Detailed Information</h2>
+                <div class="col l6 m6 s12">
+                    <p class="left-align" style="font-size: 110%">
+                        Loreum ipsom blah blah..RohAFAZA BLAH blahh..
+                        <span class="blue-text" style="border-bottom: solid 2px red;border-bottom-color: red">Know more</span>
+                    </p>
+                </div>
+                <div class="col l6 m6 s12">
+                    <div class="card horizontal">
+                        <div class="card-stacked">
+                            <div class="card-content">
+                                <div class="col l11 s10 m11">
+                                    <p>I am a very simple card. I am good at containing small bits of information.</p>
+                                </div>
+                                <div class="col l1 s2 m1 right-align"><i class="right-align material-icons">keyboard_arrow_down
+                                    </i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card horizontal">
+                        <div class="card-stacked">
+                            <div class="card-content">
+                               <div class="col l11 s10 m11">
+                                    <p>I am a very simple card. I am good at containing small bits of information.</p>
+                                </div>
+                                <div class="col l1 s2 m1 right-align"><i class="right-align material-icons">keyboard_arrow_down
+                                    </i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card horizontal">
+                        <div class="card-stacked">
+                            <div class="card-content">
+                                <div class="col l11 s10 m11">
+                                    <p>I am a very simple card. I am good at containing small bits of information.</p>
+                                </div>
+                                <div class="col l1 s2 m1 right-align"><i class="right-align material-icons">keyboard_arrow_down
+                                    </i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card horizontal">
+                        <div class="card-stacked">
+                            <div class="card-content">
+                                <div class="col l11 s10 m11">
+                                    <p>I am a very simple card. I am good at containing small bits of information.</p>
+                                </div>
+                                <div class="col l1 s2 m1 right-align"><i class="right-align material-icons">keyboard_arrow_down
+                                    </i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<% include ../partials/footer %>

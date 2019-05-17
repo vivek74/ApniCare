@@ -1,0 +1,40 @@
+<% include ../partials/header %>
+
+<body>
+
+    <nav style="height: 80px">
+        <div class="nav-wrapper light-blue">
+                <a data-target="slide-out" class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="margin-top: 10px;font-size:25px;">menu</i></a>
+            <a onclick="history.back()" class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="margin-top: 10px;font-size: 25px">arrow_back</i></a>
+            <a class="brand-logo" style="margin-top: 10px;font-size: 22px">My Medicines</a>
+        </div>
+    </nav>
+    <%include ../partials/header2%>
+
+    <section class="section section-mymedicines">
+        <div class="row" style="padding-left: 15px">
+            <div class="col s12 m7 l7 center-align">
+                <h4>Used coupon list</h4>
+            </div>
+            <div class="col m5 l5"></div>
+            <div class="col m5 l5"></div>
+            <div class="col s12 m10 l7 left-align">
+                <div class="card">
+                    <% foundCustomer.couponsUsed.reverse().forEach(function(coupons){ %>
+                    <div class="hide-on-med-and-down card-panel" style="margin-top: 0;padding-top: 0;height: 100px">
+                        <div class="card-content" style="margin-top: 0;padding-top: 0;padding-left: 0;margin-left: 0">
+                        <div class="col s12 m6 l6" style="margin-top: 10px">
+                            <p class="deep-purple-text text-darken-2 left-align">Coupon name - <%=coupons.couponName%></p>
+                            
+                        </div>
+                        
+                        </div>
+                    </div>
+                    <%});%>
+                </div>
+            </div>
+            <div class="col m2"></div>
+        </div>
+    </section>
+
+<% include ../partials/footer %>

@@ -1,0 +1,25 @@
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<!-- <script type="text/javascript" src="/js/materialize.min.js"></script> -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	 <!-- adding custon script -->
+    <script type="text/javascript" src="/js/script.js"></script>
+	<script>
+	    $(document).ready(function() {
+	       	$('select').formSelect();         
+	      	$('.sidenav').sidenav();
+	      	$('.fixed-action-btn').floatingActionButton();
+	      	$('.modal').modal();
+	    	$('.tabs').tabs();
+	    	$('.slider').slider();
+	    	$('.datepicker').datepicker();
+	    	$('.datepicker').datepicker({
+			    container: 'body',
+			    selectMonths: true, // Creates a dropdown to control month
+		        selectYears: 100, // Creates a dropdown of 15 years to control year
+		        format: 'dd/mm/yyyy'
+			});
+	      });
+	</script>
+
+</body>
+</html>

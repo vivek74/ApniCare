@@ -1,0 +1,77 @@
+<% include ../partials/header %>
+<body>
+
+    <nav style="height: 80px">
+        <div class="nav-wrapper light-blue">
+            <a data-target="slide-out" class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="margin-top: 10px;font-size:25px;">menu</i></a>
+            <a onclick="history.back()"  class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="font-size:35px;margin-top: 10px">arrow_back</i></a>
+            <a class="brand-logo" style="margin-top: 10px">Order view</a>
+        </div>
+    </nav>
+    <% include ../partials/header2%>
+
+    <section class="section section_order_view3">
+        <div class="row" style="padding-left: 2%">
+            <div class="col l3 m3 s6">
+                <h5>MEDICINE</h5>
+                <% order_view.medicines.forEach(function(medicines){ %>
+                <div class="input-field">
+                    <input type="text" value="<%=medicines.Name%>" style="border-bottom: 0">
+                </div>
+                <%});%>
+            </div>
+            <div class="col l3 m3 s6">
+                <h5>Quantity</h5>
+                <% order_view.medicines.forEach(function(medicines){ %>
+                    <div class="input-field">
+                        <input type="text" value="<%=medicines.medicinetype%>" style="border-bottom: 0">
+                    </div>
+                <%});%>
+            </div>
+            <div class="col l3 m3 s6">
+                <h5>MRP</h5>
+                <% order_view.medicines.forEach(function(medicines){ %>
+                    <div class="input-field">
+                        <input type="text" value="<%=medicines.Price%>" style="border-bottom: 0">
+                    </div>
+                <%});%>
+            </div>
+            <div class="col l3 m3 s6">
+                <h5>Discounted Amt</h5>
+                <% order_view.medicines.forEach(function(medicines){ %>
+                    <div class="input-field">
+                        <input type="text" value="<%= medicines.Discount %>" style="border-bottom: 0">
+                    </div>
+                <%});%>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col l6 hide-on-small-and-down"></div>
+            <div class="col l3 s6">
+                <h5>Net Payable Amount:</h5>
+                <h5>Discount Amount:</h5>
+                <h5>Cashback Amount:</h5>
+            </div>
+            <div class="col l3 s6">
+                <h5>INR <%= order_view.netTotal %></h5>
+                <h5>INR <%= order_view.discountedAmt %></h5>
+                <h5>INR <%= order_view.cashbackAmt %></h5>
+            </div>
+        </div>
+    </section>
+    
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="./js/materialize.min.js"></script>
+    <script type="application/javascript">
+        $('.sidenav').sidenav();
+        $('.fixed-action-btn').floatingActionButton();
+        $('.modal').modal();
+        $('.slider').slider();
+        $('select').formSelect();
+
+    </script>
+
+</body>
+
+</html>

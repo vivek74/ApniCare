@@ -1,0 +1,842 @@
+-- phpMyAdmin SQL Dump
+-- version 4.6.6
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost:3306
+-- Generation Time: Jul 25, 2018 at 10:25 AM
+-- Server version: 5.6.33-79.0-log
+-- PHP Version: 5.6.30
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `underzqg_mangali_hosiyari`
+--
+CREATE DATABASE IF NOT EXISTS `underzqg_mangali_hosiyari` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `underzqg_mangali_hosiyari`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `id` int(255) NOT NULL,
+  `user_name` varchar(255) NOT NULL,
+  `pass` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `user_name`, `pass`) VALUES
+(1, 'admin', '81dc9bdb52d04dc20036dbd8313ed055');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `body_shape`
+--
+
+CREATE TABLE `body_shape` (
+  `id` int(11) NOT NULL,
+  `shape` varchar(40) NOT NULL,
+  `product_sub_cat_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `body_shape`
+--
+
+INSERT INTO `body_shape` (`id`, `shape`, `product_sub_cat_id`) VALUES
+(9, 'a', 1),
+(10, 'b', 1),
+(11, 'c', 1),
+(12, 'l', 2),
+(13, 'm', 2),
+(14, 'n', 2),
+(15, 'a', 7),
+(16, 'b', 7),
+(17, 'c', 7),
+(20, 'l', 21),
+(21, 'm', 21),
+(22, 'n', 21),
+(23, 'x', 4),
+(24, 'y', 4),
+(25, 'z', 4),
+(26, 'p', 5),
+(27, 'q', 5),
+(28, 'r', 5),
+(29, 'x', 28),
+(30, 'y', 28),
+(31, 'z', 28),
+(32, 'p', 29),
+(33, 'q', 29),
+(34, 'r', 29);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `brand`
+--
+
+CREATE TABLE `brand` (
+  `id` int(255) NOT NULL,
+  `brand` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `brand`
+--
+
+INSERT INTO `brand` (`id`, `brand`) VALUES
+(1, 'addidas'),
+(2, 'nike'),
+(3, 'paragon'),
+(4, 'jockey');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `prise` int(11) NOT NULL,
+  `color_id` int(11) NOT NULL,
+  `size_id` int(11) NOT NULL,
+  `brand_id` int(11) NOT NULL,
+  `quantity` int(20) NOT NULL,
+  `discount` int(20) NOT NULL,
+  `cat_id` int(11) NOT NULL,
+  `sub_cat_id` int(20) NOT NULL,
+  `added_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`id`, `user_id`, `product_id`, `prise`, `color_id`, `size_id`, `brand_id`, `quantity`, `discount`, `cat_id`, `sub_cat_id`, `added_on`) VALUES
+(29, 1, 169, 500, 1, 2, 2, 1, 0, 1, 14, '2018-07-24 19:09:08'),
+(30, 1, 169, 500, 4, 6, 2, 1, 0, 1, 14, '2018-07-24 19:09:26'),
+(31, 1, 169, 500, 1, 2, 2, 2, 0, 1, 14, '2018-07-24 19:13:39'),
+(34, 7, 167, 1200, 1, 1, 2, 1, 10, 1, 14, '2018-07-24 22:50:27'),
+(35, 7, 167, 1200, 1, 1, 2, 1, 10, 1, 14, '2018-07-24 22:50:30'),
+(36, 7, 167, 1200, 1, 1, 2, 1, 10, 1, 14, '2018-07-24 23:03:28'),
+(37, 7, 169, 500, 1, 1, 2, 1, 0, 1, 14, '2018-07-24 23:03:30'),
+(38, 7, 168, 899, 1, 1, 2, 1, 0, 1, 2, '2018-07-24 23:03:34'),
+(39, 7, 167, 1200, 1, 1, 2, 1, 10, 1, 14, '2018-07-24 23:03:37'),
+(41, 6, 168, 899, 5, 1, 2, 1, 0, 1, 2, '2018-07-25 03:37:16'),
+(42, 6, 168, 899, 5, 1, 2, 1, 0, 1, 2, '2018-07-25 03:37:21');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `price` int(11) NOT NULL,
+  `color_id` int(11) NOT NULL,
+  `size_id` int(11) NOT NULL,
+  `brand_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `discount` int(11) NOT NULL,
+  `cat_id` int(11) NOT NULL,
+  `sub_cat_id` int(11) NOT NULL,
+  `status` varchar(30) NOT NULL DEFAULT 'pending',
+  `purchase_mode` varchar(30) NOT NULL,
+  `added_on` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `product_id`, `price`, `color_id`, `size_id`, `brand_id`, `quantity`, `discount`, `cat_id`, `sub_cat_id`, `status`, `purchase_mode`, `added_on`) VALUES
+(7, 6, 168, 899, 1, 86, 2, 0, 0, 1, 2, 'pending', 'cash on delivery', '2018-07-24 17:40:50.048784'),
+(8, 6, 168, 899, 5, 1, 2, 0, 0, 1, 2, 'pending', 'cash on delivery', '2018-07-24 18:13:59.133295'),
+(9, 7, 167, 1200, 1, 0, 2, 0, 10, 1, 14, 'pending', 'cash on delivery', '2018-07-24 22:53:07.350247');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product`
+--
+
+CREATE TABLE `product` (
+  `id` int(11) NOT NULL,
+  `product` varchar(255) NOT NULL,
+  `brand` int(255) NOT NULL,
+  `product_discription` longtext NOT NULL,
+  `product_cate` int(255) NOT NULL,
+  `product_sub_cat` int(255) NOT NULL,
+  `product_prise` int(11) NOT NULL,
+  `product_discount` int(11) NOT NULL,
+  `wash` varchar(10) NOT NULL,
+  `material` varchar(40) NOT NULL,
+  `unique_product_id` varchar(30) NOT NULL,
+  `shape_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`id`, `product`, `brand`, `product_discription`, `product_cate`, `product_sub_cat`, `product_prise`, `product_discount`, `wash`, `material`, `unique_product_id`, `shape_id`) VALUES
+(167, 't-shirt', 2, 'this is a test', 1, 14, 1200, 10, 'hands', 'uw', 'hdwl12', 0),
+(168, 'Test vest men 1st', 2, 'test description', 1, 2, 899, 0, 'hand', 'woolen', 'v456', 13),
+(169, 'Test t-shirt today', 2, 'test desc', 1, 14, 500, 0, 'hand', 'cotton', 'ment123', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_category`
+--
+
+CREATE TABLE `product_category` (
+  `id` int(255) NOT NULL,
+  `product_category` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `product_category`
+--
+
+INSERT INTO `product_category` (`id`, `product_category`) VALUES
+(1, 'Men'),
+(2, 'Women'),
+(3, 'kids-boy'),
+(4, 'woolen'),
+(5, 'kids-girl');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_color_tbl`
+--
+
+CREATE TABLE `product_color_tbl` (
+  `id` int(255) NOT NULL,
+  `color` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `product_color_tbl`
+--
+
+INSERT INTO `product_color_tbl` (`id`, `color`) VALUES
+(1, 'red'),
+(2, 'green'),
+(3, 'yellow'),
+(4, 'blue'),
+(5, 'brown');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_info`
+--
+
+CREATE TABLE `product_info` (
+  `id` int(255) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `product_color_id` int(30) NOT NULL,
+  `pic_1` varchar(255) NOT NULL,
+  `pic_2` varchar(255) NOT NULL,
+  `pic_3` varchar(255) NOT NULL,
+  `pic_4` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `product_info`
+--
+
+INSERT INTO `product_info` (`id`, `product_id`, `product_color_id`, `pic_1`, `pic_2`, `pic_3`, `pic_4`) VALUES
+(212, 169, 1, '24-07-18-0702271shibuya_high_resolution_desktop_3888x2592_hd-wallpaper-472547.jpg', '24-07-18-0702271The-Japan-Photoblog-A-Birds-Eye-View-of-Akihabara.jpg', '24-07-18-0702271maxresdefaultsd.jpg', '24-07-18-0702271nnnnn.jpg'),
+(213, 169, 4, '24-07-18-07022711.jpg', '24-07-18-07022711403_tokyo.jpg', '24-07-18-07022711804efb916bf55931d656dbc61a01a06.JPG', '24-07-18-0702271369376789-shinkansen-bullet-train-railway-bridge-railway-station-tokyo-city.jpg'),
+(208, 167, 1, '23-07-18-0526281download (1).jpg', '23-07-18-0526281download (1).jpg', '23-07-18-0526281download (1).jpg', '23-07-18-0526281download (1).jpg'),
+(211, 168, 5, '23-07-18-0755331411587759-shinkansen-bullet-train-ginza-traveling-train-crossing-action-of-crossing.jpg', '23-07-18-0755331AKIHABARA.jpg', '23-07-18-0755331bullet-train.jpg.size.custom.crop.1086x728.jpg', '23-07-18-0755331crossing___futsal_by_burningmonk-d8370xh.jpg'),
+(209, 167, 2, '23-07-18-0526281download.jpg', '23-07-18-0526281download.jpg', '23-07-18-0526281download.jpg', '23-07-18-0526281download.jpg'),
+(210, 168, 1, '23-07-18-07553311.jpg', '23-07-18-07553311403_tokyo.jpg', '23-07-18-07553311804efb916bf55931d656dbc61a01a06.JPG', '23-07-18-0755331369376789-shinkansen-bullet-train-railway-bridge-railway-station-tokyo-city.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_size_quantity`
+--
+
+CREATE TABLE `product_size_quantity` (
+  `id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `product_info_id` int(11) NOT NULL,
+  `product_size_id` varchar(20) NOT NULL,
+  `product_quantity` int(30) NOT NULL,
+  `product_color_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `product_size_quantity`
+--
+
+INSERT INTO `product_size_quantity` (`id`, `product_id`, `product_info_id`, `product_size_id`, `product_quantity`, `product_color_id`) VALUES
+(440, 167, 208, '1', 1, 1),
+(441, 167, 208, '2', 2, 1),
+(442, 167, 209, '5', 3, 2),
+(443, 167, 209, '4', 10, 2),
+(444, 168, 210, '86', 22, 1),
+(445, 168, 210, '87', 23, 1),
+(446, 168, 210, '88', 55, 1),
+(447, 168, 211, '91', 55, 5),
+(448, 168, 211, '92', 56, 5),
+(449, 169, 212, '2', 122, 1),
+(450, 169, 212, '4', 21, 1),
+(451, 169, 213, '7', 32, 4),
+(452, 169, 213, '6', 34, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_size_sub_category`
+--
+
+CREATE TABLE `product_size_sub_category` (
+  `id` int(11) NOT NULL,
+  `product_size_id` int(11) NOT NULL,
+  `product_sub_category_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_size_tbl`
+--
+
+CREATE TABLE `product_size_tbl` (
+  `id` int(255) NOT NULL,
+  `size` varchar(255) NOT NULL,
+  `product_sub_category_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `product_size_tbl`
+--
+
+INSERT INTO `product_size_tbl` (`id`, `size`, `product_sub_category_id`) VALUES
+(1, 'XL', 14),
+(2, 'L', 14),
+(3, 'M', 14),
+(4, 'S', 14),
+(5, 'XXL', 14),
+(6, 'XXXL', 14),
+(7, '4XL', 14),
+(8, 'XL', 19),
+(9, 'L', 19),
+(10, 'M', 19),
+(11, 'S', 19),
+(12, 'XXL', 19),
+(13, 'XXXL', 19),
+(14, '4XL', 19),
+(15, '0-1', 0),
+(16, '1-3', 0),
+(17, '3-5', 0),
+(18, '5-7', 0),
+(19, '7-9', 0),
+(20, '9-11', 0),
+(21, '11-13', 0),
+(23, 'XL', 25),
+(24, 'L', 25),
+(25, 'M', 25),
+(26, 'S', 25),
+(27, 'XXL', 25),
+(28, 'XXXL', 25),
+(29, '4XL', 25),
+(30, 'XL', 33),
+(31, 'L', 33),
+(32, 'M', 33),
+(33, 'S', 33),
+(34, 'XXL', 33),
+(35, 'XXXL', 33),
+(36, '4XL', 33),
+(37, 'XL', 11),
+(38, 'L', 11),
+(39, 'M', 11),
+(40, 'S', 11),
+(41, 'XXL', 11),
+(42, 'XXXL', 11),
+(43, '4XL', 11),
+(44, 'XL', 16),
+(45, 'L', 16),
+(46, 'M', 16),
+(47, 'S', 16),
+(48, 'XXL', 16),
+(49, 'XXXL', 16),
+(50, '4XL', 16),
+(51, 'XL', 23),
+(52, 'L', 23),
+(53, 'M', 23),
+(54, 'S', 23),
+(55, 'XXL', 23),
+(56, 'XXXL', 23),
+(57, '4XL', 23),
+(58, 'XL', 31),
+(59, 'L', 31),
+(60, 'M', 31),
+(61, 'S', 31),
+(62, 'XXL', 31),
+(63, 'XXXL', 31),
+(64, '4XL', 31),
+(65, '0-1', 27),
+(66, '1-3', 27),
+(67, '3-5', 27),
+(68, '5-7', 27),
+(69, '7-9', 27),
+(70, '9-11', 27),
+(71, '11-13', 27),
+(72, '0-1', 34),
+(73, '1-3', 34),
+(74, '3-5', 34),
+(75, '5-7', 34),
+(76, '7-9', 34),
+(77, '9-11', 34),
+(78, '11-13', 34),
+(79, '80/32', 4),
+(80, '85/34', 4),
+(81, '90/36', 4),
+(82, '95/38', 4),
+(83, '100/40', 4),
+(84, '115/42', 4),
+(85, '120/44', 4),
+(86, '80/32', 2),
+(87, '85/34', 2),
+(88, '90/36', 2),
+(89, '95/38', 2),
+(90, '100/40', 2),
+(91, '115/42', 2),
+(92, '120/44', 2),
+(93, '80/32', 5),
+(94, '85/34', 5),
+(95, '90/36', 5),
+(96, '95/38', 5),
+(97, '100/40', 5),
+(98, '115/42', 5),
+(99, '120/44', 5),
+(100, '80/32', 7),
+(101, '85/34', 7),
+(102, '90/36', 7),
+(103, '95/38', 7),
+(104, '100/40', 7),
+(105, '115/42', 7),
+(106, '120/44', 7),
+(107, '80/32', 21),
+(108, '85/34', 21),
+(109, '90/36', 21),
+(110, '95/38', 21),
+(111, '100/40', 21),
+(112, '115/42', 21),
+(113, '120/44', 21),
+(114, '80/32', 28),
+(115, '85/34', 28),
+(116, '90/36', 28),
+(117, '95/38', 28),
+(118, '100/40', 28),
+(119, '115/42', 28),
+(120, '120/44', 28),
+(121, '80/32', 29),
+(122, '85/34', 29),
+(123, '90/36', 29),
+(124, '95/38', 29),
+(125, '100/40', 29),
+(126, '115/42', 29),
+(127, '120/44', 29),
+(128, '80/32', 49),
+(129, '85/34', 49),
+(130, '90/36', 49),
+(131, '95/38', 49),
+(132, '100/40', 49),
+(133, '115/42', 49),
+(134, '120/44', 49),
+(135, '80/32', 50),
+(136, '85/34', 50),
+(137, '90/36', 50),
+(138, '95/38', 50),
+(139, '100/40', 50),
+(140, '115/42', 50),
+(141, '120/44', 50),
+(142, '80/32', 1),
+(143, '85/34', 1),
+(144, '90/36', 1),
+(145, '95/38', 1),
+(146, '100/40', 1),
+(147, '115/42', 1),
+(148, '120/44', 1),
+(149, 'XL', 3),
+(150, 'L', 3),
+(151, 'M', 3),
+(152, 'S', 3),
+(153, 'XXL', 3),
+(154, 'XL', 8),
+(155, 'L', 8),
+(156, 'M', 8),
+(157, 'S', 8),
+(158, 'XXL', 8),
+(159, 'Free', 3),
+(160, 'Free', 8);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_sub_category`
+--
+
+CREATE TABLE `product_sub_category` (
+  `id` int(255) NOT NULL,
+  `product_category_id` varchar(255) NOT NULL,
+  `product_sub_category` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `product_sub_category`
+--
+
+INSERT INTO `product_sub_category` (`id`, `product_category_id`, `product_sub_category`) VALUES
+(1, '1', 'underwear'),
+(2, '1', 'vest'),
+(3, '1', 'body shapers'),
+(4, '2', 'bra'),
+(5, '2', 'panty'),
+(6, '2', 'shorts'),
+(7, '3', 'underwear'),
+(8, '2', 'body shapers'),
+(10, '1', 'shorts'),
+(11, '1', 'lowers'),
+(12, '1', 'socks'),
+(13, '1', 'handkerchief'),
+(14, '1', 't-shirts'),
+(15, '1', 'towel'),
+(16, '2', 'lowers'),
+(17, '2', 'socks'),
+(18, '2', 'handkerchief'),
+(19, '2', 't-shirts'),
+(20, '2', 'towel'),
+(21, '3', 'vest'),
+(22, '3', 'shorts'),
+(23, '3', 'lowers'),
+(24, '3', 'handkerchief'),
+(25, '3', 't-shirts'),
+(26, '3', 'towel'),
+(27, '3', 'socks'),
+(28, '5', 'bra'),
+(29, '5', 'panty'),
+(30, '5', 'shorts'),
+(31, '5', 'lowers'),
+(32, '5', 'handkerchief'),
+(33, '5', 't-shirts'),
+(34, '5', 'socks'),
+(35, '5', 'towel'),
+(44, '4', 'dummy-1'),
+(45, '4', 'dummy-2'),
+(46, '4', 'dummy-3'),
+(47, '4', 'dummy-4'),
+(48, '4', 'dummy-5');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shipping_details`
+--
+
+CREATE TABLE `shipping_details` (
+  `id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `first_name` varchar(30) NOT NULL,
+  `last_name` varchar(30) NOT NULL,
+  `company` varchar(30) NOT NULL,
+  `country` varchar(30) NOT NULL,
+  `address` varchar(40) NOT NULL,
+  `postcode` int(30) NOT NULL,
+  `town` varchar(20) NOT NULL,
+  `phone_no` int(30) NOT NULL,
+  `email` varchar(20) NOT NULL,
+  `save_address` varchar(30) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `shipping_details`
+--
+
+INSERT INTO `shipping_details` (`id`, `order_id`, `first_name`, `last_name`, `company`, `country`, `address`, `postcode`, `town`, `phone_no`, `email`, `save_address`, `user_id`) VALUES
+(1, 1, 'Divesh ', 'Chadha', '', 'ind', '3', 201002, 'Delhi', 2147483647, 'divesh7chadha@gmail.', '', 0),
+(2, 2, 'Divesh ', 'Chadha', '', 'ind', '3', 201002, 'Delhi', 2147483647, 'divesh7chadha@gmail.', '', 0),
+(3, 3, 'Divesh ', 'Chadha', '', 'ind', '3', 201002, 'Delhi', 2147483647, 'divesh7chadha@gmail.', '', 0),
+(4, 4, 'jeslin', 'mathew', 'dfgfd', 'usa', '0', 67999999, 'dfgdfg', 2147483647, 'test@gmail.com', 'true', 6),
+(5, 5, 'jeslin', 'mathew', 'dfgfd', 'usa', '0', 67999999, 'dfgdfg', 2147483647, 'test@gmail.com', 'true', 6),
+(6, 6, 'jeslin', 'mathew', 'dfgfd', 'usa', '0', 67999999, 'dfgdfg', 2147483647, 'test@gmail.com', 'true', 6),
+(7, 7, 'jeslin', 'mathew', 'dfgfd', 'usa', '0', 67999999, 'dfgdfg', 2147483647, 'test@gmail.com', 'true', 6),
+(8, 8, 'jeslin', 'mathew', 'dfgfd', 'usa', '0', 67999999, 'dfgdfg', 2147483647, 'test@gmail.com', 'true', 6),
+(9, 9, 'Tushar', 'Goel', '', 'ind', '0', 0, '', 0, '', 'true', 7);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(255) NOT NULL,
+  `first_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
+  `gender` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `mo_no` varchar(255) NOT NULL,
+  `join_date` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+  `street` varchar(255) NOT NULL,
+  `locality` varchar(255) NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `state` varchar(255) NOT NULL,
+  `pincode` varchar(255) NOT NULL,
+  `landmark` varchar(255) NOT NULL,
+  `country` varchar(255) NOT NULL,
+  `active` varchar(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `gender`, `email`, `password`, `mo_no`, `join_date`, `street`, `locality`, `city`, `state`, `pincode`, `landmark`, `country`, `active`) VALUES
+(1, 'DIVESH', 'CHADHA', '', 'divesh7chadha@gmail.com', 'cc83e332f0e33e6e56a64e0bc7796ecc', '7011721626', '0000-00-00 00:00:00.000000', '', '', '', '', '', '', '', '1'),
+(2, 'rajnish', 'ban', '', 'bansalrajnish@yahoo.com', '962dbb3abf8a1e6dd295d430d33d5f9a', '9650555959', '0000-00-00 00:00:00.000000', '', '', '', '', '', '', '', '1'),
+(3, 'chetan', 'chouhan', '', 'che@gm.com', '81dc9bdb52d04dc20036dbd8313ed055', '7898816885', '0000-00-00 00:00:00.000000', '', '', '', '', '', '', '', '1'),
+(4, 'Chetan', 'Chouham', '', 'ch@gmail.com', 'd8578edf8458ce06fbc5bb76a58c5ca4', '7898816885', '0000-00-00 00:00:00.000000', '', '', '', '', '', '', '', '1'),
+(5, 'Chetan', 'Chouham', '', 'admin@gmail.com', 'd8578edf8458ce06fbc5bb76a58c5ca4', '7898816885', '0000-00-00 00:00:00.000000', '', '', '', '', '', '', '', '1'),
+(6, 'test', 'test', '', 'test@gmail.com', 'dc7efef342c97dc58620c6fcf7d0c145', '7869148335', '0000-00-00 00:00:00.000000', '', '', '', '', '', '', '', '1'),
+(7, 'Tushar', 'Goel', '', 'tushargoel169@gmail.com', 'd41d8cd98f00b204e9800998ecf8427e', '9810698924', '2018-07-24 22:45:25.848189', '', '', '', '', '', '', '', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wish_list`
+--
+
+CREATE TABLE `wish_list` (
+  `id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `wish_list`
+--
+
+INSERT INTO `wish_list` (`id`, `product_id`, `user_id`) VALUES
+(2, 1, 6),
+(3, 8, 6);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `body_shape`
+--
+ALTER TABLE `body_shape`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `brand`
+--
+ALTER TABLE `brand`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `product`
+--
+ALTER TABLE `product`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
+
+--
+-- Indexes for table `product_category`
+--
+ALTER TABLE `product_category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `product_color_tbl`
+--
+ALTER TABLE `product_color_tbl`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `product_info`
+--
+ALTER TABLE `product_info`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `product_size_quantity`
+--
+ALTER TABLE `product_size_quantity`
+  ADD UNIQUE KEY `id` (`id`);
+
+--
+-- Indexes for table `product_size_sub_category`
+--
+ALTER TABLE `product_size_sub_category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `product_size_tbl`
+--
+ALTER TABLE `product_size_tbl`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `product_sub_category`
+--
+ALTER TABLE `product_sub_category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `shipping_details`
+--
+ALTER TABLE `shipping_details`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `wish_list`
+--
+ALTER TABLE `wish_list`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `body_shape`
+--
+ALTER TABLE `body_shape`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+--
+-- AUTO_INCREMENT for table `brand`
+--
+ALTER TABLE `brand`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT for table `product`
+--
+ALTER TABLE `product`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=170;
+--
+-- AUTO_INCREMENT for table `product_category`
+--
+ALTER TABLE `product_category`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `product_color_tbl`
+--
+ALTER TABLE `product_color_tbl`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `product_info`
+--
+ALTER TABLE `product_info`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=214;
+--
+-- AUTO_INCREMENT for table `product_size_quantity`
+--
+ALTER TABLE `product_size_quantity`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=453;
+--
+-- AUTO_INCREMENT for table `product_size_sub_category`
+--
+ALTER TABLE `product_size_sub_category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `product_size_tbl`
+--
+ALTER TABLE `product_size_tbl`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
+--
+-- AUTO_INCREMENT for table `product_sub_category`
+--
+ALTER TABLE `product_sub_category`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+--
+-- AUTO_INCREMENT for table `shipping_details`
+--
+ALTER TABLE `shipping_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `wish_list`
+--
+ALTER TABLE `wish_list`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

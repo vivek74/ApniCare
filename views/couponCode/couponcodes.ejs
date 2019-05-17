@@ -1,0 +1,46 @@
+<% include ../partials/header %>
+
+<body>
+
+    <nav style="height: 80px">
+        <div class="nav-wrapper light-blue">
+                <a data-target="slide-out" class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="margin-top: 10px;font-size:25px;">menu</i></a>
+            <a onclick="history.back()" class="pointer sidenav-trigger show-on-medium-and-up show-on-medium-and-down"><i class="material-icons large" style="margin-top: 10px;font-size: 25px">arrow_back</i></a>
+            <a class="brand-logo" style="margin-top: 10px;font-size: 22px">View Cashback</a>
+
+        </div>
+    </nav>
+    <%include ../partials/header2%>
+    
+    <!-- Section Coupon Code !-->
+    
+    <section class="section section-couponcode">
+        <div class="row" style="margin-left: 2%">
+            <div class="col l6">
+                <h2 class="left-align"><%=coupon.couponCodeName%></h2>
+                <p class="left-align"><%=coupon.type%></p>
+                <p class="left-align"><%=coupon.valueAmount%></p>
+                <p class="left-align">Min Billing Amount: INR <%=coupon.minValue%></p>
+                <p class="left-align">Factor Condition: <%=coupon.factor%></p>
+            </div>
+            <div class="col l4">
+                <!-- Switch -->
+                <div class="switch" style="margin-top: 50px">
+                    <label>
+                        <input name="respond" id="cpd" type="checkbox" <%if(coupon.status == true){%>checked<%}%> >
+                        <span class="lever"></span>
+                    </label>
+                </div>
+                <p class="left-align">Valid From: <%=coupon.validForm%></p>
+                <p class="left-align">Valid Through: <%=coupon.validThrough%></p>
+                <h4 class="left-align">FACTOR: <span class="blue-text"><%=coupon.factor%></span></h4>
+            </div>
+            <div class="col l2">
+                <form class="delete-form" action="/coupon-code/delete/<%=coupon.id%>?_method=DELETE" method="POST">
+                    <button class="btn waves-effect waves-light red lighten-1" type="submit">DELETE</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <!-- Sectio: Fixed Acion button !-->
+<% include ../partials/footer %>
